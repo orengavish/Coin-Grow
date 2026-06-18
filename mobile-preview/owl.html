@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coin Grow — Owl Preview</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #1a1a2e;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    font-family: Georgia, serif;
+  }
+
+  /* ── Phone frame ─────────────────────────────── */
+  .phone {
+    width: 390px;
+    height: 844px;
+    background: #3E2004;
+    border-radius: 54px;
+    border: 8px solid #555;
+    box-shadow:
+      0 0 0 2px #333,
+      0 40px 80px rgba(0,0,0,0.7),
+      inset 0 0 20px rgba(0,0,0,0.4);
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* notch */
+  .phone::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 120px; height: 30px;
+    background: #555;
+    border-radius: 0 0 20px 20px;
+    z-index: 10;
+  }
+
+  /* ── Screen ──────────────────────────────────── */
+  .screen {
+    flex: 1;
+    background: linear-gradient(160deg, #2C1A00 0%, #3E2004 40%, #1a0d00 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 60px 24px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* stars */
+  .stars {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+  }
+  .star {
+    position: absolute;
+    background: #fff;
+    border-radius: 50%;
+    animation: twinkle var(--d) ease-in-out infinite alternate;
+  }
+  @keyframes twinkle {
+    from { opacity: 0.1; transform: scale(0.8); }
+    to   { opacity: 0.9; transform: scale(1.2); }
+  }
+
+  /* ground */
+  .ground {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 120px;
+    background: linear-gradient(180deg, #2D6A4F 0%, #1B4332 100%);
+    border-radius: 60% 60% 0 0 / 30px 30px 0 0;
+  }
+
+  /* tree branch */
+  .branch {
+    position: absolute;
+    bottom: 180px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 220px;
+    height: 18px;
+    background: #5D3A1A;
+    border-radius: 9px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  }
+  .branch::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 20px;
+    width: 14px; height: 80px;
+    background: #5D3A1A;
+    border-radius: 7px;
+    transform-origin: bottom center;
+    transform: rotate(-8deg);
+  }
+  .branch::after {
+    content: '';
+    position: absolute;
+    bottom: 0; right: 20px;
+    width: 14px; height: 60px;
+    background: #5D3A1A;
+    border-radius: 7px;
+    transform-origin: bottom center;
+    transform: rotate(8deg);
+  }
+
+  /* ── Owl ─────────────────────────────────────── */
+  .owl-wrap {
+    position: absolute;
+    bottom: 190px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: float 3s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%, 100% { transform: translateX(-50%) translateY(0px); }
+    50%       { transform: translateX(-50%) translateY(-10px); }
+  }
+
+  .owl {
+    position: relative;
+    width: 130px;
+    height: 140px;
+    cursor: pointer;
+    filter: drop-shadow(0 8px 20px rgba(0,0,0,0.5));
+  }
+  .owl:hover { animation: wiggle 0.5s ease-in-out; }
+  @keyframes wiggle {
+    0%,100% { transform: rotate(0deg); }
+    25%     { transform: rotate(-8deg); }
+    75%     { transform: rotate(8deg); }
+  }
+
+  /* body */
+  .owl-body {
+    position: absolute;
+    bottom: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 110px;
+    background: radial-gradient(ellipse at 40% 30%, #C8A96E, #8B6914);
+    border-radius: 50% 50% 45% 45%;
+    border: 3px solid #6B4F0A;
+  }
+
+  /* belly */
+  .owl-belly {
+    position: absolute;
+    bottom: 10px; left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 70px;
+    background: radial-gradient(ellipse at 50% 40%, #F5E6C8, #E8D5A3);
+    border-radius: 50%;
+    border: 2px solid #C8A96E;
+  }
+
+  /* belly stripes */
+  .owl-belly::before {
+    content: '';
+    position: absolute;
+    top: 20px; left: 50%;
+    transform: translateX(-50%);
+    width: 40px; height: 2px;
+    background: rgba(139, 105, 20, 0.3);
+    box-shadow:
+      0 8px 0 rgba(139,105,20,0.25),
+      0 16px 0 rgba(139,105,20,0.2),
+      0 24px 0 rgba(139,105,20,0.15);
+  }
+
+  /* head */
+  .owl-head {
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 90px;
+    height: 85px;
+    background: radial-gradient(ellipse at 40% 30%, #C8A96E, #8B6914);
+    border-radius: 50% 50% 45% 45%;
+    border: 3px solid #6B4F0A;
+    animation: headbob 4s ease-in-out infinite;
+  }
+  @keyframes headbob {
+    0%,100% { transform: translateX(-50%) rotate(0deg); }
+    30%     { transform: translateX(-50%) rotate(-5deg); }
+    70%     { transform: translateX(-50%) rotate(5deg); }
+  }
+
+  /* ears */
+  .ear {
+    position: absolute;
+    top: -10px;
+    width: 20px; height: 22px;
+    background: #8B6914;
+    border-radius: 50% 50% 0 0;
+    border: 2px solid #6B4F0A;
+  }
+  .ear-left  { left: 8px;  transform: rotate(-15deg); }
+  .ear-right { right: 8px; transform: rotate(15deg); }
+
+  /* eyes */
+  .eyes {
+    position: absolute;
+    top: 28px; left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+  }
+  .eye {
+    width: 24px; height: 24px;
+    background: #fff;
+    border-radius: 50%;
+    border: 2px solid #333;
+    position: relative;
+    overflow: hidden;
+  }
+  .pupil {
+    position: absolute;
+    top: 4px; left: 4px;
+    width: 14px; height: 14px;
+    background: #1a1a1a;
+    border-radius: 50%;
+    animation: look 5s ease-in-out infinite;
+  }
+  .pupil::after {
+    content: '';
+    position: absolute;
+    top: 2px; left: 2px;
+    width: 5px; height: 5px;
+    background: #fff;
+    border-radius: 50%;
+  }
+  @keyframes look {
+    0%,20%,100% { transform: translate(0,0); }
+    25%          { transform: translate(2px,-1px); }
+    50%          { transform: translate(-2px,1px); }
+    75%          { transform: translate(1px,2px); }
+  }
+
+  /* blink */
+  .eyelid {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: #8B6914;
+    border-radius: 50%;
+    transform: scaleY(0);
+    transform-origin: top center;
+    animation: blink 4s ease-in-out infinite;
+  }
+  .eye:nth-child(2) .eyelid { animation-delay: 0.05s; }
+  @keyframes blink {
+    0%,44%,48%,100% { transform: scaleY(0); }
+    46%             { transform: scaleY(1); }
+  }
+
+  /* eye rings */
+  .eye-ring {
+    width: 30px; height: 30px;
+    background: transparent;
+    border: 3px solid #D4A017;
+    border-radius: 50%;
+    position: absolute;
+    top: -5px; left: -5px;
+  }
+
+  /* beak */
+  .beak {
+    position: absolute;
+    top: 55px; left: 50%;
+    transform: translateX(-50%);
+    width: 0; height: 0;
+    border-left: 9px solid transparent;
+    border-right: 9px solid transparent;
+    border-top: 12px solid #D4A017;
+    filter: drop-shadow(0 2px 2px rgba(0,0,0,0.3));
+  }
+
+  /* wings */
+  .wing {
+    position: absolute;
+    bottom: 20px;
+    width: 38px; height: 65px;
+    background: radial-gradient(ellipse at 50% 30%, #B8971A, #7A5C0A);
+    border: 2px solid #6B4F0A;
+    transform-origin: top center;
+  }
+  .wing-left {
+    left: -22px;
+    border-radius: 40% 10% 50% 50%;
+    animation: wingflap-left 3s ease-in-out infinite;
+  }
+  .wing-right {
+    right: -22px;
+    border-radius: 10% 40% 50% 50%;
+    animation: wingflap-right 3s ease-in-out infinite;
+  }
+  @keyframes wingflap-left {
+    0%,100% { transform: rotate(-5deg); }
+    50%     { transform: rotate(-20deg); }
+  }
+  @keyframes wingflap-right {
+    0%,100% { transform: rotate(5deg); }
+    50%     { transform: rotate(20deg); }
+  }
+
+  /* feet */
+  .feet {
+    position: absolute;
+    bottom: -10px; left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 12px;
+  }
+  .foot {
+    display: flex;
+    gap: 3px;
+  }
+  .toe {
+    width: 8px; height: 14px;
+    background: #D4A017;
+    border-radius: 4px 4px 6px 6px;
+    border: 1px solid #B8860B;
+  }
+
+  /* coin sparkle on owl */
+  .sparkle {
+    position: absolute;
+    font-size: 18px;
+    animation: sparkle-float 2s ease-in-out infinite;
+    opacity: 0;
+  }
+  .sparkle:nth-child(1) { top: -20px; left: 10px;  animation-delay: 0s;    animation-duration: 2.2s; }
+  .sparkle:nth-child(2) { top: -10px; right: 5px;  animation-delay: 0.7s;  animation-duration: 1.8s; }
+  .sparkle:nth-child(3) { top: 0px;   left: -15px; animation-delay: 1.3s;  animation-duration: 2.5s; }
+  @keyframes sparkle-float {
+    0%   { opacity: 0; transform: translateY(0) scale(0.5); }
+    30%  { opacity: 1; transform: translateY(-15px) scale(1); }
+    100% { opacity: 0; transform: translateY(-35px) scale(0.5); }
+  }
+
+  /* ── UI elements ─────────────────────────────── */
+  .header {
+    text-align: center;
+    z-index: 2;
+  }
+  .logo {
+    font-size: 28px;
+    color: #D4A017;
+    font-weight: bold;
+    letter-spacing: 3px;
+    text-shadow: 0 2px 8px rgba(212,160,23,0.5);
+  }
+  .tagline {
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    margin-top: 4px;
+    font-style: italic;
+  }
+
+  .speech-bubble {
+    position: absolute;
+    bottom: 340px;
+    left: 50%;
+    transform: translateX(-60%);
+    background: #F5E6C8;
+    border: 2px solid #D4A017;
+    border-radius: 16px;
+    padding: 10px 16px;
+    font-size: 13px;
+    color: #3E2004;
+    white-space: nowrap;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    animation: bubble-appear 0.5s ease-out 1s both;
+    z-index: 5;
+  }
+  .speech-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -12px; right: 24px;
+    width: 0; height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 12px solid #D4A017;
+  }
+  .speech-bubble::before {
+    content: '';
+    position: absolute;
+    bottom: -10px; right: 24px;
+    width: 0; height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 12px solid #F5E6C8;
+    z-index: 1;
+  }
+  @keyframes bubble-appear {
+    from { opacity: 0; transform: translateX(-60%) scale(0.8); }
+    to   { opacity: 1; transform: translateX(-60%) scale(1); }
+  }
+
+  .bottom-ui {
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .play-btn {
+    background: linear-gradient(135deg, #D4A017, #B8860B);
+    color: #3E2004;
+    border: none;
+    border-radius: 30px;
+    padding: 16px 48px;
+    font-size: 18px;
+    font-weight: bold;
+    font-family: Georgia, serif;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(212,160,23,0.4);
+    letter-spacing: 1px;
+    transition: transform 0.1s, box-shadow 0.1s;
+  }
+  .play-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(212,160,23,0.5);
+  }
+  .play-btn:active { transform: translateY(0); }
+
+  .lesson-pill {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(212,160,23,0.3);
+    border-radius: 20px;
+    padding: 8px 16px;
+    color: rgba(255,255,255,0.7);
+    font-size: 12px;
+  }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: #D4A017; }
+</style>
+</head>
+<body>
+
+<div class="phone">
+  <div class="screen">
+
+    <!-- Stars background -->
+    <div class="stars" id="stars"></div>
+
+    <!-- Header -->
+    <div class="header">
+      <div class="logo">🪙 COIN GROW</div>
+      <div class="tagline">Learn money by living it.</div>
+    </div>
+
+    <!-- Speech bubble -->
+    <div class="speech-bubble">Hoo-hoo! Ready to learn? 🪙</div>
+
+    <!-- Branch -->
+    <div class="branch"></div>
+
+    <!-- Owl -->
+    <div class="owl-wrap">
+      <span class="sparkle">✨</span>
+      <span class="sparkle">🪙</span>
+      <span class="sparkle">⭐</span>
+      <div class="owl" onclick="hoot()">
+        <div class="wing wing-left"></div>
+        <div class="wing wing-right"></div>
+        <div class="owl-body">
+          <div class="owl-belly"></div>
+          <div class="feet">
+            <div class="foot"><div class="toe"></div><div class="toe"></div><div class="toe"></div></div>
+            <div class="foot"><div class="toe"></div><div class="toe"></div><div class="toe"></div></div>
+          </div>
+        </div>
+        <div class="owl-head">
+          <div class="ear ear-left"></div>
+          <div class="ear ear-right"></div>
+          <div class="eyes">
+            <div class="eye">
+              <div class="eye-ring"></div>
+              <div class="pupil"></div>
+              <div class="eyelid"></div>
+            </div>
+            <div class="eye">
+              <div class="eye-ring"></div>
+              <div class="pupil"></div>
+              <div class="eyelid"></div>
+            </div>
+          </div>
+          <div class="beak"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ground -->
+    <div class="ground"></div>
+
+    <!-- Bottom UI -->
+    <div class="bottom-ui">
+      <div class="lesson-pill">
+        <div class="dot"></div>
+        Lesson 1 · What is Money?
+      </div>
+      <button class="play-btn" onclick="hoot()">▶  Start Adventure</button>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  // Generate random stars
+  const starsEl = document.getElementById('stars');
+  for (let i = 0; i < 40; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    const size = Math.random() * 3 + 1;
+    s.style.cssText = `
+      width:${size}px; height:${size}px;
+      top:${Math.random()*70}%;
+      left:${Math.random()*100}%;
+      --d:${(Math.random()*2+1.5).toFixed(1)}s;
+      animation-delay:${(Math.random()*3).toFixed(1)}s;
+    `;
+    starsEl.appendChild(s);
+  }
+
+  // Click owl to hoot
+  function hoot() {
+    const bubble = document.querySelector('.speech-bubble');
+    const phrases = [
+      'Hoo-hoo! Let\'s learn! 📚',
+      'Money was invented for YOU! 🪙',
+      'Ready to barter? 🍎',
+      'Wisdom begins here! ⭐',
+      'Let\'s grow your coins! 💰',
+    ];
+    bubble.textContent = phrases[Math.floor(Math.random() * phrases.length)];
+  }
+</script>
+</body>
+</html>
