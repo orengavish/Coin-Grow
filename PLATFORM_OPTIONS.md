@@ -249,7 +249,11 @@ for each animation (walk, talk, happy, sad). Code cycles through frames.
 
 ---
 
-## Current Recommendation
+## DECISION — Confirmed 2026-06-18
+
+**Flutter + Flame + Rive + Lottie** ✅ — validated by second AI review.
+
+## Current Recommendation (archived — see DECISION above)
 
 **Flutter + Flame + Rive + Lottie**
 

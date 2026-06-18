@@ -1,0 +1,31 @@
+name: coin_grow
+description: AI-generated financial literacy game for kids and adults.
+publish_to: 'none'
+version: 0.1.0+1
+
+environment:
+  sdk: '>=3.3.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flame: ^1.18.0          # 2D game engine for scene rendering
+  rive: ^0.13.0            # Character animation state machines
+  lottie: ^3.1.0           # UI effect animations (trophies, coins)
+  http: ^1.2.0             # Lesson API calls (future backend)
+  go_router: ^13.0.0       # Navigation
+  provider: ^6.1.0         # State management
+  shared_preferences: ^2.2.0  # Local progress storage
+  cached_network_image: ^3.3.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/animations/
+    - assets/audio/
+    - assets/lessons/

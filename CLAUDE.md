@@ -13,14 +13,39 @@ Team: two co-founders, pre-funding. No game engine or mobile shell exists yet �
 ## Architecture
 
 ```
-prompts/                  ← Core IP. Versioned prompt files. Never overwrite — always create a new version.
-  lesson-generator-v0.1.md
-lessons/                  ← Generated lesson JSON files (git-ignored, created at runtime)
-app.py                    ← Streamlit UI — primary interface for prompt iteration and demos
-test_harness.py           ← CLI fallback — same generation + validation logic as app.py
-curriculum.json           ← Single source of truth for lesson ordering and prior_concepts
-requirements.txt
+prompts/                        ← Core IP. Versioned prompt files. Never overwrite.
+lessons/                        ← Generated lesson JSON (git-ignored, runtime output)
+app.py                          ← Streamlit Studio (primary prompt iteration UI)
+test_harness.py                 ← CLI fallback
+curriculum.json                 ← Lesson ordering and prior_concepts source of truth
+mobile/                         ← Flutter app
+  lib/
+    main.dart                   ← App entry point
+    models/lesson.dart          ← Dart models mirroring lesson JSON schema
+    screens/home_screen.dart    ← Home / lesson picker
+    screens/lesson_player.dart  ← Scene state machine driver
+    game/scenes/                ← One file per scene type (cutscene, dialogue, choice, outcome, debrief)
+    widgets/                    ← Shared UI components (NarrativeBox, CharacterPortrait)
+    theme/app_theme.dart        ← Colors, text styles, button styles
+  assets/lessons/               ← Pre-generated lesson JSON for offline/demo use
+  pubspec.yaml                  ← Flutter dependencies (Flame, Rive, Lottie)
 ```
+
+## Flutter Setup (one-time)
+
+Flutter is not yet installed. Install it from flutter.dev, then:
+```powershell
+cd mobile
+flutter pub get
+flutter run          # launches on connected device or emulator
+flutter build apk   # builds Android APK
+```
+
+## Connecting a Generated Lesson to the App
+
+1. Generate a lesson: `streamlit run app.py` → Save
+2. Copy the saved JSON from `lessons/` to `mobile/assets/lessons/sample_lesson.json`
+3. `flutter run` — the home screen loads it automatically
 
 ### How a lesson is generated
 

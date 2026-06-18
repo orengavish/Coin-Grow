@@ -28,10 +28,12 @@ Working prompt engine that generates validated, playable lesson JSON. No mobile 
 ## Feature Scope
 
 ### In Scope Now
-- Lesson generator prompt (versioned)
-- Test harness with validation and caching
-- Curriculum map (18 lessons, 6 units)
-- GitHub versioning and CI discipline
+- Lesson generator prompt (versioned) ✅
+- Streamlit Studio UI ✅
+- Test harness with validation and caching ✅
+- Curriculum map (18 lessons, 6 units) ✅
+- GitHub versioning and CI discipline ✅
+- Flutter mobile shell — scene player (in progress)
 
 ### In Scope Next
 - Lesson runner / batch generator
@@ -62,6 +64,18 @@ Working prompt engine that generates validated, playable lesson JSON. No mobile 
 | 4 | Banks & Borrowing | Banking, Good vs bad debt |
 | 5 | Investing & Risk | Investing basics, Risk/return, Diversification, Stock market |
 | 6 | Advanced Topics | Inflation, Taxes, Insurance |
+
+## Tech Stack (decided 2026-06-18)
+
+| Layer | Technology |
+|---|---|
+| Mobile framework | Flutter (Dart) |
+| Game scenes | Flame (Flutter game engine) |
+| Character animation | Rive (state-machine driven) |
+| UI effects | Lottie (coins, trophies, celebrations) |
+| AI/prompt engine | Claude API (Anthropic SDK, Python) |
+| Studio / dev UI | Streamlit (Python) |
+| Backend (future) | TBD — leaderboards, teacher dashboard |
 
 ## Non-Goals
 - This is not a simulation game (no open-ended free play in v1)
