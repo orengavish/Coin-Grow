@@ -15,8 +15,10 @@ Team: two co-founders, pre-funding. No game engine or mobile shell exists yet �
 ```
 prompts/                  ← Core IP. Versioned prompt files. Never overwrite — always create a new version.
   lesson-generator-v0.1.md
-lessons/                  ← Generated lesson JSON files (git-ignored, created at runtime by --save flag)
-test_harness.py           ← CLI that calls the API, parses output, validates schema, prints summary
+lessons/                  ← Generated lesson JSON files (git-ignored, created at runtime)
+app.py                    ← Streamlit UI — primary interface for prompt iteration and demos
+test_harness.py           ← CLI fallback — same generation + validation logic as app.py
+curriculum.json           ← Single source of truth for lesson ordering and prior_concepts
 requirements.txt
 ```
 
@@ -39,7 +41,18 @@ Every scene has: `id`, `type` (cutscene/dialogue/interactive/choice/outcome/debr
 
 Prompt files are named `lesson-generator-vMAJOR.MINOR.md`. Increment minor for tweaks, major for structural schema changes. The generated lesson JSON records which prompt version created it via `lesson.version`.
 
-## Running the Test Harness
+## Running the Studio (Streamlit UI)
+
+```powershell
+pip install anthropic streamlit
+streamlit run app.py
+# Opens at http://localhost:8501
+# Enter API key in sidebar, pick a lesson, click Generate
+```
+
+The studio renders generated lessons with scene-by-scene breakdown, choice quality indicators, validation warnings, cache hit/miss stats, and a save button. It reads prompts from `prompts/` and writes saved lessons to `lessons/`.
+
+## Running the Test Harness (CLI)
 
 ```powershell
 pip install anthropic

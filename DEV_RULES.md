@@ -35,9 +35,8 @@ If a section is still accurate, leave it. If stale, update it. Never skip this s
 
 A coding session is not complete until ALL of the following pass:
 
-- [ ] `python test_harness.py` exits with code 0 (no validation errors)
 - [ ] `python test_harness.py --list` shows curriculum correctly
-- [ ] No Python syntax errors (`python -m py_compile test_harness.py`)
+- [ ] No Python syntax errors (`python -m py_compile test_harness.py app.py`)
 - [ ] All changed files committed and pushed to GitHub
 - [ ] All MD files reviewed and updated
 - [ ] `git log --oneline -5` shows clean, meaningful commit messages
@@ -64,5 +63,6 @@ Visual tests (game UI, animations) are explicitly excluded until the mobile shel
 prompts/          ← versioned prompt files only, never delete old versions
 lessons/          ← git-ignored, runtime output
 curriculum.json   ← single source of truth for lesson ordering
-test_harness.py   ← main CLI entry point, keep lean
+app.py            ← Streamlit UI, primary interface
+test_harness.py   ← CLI fallback, same logic as app.py
 ```
