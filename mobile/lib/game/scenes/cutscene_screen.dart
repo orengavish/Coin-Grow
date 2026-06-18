@@ -28,10 +28,14 @@ class CutsceneScreen extends StatelessWidget {
                     children: [
                       const Icon(Icons.landscape, size: 80, color: Colors.white24),
                       const SizedBox(height: 8),
-                      Text(
-                        scene.visualDescription,
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(color: Colors.white38, fontSize: 12),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 24),
+                        child: Text(
+                          scene.visualDescription,
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                              color: Colors.white38, fontSize: 12),
+                        ),
                       ),
                     ],
                   ),
@@ -40,7 +44,7 @@ class CutsceneScreen extends StatelessWidget {
               Expanded(
                 flex: 2,
                 child: NarrativeBox(
-                  text: scene.narrative,
+                  text: scene.narrative.text,
                   onTap: onAdvance,
                 ),
               ),

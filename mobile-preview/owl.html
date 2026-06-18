@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Coin Grow — Owl Preview</title>
+<title>Coin Grow — Prof Penny Preview</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -15,6 +15,7 @@
     justify-content: center;
     min-height: 100vh;
     font-family: Georgia, serif;
+    gap: 24px;
   }
 
   /* ── Phone frame ─────────────────────────────── */
@@ -88,273 +89,180 @@
   /* tree branch */
   .branch {
     position: absolute;
-    bottom: 180px;
+    bottom: 195px;
     left: 50%;
     transform: translateX(-50%);
-    width: 220px;
+    width: 240px;
     height: 18px;
-    background: #1E3A6B;
+    background: linear-gradient(180deg, #2A5A9B, #1E3A6B);
     border-radius: 9px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.5);
   }
   .branch::before {
     content: '';
     position: absolute;
-    bottom: 0; left: 20px;
-    width: 14px; height: 80px;
-    background: #1E3A6B;
+    bottom: 0; left: 22px;
+    width: 14px; height: 90px;
+    background: linear-gradient(180deg, #2A5A9B, #1A3060);
     border-radius: 7px;
     transform-origin: bottom center;
-    transform: rotate(-8deg);
+    transform: rotate(-10deg);
   }
   .branch::after {
     content: '';
     position: absolute;
-    bottom: 0; right: 20px;
-    width: 14px; height: 60px;
-    background: #1E3A6B;
+    bottom: 0; right: 22px;
+    width: 14px; height: 70px;
+    background: linear-gradient(180deg, #2A5A9B, #1A3060);
     border-radius: 7px;
     transform-origin: bottom center;
-    transform: rotate(8deg);
+    transform: rotate(10deg);
   }
 
-  /* ── Owl ─────────────────────────────────────── */
+  /* ── Penny owl ───────────────────────────────── */
   .owl-wrap {
     position: absolute;
-    bottom: 190px;
+    bottom: 200px;
     left: 50%;
     transform: translateX(-50%);
-    animation: float 3s ease-in-out infinite;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    animation: float 3.5s ease-in-out infinite;
+    cursor: pointer;
+    z-index: 4;
   }
   @keyframes float {
     0%, 100% { transform: translateX(-50%) translateY(0px); }
-    50%       { transform: translateX(-50%) translateY(-10px); }
+    50%       { transform: translateX(-50%) translateY(-12px); }
   }
 
-  .owl {
-    position: relative;
-    width: 130px;
-    height: 140px;
-    cursor: pointer;
-    filter: drop-shadow(0 8px 20px rgba(0,0,0,0.5));
+  .owl-img {
+    width: 150px;
+    height: auto;
+    filter: drop-shadow(0 10px 24px rgba(0,0,0,0.6));
+    transition: transform 0.2s ease;
   }
-  .owl:hover { animation: wiggle 0.5s ease-in-out; }
-  @keyframes wiggle {
-    0%,100% { transform: rotate(0deg); }
-    25%     { transform: rotate(-8deg); }
-    75%     { transform: rotate(8deg); }
+  .owl-wrap:hover .owl-img {
+    transform: scale(1.06);
   }
-
-  /* body */
-  .owl-body {
-    position: absolute;
-    bottom: 0; left: 50%;
-    transform: translateX(-50%);
-    width: 100px;
-    height: 110px;
-    background: radial-gradient(ellipse at 40% 30%, #D4A017, #7A5C0A);
-    border-radius: 50% 50% 45% 45%;
-    border: 3px solid #4A7AB5;
+  .owl-wrap:active .owl-img {
+    transform: scale(0.97);
   }
 
-  /* belly */
-  .owl-belly {
-    position: absolute;
-    bottom: 10px; left: 50%;
-    transform: translateX(-50%);
-    width: 60px;
-    height: 70px;
-    background: radial-gradient(ellipse at 50% 40%, #F5E6C8, #E8D5A3);
-    border-radius: 50%;
-    border: 2px solid #C8A96E;
+  .owl-name {
+    font-size: 13px;
+    font-weight: bold;
+    color: #D4A017;
+    letter-spacing: 1.5px;
+    text-shadow: 0 2px 6px rgba(212,160,23,0.5);
+    font-style: italic;
   }
 
-  /* belly stripes */
-  .owl-belly::before {
-    content: '';
-    position: absolute;
-    top: 20px; left: 50%;
-    transform: translateX(-50%);
-    width: 40px; height: 2px;
-    background: rgba(139, 105, 20, 0.3);
-    box-shadow:
-      0 8px 0 rgba(139,105,20,0.25),
-      0 16px 0 rgba(139,105,20,0.2),
-      0 24px 0 rgba(139,105,20,0.15);
-  }
-
-  /* head */
-  .owl-head {
-    position: absolute;
-    top: 0; left: 50%;
-    transform: translateX(-50%);
-    width: 90px;
-    height: 85px;
-    background: radial-gradient(ellipse at 40% 30%, #D4A017, #7A5C0A);
-    border-radius: 50% 50% 45% 45%;
-    border: 3px solid #4A7AB5;
-    animation: headbob 4s ease-in-out infinite;
-  }
-  @keyframes headbob {
-    0%,100% { transform: translateX(-50%) rotate(0deg); }
-    30%     { transform: translateX(-50%) rotate(-5deg); }
-    70%     { transform: translateX(-50%) rotate(5deg); }
-  }
-
-  /* ears */
-  .ear {
-    position: absolute;
-    top: -10px;
-    width: 20px; height: 22px;
-    background: #7A5C0A;
-    border-radius: 50% 50% 0 0;
-    border: 2px solid #4A7AB5;
-  }
-  .ear-left  { left: 8px;  transform: rotate(-15deg); }
-  .ear-right { right: 8px; transform: rotate(15deg); }
-
-  /* eyes */
-  .eyes {
-    position: absolute;
-    top: 28px; left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 10px;
-  }
-  .eye {
-    width: 24px; height: 24px;
-    background: #fff;
-    border-radius: 50%;
-    border: 2px solid #333;
-    position: relative;
-    overflow: hidden;
-  }
-  .pupil {
-    position: absolute;
-    top: 4px; left: 4px;
-    width: 14px; height: 14px;
-    background: #1a1a1a;
-    border-radius: 50%;
-    animation: look 5s ease-in-out infinite;
-  }
-  .pupil::after {
-    content: '';
-    position: absolute;
-    top: 2px; left: 2px;
-    width: 5px; height: 5px;
-    background: #fff;
-    border-radius: 50%;
-  }
-  @keyframes look {
-    0%,20%,100% { transform: translate(0,0); }
-    25%          { transform: translate(2px,-1px); }
-    50%          { transform: translate(-2px,1px); }
-    75%          { transform: translate(1px,2px); }
-  }
-
-  /* blink */
-  .eyelid {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: #7A5C0A;
-    border-radius: 50%;
-    transform: scaleY(0);
-    transform-origin: top center;
-    animation: blink 4s ease-in-out infinite;
-  }
-  .eye:nth-child(2) .eyelid { animation-delay: 0.05s; }
-  @keyframes blink {
-    0%,44%,48%,100% { transform: scaleY(0); }
-    46%             { transform: scaleY(1); }
-  }
-
-  /* eye rings */
-  .eye-ring {
-    width: 30px; height: 30px;
-    background: transparent;
-    border: 3px solid #D4A017;
-    border-radius: 50%;
-    position: absolute;
-    top: -5px; left: -5px;
-  }
-
-  /* beak */
-  .beak {
-    position: absolute;
-    top: 55px; left: 50%;
-    transform: translateX(-50%);
-    width: 0; height: 0;
-    border-left: 9px solid transparent;
-    border-right: 9px solid transparent;
-    border-top: 12px solid #D4A017;
-    filter: drop-shadow(0 2px 2px rgba(0,0,0,0.3));
-  }
-
-  /* wings */
-  .wing {
-    position: absolute;
-    bottom: 20px;
-    width: 38px; height: 65px;
-    background: radial-gradient(ellipse at 50% 30%, #B8971A, #5A4008);
-    border: 2px solid #4A7AB5;
-    transform-origin: top center;
-  }
-  .wing-left {
-    left: -22px;
-    border-radius: 40% 10% 50% 50%;
-    animation: wingflap-left 3s ease-in-out infinite;
-  }
-  .wing-right {
-    right: -22px;
-    border-radius: 10% 40% 50% 50%;
-    animation: wingflap-right 3s ease-in-out infinite;
-  }
-  @keyframes wingflap-left {
-    0%,100% { transform: rotate(-5deg); }
-    50%     { transform: rotate(-20deg); }
-  }
-  @keyframes wingflap-right {
-    0%,100% { transform: rotate(5deg); }
-    50%     { transform: rotate(20deg); }
-  }
-
-  /* feet */
-  .feet {
-    position: absolute;
-    bottom: -10px; left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 12px;
-  }
-  .foot {
-    display: flex;
-    gap: 3px;
-  }
-  .toe {
-    width: 8px; height: 14px;
-    background: #D4A017;
-    border-radius: 4px 4px 6px 6px;
-    border: 1px solid #B8860B;
-  }
-
-  /* coin sparkle on owl */
+  /* sparkle coins */
   .sparkle {
     position: absolute;
-    font-size: 18px;
-    animation: sparkle-float 2s ease-in-out infinite;
+    font-size: 16px;
+    animation: sparkle-float var(--sd) ease-in-out infinite;
     opacity: 0;
+    pointer-events: none;
   }
-  .sparkle:nth-child(1) { top: -20px; left: 10px;  animation-delay: 0s;    animation-duration: 2.2s; }
-  .sparkle:nth-child(2) { top: -10px; right: 5px;  animation-delay: 0.7s;  animation-duration: 1.8s; }
-  .sparkle:nth-child(3) { top: 0px;   left: -15px; animation-delay: 1.3s;  animation-duration: 2.5s; }
   @keyframes sparkle-float {
     0%   { opacity: 0; transform: translateY(0) scale(0.5); }
-    30%  { opacity: 1; transform: translateY(-15px) scale(1); }
-    100% { opacity: 0; transform: translateY(-35px) scale(0.5); }
+    30%  { opacity: 1; transform: translateY(-18px) scale(1); }
+    100% { opacity: 0; transform: translateY(-40px) scale(0.5); }
   }
 
-  /* ── UI elements ─────────────────────────────── */
+  /* ── Speech bubble ───────────────────────────── */
+  .speech-bubble {
+    position: absolute;
+    bottom: 370px;
+    left: 50%;
+    transform: translateX(-58%);
+    background: #E8F4FF;
+    border: 2px solid #D4A017;
+    border-radius: 16px;
+    padding: 10px 16px;
+    font-size: 13px;
+    color: #0A1628;
+    white-space: nowrap;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.35);
+    z-index: 5;
+    transition: opacity 0.3s, transform 0.3s;
+  }
+  .speech-bubble.hidden {
+    opacity: 0;
+    transform: translateX(-58%) scale(0.9);
+    pointer-events: none;
+  }
+  .speech-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -12px; right: 28px;
+    width: 0; height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 12px solid #D4A017;
+  }
+  .speech-bubble::before {
+    content: '';
+    position: absolute;
+    bottom: -10px; right: 28px;
+    width: 0; height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 12px solid #E8F4FF;
+    z-index: 1;
+  }
+
+  /* ── Owl bubble menu ─────────────────────────── */
+  .bubble-menu {
+    position: absolute;
+    bottom: 215px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    z-index: 10;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+  }
+  .bubble-menu.visible {
+    opacity: 1;
+    pointer-events: all;
+  }
+  .bubble-btn {
+    background: rgba(14, 42, 84, 0.97);
+    border: 1.5px solid #D4A017;
+    border-radius: 22px;
+    padding: 9px 18px;
+    color: #CCE4FF;
+    font-size: 13px;
+    font-family: Georgia, serif;
+    cursor: pointer;
+    white-space: nowrap;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.5);
+    transition: background 0.15s, transform 0.1s;
+    animation: bubble-in 0.3s ease both;
+  }
+  .bubble-btn:nth-child(2) { animation-delay: 0.05s; }
+  .bubble-btn:nth-child(3) { animation-delay: 0.10s; }
+  .bubble-btn:nth-child(4) { animation-delay: 0.15s; }
+  @keyframes bubble-in {
+    from { opacity: 0; transform: translateX(-10px) scale(0.9); }
+    to   { opacity: 1; transform: translateX(0) scale(1); }
+  }
+  .bubble-btn:hover {
+    background: rgba(212,160,23,0.15);
+    transform: translateX(3px);
+  }
+  .bubble-btn .b-icon { margin-right: 8px; }
+
+  /* ── UI ──────────────────────────────────────── */
   .header {
     text-align: center;
     z-index: 2;
@@ -364,53 +272,13 @@
     color: #D4A017;
     font-weight: bold;
     letter-spacing: 3px;
-    text-shadow: 0 2px 8px rgba(212,160,23,0.5);
+    text-shadow: 0 2px 10px rgba(212,160,23,0.6);
   }
   .tagline {
     font-size: 13px;
-    color: rgba(255,255,255,0.5);
+    color: rgba(204,228,255,0.5);
     margin-top: 4px;
     font-style: italic;
-  }
-
-  .speech-bubble {
-    position: absolute;
-    bottom: 340px;
-    left: 50%;
-    transform: translateX(-60%);
-    background: #E8F4FF;
-    border: 2px solid #D4A017;
-    border-radius: 16px;
-    padding: 10px 16px;
-    font-size: 13px;
-    color: #0A1628;
-    white-space: nowrap;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    animation: bubble-appear 0.5s ease-out 1s both;
-    z-index: 5;
-  }
-  .speech-bubble::after {
-    content: '';
-    position: absolute;
-    bottom: -12px; right: 24px;
-    width: 0; height: 0;
-    border-left: 8px solid transparent;
-    border-right: 8px solid transparent;
-    border-top: 12px solid #D4A017;
-  }
-  .speech-bubble::before {
-    content: '';
-    position: absolute;
-    bottom: -10px; right: 24px;
-    width: 0; height: 0;
-    border-left: 8px solid transparent;
-    border-right: 8px solid transparent;
-    border-top: 12px solid #E8F4FF;
-    z-index: 1;
-  }
-  @keyframes bubble-appear {
-    from { opacity: 0; transform: translateX(-60%) scale(0.8); }
-    to   { opacity: 1; transform: translateX(-60%) scale(1); }
   }
 
   .bottom-ui {
@@ -421,24 +289,23 @@
     gap: 12px;
     width: 100%;
   }
-
   .play-btn {
     background: linear-gradient(135deg, #D4A017, #B8860B);
-    color: #3E2004;
+    color: #1a0e00;
     border: none;
     border-radius: 30px;
-    padding: 16px 48px;
+    padding: 16px 52px;
     font-size: 18px;
     font-weight: bold;
     font-family: Georgia, serif;
     cursor: pointer;
-    box-shadow: 0 4px 20px rgba(212,160,23,0.4);
+    box-shadow: 0 4px 20px rgba(212,160,23,0.5);
     letter-spacing: 1px;
     transition: transform 0.1s, box-shadow 0.1s;
   }
   .play-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 28px rgba(212,160,23,0.5);
+    box-shadow: 0 8px 28px rgba(212,160,23,0.6);
   }
   .play-btn:active { transform: translateY(0); }
 
@@ -450,10 +317,41 @@
     border: 1px solid rgba(212,160,23,0.3);
     border-radius: 20px;
     padding: 8px 16px;
-    color: rgba(255,255,255,0.7);
+    color: rgba(204,228,255,0.7);
     font-size: 12px;
   }
   .dot { width: 8px; height: 8px; border-radius: 50%; background: #D4A017; }
+
+  /* ── Floating HUD owl (corner) ───────────────── */
+  .hud-owl {
+    position: absolute;
+    bottom: 90px;
+    right: 20px;
+    width: 60px;
+    cursor: pointer;
+    animation: float-hud 4s ease-in-out infinite;
+    z-index: 20;
+    filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5));
+  }
+  @keyframes float-hud {
+    0%,100% { transform: translateY(0); }
+    50%     { transform: translateY(-6px); }
+  }
+  .hud-owl img {
+    width: 100%;
+    height: auto;
+    transition: transform 0.2s;
+  }
+  .hud-owl:hover img { transform: scale(1.1); }
+
+  /* ── Labels ──────────────────────────────────── */
+  .label {
+    color: rgba(204,228,255,0.4);
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-top: 8px;
+  }
 </style>
 </head>
 <body>
@@ -461,7 +359,7 @@
 <div class="phone">
   <div class="screen">
 
-    <!-- Stars background -->
+    <!-- Stars -->
     <div class="stars" id="stars"></div>
 
     <!-- Header -->
@@ -471,71 +369,60 @@
     </div>
 
     <!-- Speech bubble -->
-    <div class="speech-bubble">Hoo-hoo! Ready to learn? 🪙</div>
+    <div class="speech-bubble" id="bubble">Hoo! Ready for an adventure? 🪙</div>
 
     <!-- Branch -->
     <div class="branch"></div>
 
-    <!-- Owl -->
-    <div class="owl-wrap">
-      <span class="sparkle">✨</span>
-      <span class="sparkle">🪙</span>
-      <span class="sparkle">⭐</span>
-      <div class="owl" onclick="hoot()">
-        <div class="wing wing-left"></div>
-        <div class="wing wing-right"></div>
-        <div class="owl-body">
-          <div class="owl-belly"></div>
-          <div class="feet">
-            <div class="foot"><div class="toe"></div><div class="toe"></div><div class="toe"></div></div>
-            <div class="foot"><div class="toe"></div><div class="toe"></div><div class="toe"></div></div>
-          </div>
-        </div>
-        <div class="owl-head">
-          <div class="ear ear-left"></div>
-          <div class="ear ear-right"></div>
-          <div class="eyes">
-            <div class="eye">
-              <div class="eye-ring"></div>
-              <div class="pupil"></div>
-              <div class="eyelid"></div>
-            </div>
-            <div class="eye">
-              <div class="eye-ring"></div>
-              <div class="pupil"></div>
-              <div class="eyelid"></div>
-            </div>
-          </div>
-          <div class="beak"></div>
-        </div>
-      </div>
+    <!-- Bubble menu (shown on owl click) -->
+    <div class="bubble-menu" id="bubbleMenu">
+      <button class="bubble-btn" onclick="handleBubble('ask')"><span class="b-icon">💬</span>Ask me anything</button>
+      <button class="bubble-btn" onclick="handleBubble('journey')"><span class="b-icon">📖</span>Your Journey</button>
+      <button class="bubble-btn" onclick="handleBubble('trophy')"><span class="b-icon">🏆</span>Your Trophy</button>
+      <button class="bubble-btn" onclick="handleBubble('hint')"><span class="b-icon">✨</span>Give me a hint</button>
+    </div>
+
+    <!-- Penny on branch -->
+    <div class="owl-wrap" id="owlWrap" onclick="toggleMenu()">
+      <span class="sparkle" style="top:-28px;left:18px;--sd:2.2s;">✨</span>
+      <span class="sparkle" style="top:-16px;right:8px;--sd:1.8s;animation-delay:0.7s;">🪙</span>
+      <span class="sparkle" style="top:4px;left:-10px;--sd:2.5s;animation-delay:1.3s;">⭐</span>
+      <img class="owl-img" id="pennyImg" src="../Images/penny-wave.png" alt="Prof Penny">
+      <div class="owl-name">Prof Penny</div>
     </div>
 
     <!-- Ground -->
     <div class="ground"></div>
 
+    <!-- Floating HUD owl (bottom-right corner) -->
+    <div class="hud-owl" onclick="toggleMenu()" title="Ask Prof Penny">
+      <img src="../Images/penny-wave.png" alt="Prof Penny">
+    </div>
+
     <!-- Bottom UI -->
     <div class="bottom-ui">
       <div class="lesson-pill">
         <div class="dot"></div>
-        Lesson 1 · What is Money?
+        Lesson 1 · The Orange Quest
       </div>
-      <button class="play-btn" onclick="hoot()">▶  Start Adventure</button>
+      <button class="play-btn" onclick="celebrate()">▶  Start Adventure</button>
     </div>
 
   </div>
 </div>
 
+<div class="label">click Penny or the corner owl · tap any bubble</div>
+
 <script>
-  // Generate random stars
+  // Stars
   const starsEl = document.getElementById('stars');
-  for (let i = 0; i < 40; i++) {
+  for (let i = 0; i < 45; i++) {
     const s = document.createElement('div');
     s.className = 'star';
     const size = Math.random() * 3 + 1;
     s.style.cssText = `
       width:${size}px; height:${size}px;
-      top:${Math.random()*70}%;
+      top:${Math.random()*75}%;
       left:${Math.random()*100}%;
       --d:${(Math.random()*2+1.5).toFixed(1)}s;
       animation-delay:${(Math.random()*3).toFixed(1)}s;
@@ -543,17 +430,53 @@
     starsEl.appendChild(s);
   }
 
-  // Click owl to hoot
-  function hoot() {
-    const bubble = document.querySelector('.speech-bubble');
-    const phrases = [
-      'Hoo-hoo! Let\'s learn! 📚',
-      'Money was invented for YOU! 🪙',
-      'Ready to barter? 🍎',
-      'Wisdom begins here! ⭐',
-      'Let\'s grow your coins! 💰',
-    ];
-    bubble.textContent = phrases[Math.floor(Math.random() * phrases.length)];
+  let menuOpen = false;
+
+  function toggleMenu() {
+    menuOpen = !menuOpen;
+    document.getElementById('bubbleMenu').classList.toggle('visible', menuOpen);
+    const img = document.getElementById('pennyImg');
+    img.src = menuOpen ? '../Images/penny-thoughtful.png' : '../Images/penny-wave.png';
+    if (menuOpen) {
+      setBubble('Hoo... what do you want to know? 🦉', false);
+    }
+  }
+
+  function handleBubble(type) {
+    menuOpen = false;
+    document.getElementById('bubbleMenu').classList.remove('visible');
+
+    const responses = {
+      ask: ['What can a basket of apples get you?', 'What does Fatima need most?', 'Ask me about any trader…'],
+      journey: ['You have spoken to two people today.', 'The market holds three paths to the orange…', 'What you carry matters.'],
+      trophy: ['No trophy yet — but you are close.', 'The Trader trophy awaits. Keep going.', 'Earn it by finding the orange for Beni.'],
+      hint: ['You already know what Marco needs.', 'Fatima mentioned something this morning…', 'The fastest path is not always the best.'],
+    };
+
+    const list = responses[type];
+    const text = list[Math.floor(Math.random() * list.length)];
+    setBubble(text, true);
+
+    const img = document.getElementById('pennyImg');
+    img.src = '../Images/penny-thoughtful.png';
+    setTimeout(() => { img.src = '../Images/penny-wave.png'; }, 2200);
+  }
+
+  function celebrate() {
+    const img = document.getElementById('pennyImg');
+    img.src = '../Images/penny-celebrate.png';
+    setBubble('The adventure begins! 🌟', false);
+    setTimeout(() => { img.src = '../Images/penny-wave.png'; }, 2500);
+  }
+
+  function setBubble(text, autoHide) {
+    const b = document.getElementById('bubble');
+    b.classList.remove('hidden');
+    b.textContent = text;
+    if (autoHide) {
+      clearTimeout(window._bubbleTimer);
+      window._bubbleTimer = setTimeout(() => b.classList.add('hidden'), 4000);
+    }
   }
 </script>
 </body>

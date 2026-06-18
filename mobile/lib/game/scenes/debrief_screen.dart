@@ -19,9 +19,9 @@ class DebriefScreen extends StatelessWidget {
   });
 
   String get _grade {
-    final thresholds = scoring.gradeThresholds ?? {};
-    if (totalPoints >= (thresholds['gold'] ?? 80)) return 'gold';
-    if (totalPoints >= (thresholds['silver'] ?? 50)) return 'silver';
+    final t = scoring.gradeThresholds;
+    if (totalPoints >= (t['gold'] ?? 80)) return 'gold';
+    if (totalPoints >= (t['silver'] ?? 50)) return 'silver';
     return 'bronze';
   }
 
@@ -43,15 +43,16 @@ class DebriefScreen extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               Text(
-                trophy.name,
+                trophy.name.text,
                 style: const TextStyle(
                   color: AppTheme.gold,
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
                 ),
               ),
+              const SizedBox(height: 4),
               Text(
-                trophy.unlockMessage,
+                trophy.unlockMessage.text,
                 textAlign: TextAlign.center,
                 style: const TextStyle(color: Colors.white70, fontSize: 14),
               ),
@@ -62,35 +63,40 @@ class DebriefScreen extends StatelessWidget {
               ),
               const SizedBox(height: 32),
               _InfoCard(
-                title: '💡 ${debrief.conceptName}',
-                body: debrief.conceptExplanation,
+                title: '💡 ${debrief.conceptName.text}',
+                body: debrief.conceptExplanation.text,
               ),
               const SizedBox(height: 16),
               _InfoCard(
                 title: '🌍 Real world',
-                body: debrief.realWorldConnection,
+                body: debrief.realWorldConnection.text,
               ),
               const SizedBox(height: 16),
               Container(
                 width: double.infinity,
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: AppTheme.forestGreen.withOpacity(0.3),
+                  color: AppTheme.forestGreen.withValues(alpha: 0.2),
                   borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: AppTheme.forestGreen),
+                  border: Border.all(
+                      color: AppTheme.forestGreen.withValues(alpha: 0.6)),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text('🗣 Discussion question',
-                        style: TextStyle(color: Colors.white70, fontSize: 12)),
+                    const Text(
+                      '🗣  Discussion question',
+                      style:
+                          TextStyle(color: Colors.white60, fontSize: 12),
+                    ),
                     const SizedBox(height: 6),
                     Text(
-                      debrief.reflectionQuestion,
+                      debrief.reflectionQuestion.text,
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 15,
                         fontStyle: FontStyle.italic,
+                        height: 1.5,
                       ),
                     ),
                   ],
@@ -98,9 +104,10 @@ class DebriefScreen extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               Text(
-                'Next up: ${debrief.teaserNextLesson}',
+                'Next up: ${debrief.teaserNextLesson.text}',
                 textAlign: TextAlign.center,
-                style: const TextStyle(color: Colors.white54, fontSize: 13),
+                style:
+                    const TextStyle(color: Colors.white54, fontSize: 13),
               ),
               const SizedBox(height: 32),
               ElevatedButton(
@@ -129,17 +136,24 @@ class _InfoCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppTheme.deepBlue,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: AppTheme.gold.withOpacity(0.3)),
+        border: Border.all(color: AppTheme.gold.withValues(alpha: 0.3)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(title,
-              style: const TextStyle(
-                  color: AppTheme.gold, fontWeight: FontWeight.bold, fontSize: 15)),
+          Text(
+            title,
+            style: const TextStyle(
+                color: AppTheme.gold,
+                fontWeight: FontWeight.bold,
+                fontSize: 15),
+          ),
           const SizedBox(height: 8),
-          Text(body,
-              style: const TextStyle(color: AppTheme.lightText, fontSize: 14, height: 1.5)),
+          Text(
+            body,
+            style: const TextStyle(
+                color: AppTheme.lightText, fontSize: 14, height: 1.5),
+          ),
         ],
       ),
     );

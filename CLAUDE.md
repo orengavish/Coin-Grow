@@ -31,19 +31,21 @@ mobile/                         ← Flutter app
   pubspec.yaml                  ← Flutter dependencies (Flame, Rive, Lottie)
 ```
 
-## Flutter Setup (one-time)
+## Flutter Setup
 
-**Current state:** Flutter 3.44.2 zip downloading to `$env:TEMP\flutter.zip` (1.9 GB). Android Studio installed at `C:\Program Files\Android\Android Studio`.
+**Current state:** Flutter 3.44.2 installed at `C:\flutter`. Android Studio at `C:\Program Files\Android\Android Studio`.
 
-After download completes:
+**IMPORTANT:** All `flutter` commands must be run from `C:\Projects\Coin-Grow\mobile\` — Flutter looks for `pubspec.yaml` in the working directory and fails if run from the repo root.
+
+Add `C:\flutter\bin` to system PATH via Windows Environment Variables dialog if not already done.
+
 ```powershell
-Expand-Archive -Path "$env:TEMP\flutter.zip" -DestinationPath "C:\" -Force
-# Then add C:\flutter\bin to system PATH via Windows Environment Variables dialog
-flutter doctor       # verify setup, accept Android licenses
-cd C:\Projects\Coin-Grow\mobile
-flutter pub get
-flutter run          # launches on connected device or emulator
-flutter build apk   # builds Android APK
+# From C:\Projects\Coin-Grow\mobile\
+Set-Location "C:\Projects\Coin-Grow\mobile"
+C:\flutter\bin\flutter.bat doctor    # verify setup, accept Android licenses
+C:\flutter\bin\flutter.bat pub get
+C:\flutter\bin\flutter.bat run       # launches on connected device or emulator
+C:\flutter\bin\flutter.bat build apk
 ```
 
 ## Connecting a Generated Lesson to the App
@@ -89,17 +91,24 @@ pip install anthropic
 
 $env:ANTHROPIC_API_KEY = "sk-ant-..."
 
-# Default run (Lesson 1, age 12-15, beginner)
+# Default run (v0.1 prompt, Lesson 1, age 12-15, beginner)
 python test_harness.py
 
-# Custom lesson
+# v0.2 prompt with a pre-written input spec
+python test_harness.py --prompt-version 0.2 --input-file prompts/lesson-01-input.md --save
+
+# Custom v0.1 lesson
 python test_harness.py --topic "Why save money?" --age 8-11 --difficulty beginner --save
 
 # All options
-python test_harness.py --topic "..." --age [8-11|12-15|16+] --difficulty [beginner|intermediate|advanced] --lesson-number 2 --model claude-sonnet-4-6 --save
+python test_harness.py --prompt-version [0.1|0.2] --input-file prompts/lesson-01-input.md \
+    --topic "..." --age [8-11|12-15|16+] --difficulty [beginner|intermediate|advanced] \
+    --lesson-number 2 --model claude-sonnet-4-6 --save --list
 ```
 
 `--save` writes the generated lesson JSON to `lessons/<slug>_<timestamp>.json`.
+`--input-file` reads a lesson input `.md` file and extracts the JSON user message block (for v0.2 branching lessons).
+`--prompt-version` selects the prompt file; defaults to `0.2` when `--input-file` is given, `0.1` otherwise.
 
 ## Prompt Engineering Rules
 

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import '../models/lesson.dart';
 import '../game/scenes/scene_router.dart';
+import 'path_selection_screen.dart';
+import 'dead_end_screen.dart';
 
-// Drives the entire lesson from first scene to completion.
-// Maintains scene index, points, and happiness state.
+enum _Zone { intro, pathSelect, pathScenes, ending }
+
 class LessonPlayer extends StatefulWidget {
   final LessonModel lesson;
   final VoidCallback onComplete;
@@ -15,46 +17,100 @@ class LessonPlayer extends StatefulWidget {
 }
 
 class _LessonPlayerState extends State<LessonPlayer> {
-  late String _currentSceneId;
+  _Zone _zone = _Zone.intro;
+  int _introIndex = 0;
+  PathModel? _selectedPath;
+  int _pathSceneIndex = 0;
+  int _endingIndex = 0;
   int _totalPoints = 0;
-  int _happinessLevel = 0;
+  final Set<String> _triedDeadEnds = {};
+  PathModel? _activeDeadEnd;
 
-  Map<String, SceneModel> get _sceneMap =>
-      {for (var s in widget.lesson.scenes) s.id: s};
+  String get _owlName =>
+      widget.lesson.characters['owl']?.name ?? 'Prof Penny';
 
-  @override
-  void initState() {
-    super.initState();
-    _currentSceneId = widget.lesson.scenes.first.id;
+  void _onIntroAdvance() {
+    if (_introIndex < widget.lesson.introScenes.length - 1) {
+      setState(() => _introIndex++);
+    } else {
+      setState(() => _zone = _Zone.pathSelect);
+    }
   }
 
-  void _advance(String nextSceneId, {int? points, int? happiness}) {
-    if (nextSceneId == '__lesson_complete__') {
-      widget.onComplete();
-      return;
+  void _onPathSelected(PathModel path) {
+    if (path.isDeadEnd) {
+      setState(() {
+        _triedDeadEnds.add(path.id);
+        _activeDeadEnd = path;
+      });
+    } else {
+      final pts = widget.lesson.scoring.pathPoints[path.id] ?? 0;
+      setState(() {
+        _selectedPath = path;
+        _pathSceneIndex = 0;
+        _totalPoints += pts;
+        _zone = _Zone.pathScenes;
+        _activeDeadEnd = null;
+      });
     }
-    setState(() {
-      _currentSceneId = nextSceneId;
-      if (points != null) _totalPoints += points;
-      if (happiness != null) _happinessLevel = (_happinessLevel + happiness).clamp(-3, 3);
-    });
+  }
+
+  void _onDeadEndDismissed() {
+    setState(() => _activeDeadEnd = null);
+  }
+
+  void _onPathSceneAdvance() {
+    final path = _selectedPath!;
+    if (_pathSceneIndex < path.scenes.length - 1) {
+      setState(() => _pathSceneIndex++);
+    } else {
+      setState(() {
+        _zone = _Zone.ending;
+        _endingIndex = 0;
+      });
+    }
+  }
+
+  void _onEndingAdvance() {
+    if (_endingIndex < widget.lesson.endingScenes.length - 1) {
+      setState(() => _endingIndex++);
+    } else {
+      widget.onComplete();
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    final scene = _sceneMap[_currentSceneId];
-    if (scene == null) {
-      return const Scaffold(
-        body: Center(child: Text('Scene not found', style: TextStyle(color: Colors.red))),
-      );
-    }
-
-    return buildScene(
-      scene: scene,
-      lesson: widget.lesson,
-      totalPoints: _totalPoints,
-      happinessLevel: _happinessLevel,
-      onAdvance: _advance,
-    );
+    return switch (_zone) {
+      _Zone.intro => buildScene(
+          scene: widget.lesson.introScenes[_introIndex],
+          lesson: widget.lesson,
+          totalPoints: _totalPoints,
+          onAdvance: _onIntroAdvance,
+        ),
+      _Zone.pathSelect => _activeDeadEnd != null
+          ? DeadEndScreen(
+              deadEnd: _activeDeadEnd!.deadEnd!,
+              owlName: _owlName,
+              onDismiss: _onDeadEndDismissed,
+            )
+          : PathSelectionScreen(
+              paths: widget.lesson.paths,
+              triedDeadEnds: _triedDeadEnds,
+              onSelect: _onPathSelected,
+            ),
+      _Zone.pathScenes => buildScene(
+          scene: _selectedPath!.scenes[_pathSceneIndex],
+          lesson: widget.lesson,
+          totalPoints: _totalPoints,
+          onAdvance: _onPathSceneAdvance,
+        ),
+      _Zone.ending => buildScene(
+          scene: widget.lesson.endingScenes[_endingIndex],
+          lesson: widget.lesson,
+          totalPoints: _totalPoints,
+          onAdvance: _onEndingAdvance,
+        ),
+    };
   }
 }

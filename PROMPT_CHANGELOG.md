@@ -62,6 +62,12 @@ Lesson 1 (The Orange Quest) required a fundamentally different schema from v0.1.
 - No validation yet for owl_library coverage (checklist is manual)
 - Italian quality depends entirely on the model — no human review pass yet
 
+**Design update (2026-06-18):**
+- Owl renamed from "nameless/player-names-it" to **Prof Penny** — permanent name, not player-assigned
+- `named_by_player` field removed from schema; `name: "Prof Penny"` is fixed
+- Three Penny image assets: `penny-wave.png`, `penny-thoughtful.png`, `penny-celebrate.png`
+- HTML prototype (`mobile-preview/owl.html`) updated to use real image assets
+
 **Next planned changes:**
 - Add explicit sub-path schema for chain trades (path within a path)
 - Add owl_library validator to test_harness.py

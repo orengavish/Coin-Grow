@@ -29,7 +29,7 @@ class CharacterPortrait extends StatelessWidget {
             height: 80,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: AppTheme.gold.withOpacity(0.15),
+              color: AppTheme.gold.withValues(alpha:0.15),
               border: Border.all(color: AppTheme.gold, width: 2),
             ),
             child: Icon(_emotionIcon, size: 44, color: AppTheme.gold),

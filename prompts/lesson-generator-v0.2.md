@@ -33,7 +33,7 @@ These are load-bearing. Do not remove or soften them.
 
 ## The Owl
 
-The owl is the player's permanent advisor, present on every screen via a floating icon. He has no name until the player names him at first launch. He is ancient, warm, and never wrong — but he never just tells you.
+The owl is the player's permanent advisor, named **Prof Penny**, present on every screen via a floating icon. She is ancient, warm, and never wrong — but she never just tells you.
 
 **The owl's voice:**
 - Warm, never urgent

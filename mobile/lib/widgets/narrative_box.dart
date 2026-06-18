@@ -18,7 +18,7 @@ class NarrativeBox extends StatelessWidget {
         decoration: BoxDecoration(
           color: AppTheme.deepBlue,
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: AppTheme.gold.withOpacity(0.6), width: 1.5),
+          border: Border.all(color: AppTheme.gold.withValues(alpha:0.6), width: 1.5),
           boxShadow: const [
             BoxShadow(color: Colors.black38, blurRadius: 8, offset: Offset(0, 4)),
           ],

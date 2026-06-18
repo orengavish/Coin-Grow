@@ -21,11 +21,11 @@ class DialogueScreen extends StatefulWidget {
 }
 
 class _DialogueScreenState extends State<DialogueScreen> {
-  int _dialogueIndex = 0;
+  int _lineIndex = 0;
 
   void _next() {
-    if (_dialogueIndex < widget.scene.npcDialogue.length - 1) {
-      setState(() => _dialogueIndex++);
+    if (_lineIndex < widget.scene.npcDialogue.length - 1) {
+      setState(() => _lineIndex++);
     } else {
       widget.onAdvance();
     }
@@ -34,9 +34,9 @@ class _DialogueScreenState extends State<DialogueScreen> {
   @override
   Widget build(BuildContext context) {
     final lines = widget.scene.npcDialogue;
-    final hasDialogue = lines.isNotEmpty;
-    final currentLine = hasDialogue ? lines[_dialogueIndex] : null;
-    final speaker = currentLine != null ? widget.characters[currentLine.characterId] : null;
+    final currentLine = lines.isNotEmpty ? lines[_lineIndex] : null;
+    final speaker =
+        currentLine != null ? widget.characters[currentLine.characterId] : null;
 
     return Scaffold(
       backgroundColor: AppTheme.darkNavy,
@@ -50,7 +50,8 @@ class _DialogueScreenState extends State<DialogueScreen> {
                   Container(
                     width: double.infinity,
                     color: AppTheme.deepBlue,
-                    child: const Icon(Icons.landscape, size: 80, color: Colors.white12),
+                    child: const Icon(Icons.landscape,
+                        size: 80, color: Colors.white12),
                   ),
                   if (speaker != null)
                     Positioned(
@@ -94,7 +95,7 @@ class _DialogueScreenState extends State<DialogueScreen> {
                             const SizedBox(height: 8),
                             Expanded(
                               child: Text(
-                                currentLine.line,
+                                currentLine.line.text,
                                 style: const TextStyle(
                                   color: AppTheme.lightText,
                                   fontSize: 16,
@@ -105,15 +106,17 @@ class _DialogueScreenState extends State<DialogueScreen> {
                             Align(
                               alignment: Alignment.bottomRight,
                               child: Text(
-                                '${_dialogueIndex + 1} / ${lines.length}  ▶',
-                                style: TextStyle(color: Colors.white38, fontSize: 12),
+                                '${_lineIndex + 1} / ${lines.length}  ▶',
+                                style: const TextStyle(
+                                    color: Colors.white38, fontSize: 12),
                               ),
                             ),
                           ],
                         ),
                       ),
                     )
-                  : NarrativeBox(text: widget.scene.narrative, onTap: _next),
+                  : NarrativeBox(
+                      text: widget.scene.narrative.text, onTap: _next),
             ),
           ],
         ),

@@ -47,7 +47,8 @@ Generate Lesson 1 for Coin Grow using the following specification exactly.
     "owl": {
       "id": "owl",
       "role": "mentor",
-      "named_by_player": true,
+      "name": "Prof Penny",
+      "named_by_player": false,
       "personality": "Ancient, warm, Socratic. Never gives the answer. Speaks in observations and questions. Refers to things the player has already seen or done. Calm even when the player is panicking."
     },
     "fatima": {
