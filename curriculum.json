@@ -1,0 +1,219 @@
+{
+  "version": "0.1",
+  "name": "Coin Grow Core Curriculum",
+  "description": "Ordered financial literacy progression from barter to investing. Each lesson builds on prior concepts. Age variants are generated from the same topic with different age_group inputs.",
+
+  "units": [
+    {
+      "unit": 1,
+      "title": "The Story of Money",
+      "theme": "Where money comes from and why it exists",
+      "lessons": [
+        {
+          "lesson_number": 1,
+          "topic": "What is money and why does it exist?",
+          "concept": "barter",
+          "setting_preference": "historical",
+          "prior_concepts": [],
+          "summary": "Player experiences barter frustration (20 apples, get dinner). Discovers why a common medium of exchange was invented.",
+          "age_variants": ["8-11", "12-15", "16+"]
+        },
+        {
+          "lesson_number": 2,
+          "topic": "Why save? The problem of things that rot.",
+          "concept": "saving",
+          "setting_preference": "historical",
+          "prior_concepts": ["barter"],
+          "summary": "Player has 30 apples, must keep 10 for next week — but they rot. Discovers stores of value and the origin of saving.",
+          "age_variants": ["8-11", "12-15", "16+"]
+        },
+        {
+          "lesson_number": 3,
+          "topic": "What gives money its value?",
+          "concept": "value_and_trust",
+          "setting_preference": "historical",
+          "prior_concepts": ["barter", "saving"],
+          "summary": "Player witnesses the transition from commodity money (gold, grain) to symbolic money. Why does a coin have value? Because everyone agrees it does.",
+          "age_variants": ["12-15", "16+"]
+        }
+      ]
+    },
+    {
+      "unit": 2,
+      "title": "Earning and Spending",
+      "theme": "Income, expenses, and the basics of a budget",
+      "lessons": [
+        {
+          "lesson_number": 4,
+          "topic": "How do you earn money?",
+          "concept": "income",
+          "setting_preference": "modern",
+          "prior_concepts": ["barter", "saving", "value_and_trust"],
+          "summary": "Player chooses between different ways to spend a day (trade skills, sell goods, work for someone). Discovers that income = exchanging value for money.",
+          "age_variants": ["8-11", "12-15", "16+"]
+        },
+        {
+          "lesson_number": 5,
+          "topic": "Needs vs. wants: where does your money go?",
+          "concept": "budgeting",
+          "setting_preference": "modern",
+          "prior_concepts": ["income"],
+          "summary": "Player has a weekly income and must allocate it. Rent, food, and fun compete. Family happiness meter shows consequences of choices.",
+          "age_variants": ["8-11", "12-15", "16+"]
+        },
+        {
+          "lesson_number": 6,
+          "topic": "What happens when you spend more than you earn?",
+          "concept": "debt_basics",
+          "setting_preference": "modern",
+          "prior_concepts": ["income", "budgeting"],
+          "summary": "Player overspends and must borrow. Feels the weight of owing. Teases the concept of interest.",
+          "age_variants": ["12-15", "16+"]
+        }
+      ]
+    },
+    {
+      "unit": 3,
+      "title": "The Power of Saving",
+      "theme": "Delayed gratification, goals, and compound growth",
+      "lessons": [
+        {
+          "lesson_number": 7,
+          "topic": "Setting a financial goal",
+          "concept": "financial_goals",
+          "setting_preference": "modern",
+          "prior_concepts": ["budgeting"],
+          "summary": "Player picks a goal (bicycle, trip, new tool) and reverse-engineers how long it takes to save for it. Trophy awarded on completion.",
+          "age_variants": ["8-11", "12-15", "16+"]
+        },
+        {
+          "lesson_number": 8,
+          "topic": "What is interest? Making your money work for you.",
+          "concept": "interest",
+          "setting_preference": "auto",
+          "prior_concepts": ["saving", "financial_goals"],
+          "summary": "Player discovers that a bank pays you to hold your money. Simulates leaving money in savings for 1, 5, and 20 years. Sees the curve.",
+          "age_variants": ["8-11", "12-15", "16+"]
+        },
+        {
+          "lesson_number": 9,
+          "topic": "Compound interest: the eighth wonder of the world.",
+          "concept": "compound_interest",
+          "setting_preference": "auto",
+          "prior_concepts": ["interest", "saving"],
+          "summary": "Player races a friend who saves more but starts later. Demonstrates why starting early beats saving more.",
+          "age_variants": ["12-15", "16+"]
+        }
+      ]
+    },
+    {
+      "unit": 4,
+      "title": "Banks and Borrowing",
+      "theme": "What banks do, credit, and responsible debt",
+      "lessons": [
+        {
+          "lesson_number": 10,
+          "topic": "What does a bank actually do?",
+          "concept": "banking",
+          "setting_preference": "historical",
+          "prior_concepts": ["saving", "interest"],
+          "summary": "Player runs a simple bank for a day — takes deposits, makes loans, charges interest. Sees how the system works from both sides.",
+          "age_variants": ["12-15", "16+"]
+        },
+        {
+          "lesson_number": 11,
+          "topic": "Good debt vs. bad debt.",
+          "concept": "credit_and_debt",
+          "setting_preference": "modern",
+          "prior_concepts": ["debt_basics", "interest", "banking"],
+          "summary": "Player takes two loans: one to buy a business tool (generates income), one to buy luxury goods (generates nothing). Compares outcomes.",
+          "age_variants": ["12-15", "16+"]
+        }
+      ]
+    },
+    {
+      "unit": 5,
+      "title": "Investing and Risk",
+      "theme": "Making money grow, risk vs. reward, market basics",
+      "lessons": [
+        {
+          "lesson_number": 12,
+          "topic": "What is investing?",
+          "concept": "investing_basics",
+          "setting_preference": "auto",
+          "prior_concepts": ["compound_interest", "banking", "financial_goals"],
+          "summary": "Player allocates coins between three options: mattress (safe, 0% return), savings account (safe, low return), small business (risky, high return). Sees outcomes.",
+          "age_variants": ["12-15", "16+"]
+        },
+        {
+          "lesson_number": 13,
+          "topic": "Risk and return: why higher reward means higher risk.",
+          "concept": "risk_and_return",
+          "setting_preference": "auto",
+          "prior_concepts": ["investing_basics"],
+          "summary": "Player bets on harvests (weather risk), loans to merchants (default risk), and a new trade route (total loss risk). Discovers the risk-reward tradeoff.",
+          "age_variants": ["12-15", "16+"]
+        },
+        {
+          "lesson_number": 14,
+          "topic": "Diversification: don't put all eggs in one basket.",
+          "concept": "diversification",
+          "setting_preference": "historical",
+          "prior_concepts": ["risk_and_return", "investing_basics"],
+          "summary": "Player with 3 merchant ships learns that spreading cargo across ships beats concentrating it. One ship sinks — outcome depends on player's split.",
+          "age_variants": ["8-11", "12-15", "16+"]
+        },
+        {
+          "lesson_number": 15,
+          "topic": "What is a stock market?",
+          "concept": "stock_market",
+          "setting_preference": "modern",
+          "prior_concepts": ["investing_basics", "risk_and_return", "diversification"],
+          "summary": "Player buys a tiny share of a village bakery. Bakery grows, struggles, recovers. Player decides when to hold, sell, or buy more.",
+          "age_variants": ["16+"]
+        }
+      ]
+    },
+    {
+      "unit": 6,
+      "title": "Advanced Topics",
+      "theme": "Inflation, taxes, insurance — the forces that affect your money",
+      "lessons": [
+        {
+          "lesson_number": 16,
+          "topic": "What is inflation and why does it matter?",
+          "concept": "inflation",
+          "setting_preference": "historical",
+          "prior_concepts": ["value_and_trust", "saving", "interest"],
+          "summary": "Player saves coins under a mattress for 10 years. Returns to find everything costs more. Same coins, less buying power. Discovers inflation.",
+          "age_variants": ["12-15", "16+"]
+        },
+        {
+          "lesson_number": 17,
+          "topic": "Why do we pay taxes?",
+          "concept": "taxes",
+          "setting_preference": "modern",
+          "prior_concepts": ["income", "budgeting"],
+          "summary": "Player is the mayor for a day — must fund roads, schools, and a hospital. Decides who pays how much. Sees services disappear when taxes are cut.",
+          "age_variants": ["12-15", "16+"]
+        },
+        {
+          "lesson_number": 18,
+          "topic": "What is insurance?",
+          "concept": "insurance",
+          "setting_preference": "modern",
+          "prior_concepts": ["risk_and_return", "budgeting"],
+          "summary": "Player's house burns down — with and without insurance. Then plays insurer for a village: collects small premiums, pays rare large claims. Sees the math.",
+          "age_variants": ["12-15", "16+"]
+        }
+      ]
+    }
+  ],
+
+  "market_simulator": {
+    "description": "Unlocked after completing Unit 5. Classroom-vs-classroom investment competition.",
+    "prerequisite_concepts": ["stock_market", "risk_and_return", "diversification"],
+    "mechanics": "Each classroom gets a virtual portfolio. Weekly market events generated by AI. Classes compete on returns over a semester.",
+    "status": "planned — future paid tier"
+  }
+}
