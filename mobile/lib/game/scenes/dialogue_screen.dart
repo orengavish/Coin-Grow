@@ -39,18 +39,17 @@ class _DialogueScreenState extends State<DialogueScreen> {
     final speaker = currentLine != null ? widget.characters[currentLine.characterId] : null;
 
     return Scaffold(
-      backgroundColor: AppTheme.darkBrown,
+      backgroundColor: AppTheme.darkNavy,
       body: SafeArea(
         child: Column(
           children: [
-            // Scene background placeholder
             Expanded(
               flex: 3,
               child: Stack(
                 children: [
                   Container(
                     width: double.infinity,
-                    color: AppTheme.parchment.withOpacity(0.08),
+                    color: AppTheme.deepBlue,
                     child: const Icon(Icons.landscape, size: 80, color: Colors.white12),
                   ),
                   if (speaker != null)
@@ -66,7 +65,6 @@ class _DialogueScreenState extends State<DialogueScreen> {
                 ],
               ),
             ),
-            // Dialogue / narrative box
             Expanded(
               flex: 2,
               child: currentLine != null
@@ -77,7 +75,7 @@ class _DialogueScreenState extends State<DialogueScreen> {
                         margin: const EdgeInsets.all(16),
                         padding: const EdgeInsets.all(20),
                         decoration: BoxDecoration(
-                          color: AppTheme.parchment,
+                          color: AppTheme.deepBlue,
                           borderRadius: BorderRadius.circular(16),
                           border: Border.all(color: AppTheme.gold, width: 2),
                         ),
@@ -87,8 +85,8 @@ class _DialogueScreenState extends State<DialogueScreen> {
                             if (speaker != null)
                               Text(
                                 speaker.name,
-                                style: TextStyle(
-                                  color: AppTheme.darkBrown,
+                                style: const TextStyle(
+                                  color: AppTheme.gold,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 14,
                                 ),
@@ -98,7 +96,7 @@ class _DialogueScreenState extends State<DialogueScreen> {
                               child: Text(
                                 currentLine.line,
                                 style: const TextStyle(
-                                  color: AppTheme.darkBrown,
+                                  color: AppTheme.lightText,
                                   fontSize: 16,
                                   height: 1.5,
                                 ),
@@ -108,7 +106,7 @@ class _DialogueScreenState extends State<DialogueScreen> {
                               alignment: Alignment.bottomRight,
                               child: Text(
                                 '${_dialogueIndex + 1} / ${lines.length}  ▶',
-                                style: TextStyle(color: AppTheme.darkBrown.withOpacity(0.5), fontSize: 12),
+                                style: TextStyle(color: Colors.white38, fontSize: 12),
                               ),
                             ),
                           ],

@@ -8,7 +8,7 @@ Coin Grow is an AI-generated financial literacy game for mobile (iOS/Android). T
 
 Target audience: kids (8+) through adults. Social layer: classrooms compete against each other, schools against schools. Future tier: market simulator for investment competitions.
 
-Team: two co-founders, pre-funding. No game engine or mobile shell exists yet — the current milestone is a working, validated prompt engine.
+Team: two co-founders, pre-funding. Flutter mobile scaffold exists (models, scene router, lesson player). Owl character HTML prototype built. Current milestone: get Flutter running and connect generated lessons to the mobile shell.
 
 ## Architecture
 
@@ -33,9 +33,14 @@ mobile/                         ← Flutter app
 
 ## Flutter Setup (one-time)
 
-Flutter is not yet installed. Install it from flutter.dev, then:
+**Current state:** Flutter 3.44.2 zip downloading to `$env:TEMP\flutter.zip` (1.9 GB). Android Studio installed at `C:\Program Files\Android\Android Studio`.
+
+After download completes:
 ```powershell
-cd mobile
+Expand-Archive -Path "$env:TEMP\flutter.zip" -DestinationPath "C:\" -Force
+# Then add C:\flutter\bin to system PATH via Windows Environment Variables dialog
+flutter doctor       # verify setup, accept Android licenses
+cd C:\Projects\Coin-Grow\mobile
 flutter pub get
 flutter run          # launches on connected device or emulator
 flutter build apk   # builds Android APK

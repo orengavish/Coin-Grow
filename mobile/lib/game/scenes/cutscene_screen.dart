@@ -14,20 +14,19 @@ class CutsceneScreen extends StatelessWidget {
     return GestureDetector(
       onTap: onAdvance,
       child: Scaffold(
-        backgroundColor: AppTheme.darkBrown,
+        backgroundColor: AppTheme.darkNavy,
         body: SafeArea(
           child: Column(
             children: [
-              // Scene illustration placeholder (replace with actual art/Rive)
               Expanded(
                 flex: 3,
                 child: Container(
                   width: double.infinity,
-                  color: AppTheme.parchment.withOpacity(0.1),
+                  color: AppTheme.deepBlue,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Icon(Icons.landscape, size: 80, color: Colors.white30),
+                      const Icon(Icons.landscape, size: 80, color: Colors.white24),
                       const SizedBox(height: 8),
                       Text(
                         scene.visualDescription,
@@ -38,7 +37,6 @@ class CutsceneScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              // Narrative box
               Expanded(
                 flex: 2,
                 child: NarrativeBox(

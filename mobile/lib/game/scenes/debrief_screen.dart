@@ -31,13 +31,12 @@ class DebriefScreen extends StatelessWidget {
     final grade = _grade;
 
     return Scaffold(
-      backgroundColor: AppTheme.darkBrown,
+      backgroundColor: AppTheme.darkNavy,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(24),
           child: Column(
             children: [
-              // Trophy
               Text(
                 switch (grade) { 'gold' => '🥇', 'silver' => '🥈', _ => '🥉' },
                 style: const TextStyle(fontSize: 72),
@@ -62,7 +61,6 @@ class DebriefScreen extends StatelessWidget {
                 style: const TextStyle(color: AppTheme.gold, fontSize: 18),
               ),
               const SizedBox(height: 32),
-              // Concept card
               _InfoCard(
                 title: '💡 ${debrief.conceptName}',
                 body: debrief.conceptExplanation,
@@ -99,7 +97,6 @@ class DebriefScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 16),
-              // Next lesson teaser
               Text(
                 'Next up: ${debrief.teaserNextLesson}',
                 textAlign: TextAlign.center,
@@ -130,18 +127,19 @@ class _InfoCard extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: AppTheme.parchment,
+        color: AppTheme.deepBlue,
         borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: AppTheme.gold.withOpacity(0.3)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(title,
               style: const TextStyle(
-                  color: AppTheme.darkBrown, fontWeight: FontWeight.bold, fontSize: 15)),
+                  color: AppTheme.gold, fontWeight: FontWeight.bold, fontSize: 15)),
           const SizedBox(height: 8),
           Text(body,
-              style: const TextStyle(color: AppTheme.darkBrown, fontSize: 14, height: 1.5)),
+              style: const TextStyle(color: AppTheme.lightText, fontSize: 14, height: 1.5)),
         ],
       ),
     );

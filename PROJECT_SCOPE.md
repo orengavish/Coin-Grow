@@ -23,7 +23,7 @@ An AI-generated educational financial literacy game for mobile (iOS/Android). Pl
 - Pre-funding as of June 2026
 
 ## Current Milestone
-Working prompt engine that generates validated, playable lesson JSON. No mobile shell yet.
+Flutter mobile scaffold built (Dart models, scene router, all scene types). Owl character prototype live in browser (blue theme). Flutter 3.44.2 downloading; Android Studio installed at `C:\Program Files\Android\Android Studio`.
 
 ## Feature Scope
 
@@ -33,7 +33,16 @@ Working prompt engine that generates validated, playable lesson JSON. No mobile 
 - Test harness with validation and caching ✅
 - Curriculum map (18 lessons, 6 units) ✅
 - GitHub versioning and CI discipline ✅
-- Flutter mobile shell — scene player (in progress)
+- Flutter mobile scaffold — models, scene router, lesson player ✅
+- Owl character HTML prototype — blue navy theme, CSS animations ✅
+- Flutter environment setup (install in progress)
+
+### In Scope Next
+- Flutter: `flutter pub get`, `flutter run` on device/emulator
+- Port owl character to Rive for Flutter
+- Connect generated lesson JSON to Flutter player
+- Teacher dashboard (assign lessons, view class progress)
+- Classroom leaderboard backend
 
 ### In Scope Next
 - Lesson runner / batch generator

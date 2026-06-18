@@ -18,22 +18,19 @@ class ChoiceScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppTheme.darkBrown,
+      backgroundColor: AppTheme.darkNavy,
       body: SafeArea(
         child: Column(
           children: [
-            // Scene illustration
             Expanded(
               flex: 2,
               child: Container(
                 width: double.infinity,
-                color: AppTheme.parchment.withOpacity(0.08),
+                color: AppTheme.deepBlue,
                 child: const Icon(Icons.help_outline, size: 64, color: Colors.white24),
               ),
             ),
-            // Narrative
             NarrativeBox(text: scene.narrative, onTap: null),
-            // Choice buttons
             Expanded(
               flex: 3,
               child: Padding(
@@ -80,8 +77,8 @@ class _ChoiceButton extends StatelessWidget {
         child: ElevatedButton(
           onPressed: onTap,
           style: ElevatedButton.styleFrom(
-            backgroundColor: AppTheme.parchment,
-            foregroundColor: AppTheme.darkBrown,
+            backgroundColor: AppTheme.deepBlue,
+            foregroundColor: AppTheme.lightText,
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
             side: BorderSide(color: AppTheme.gold.withOpacity(0.5)),

@@ -23,21 +23,19 @@ class OutcomeScreen extends StatelessWidget {
     final happiness = outcome?.happinessDelta ?? 0;
 
     return Scaffold(
-      backgroundColor: AppTheme.darkBrown,
+      backgroundColor: AppTheme.darkNavy,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(24),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // Happiness indicator
               _HappinessMeter(level: happinessLevel + happiness),
               const SizedBox(height: 32),
-              // Outcome narrative
               Container(
                 padding: const EdgeInsets.all(24),
                 decoration: BoxDecoration(
-                  color: AppTheme.parchment,
+                  color: AppTheme.deepBlue,
                   borderRadius: BorderRadius.circular(16),
                   border: Border.all(color: AppTheme.gold, width: 2),
                 ),
@@ -45,14 +43,13 @@ class OutcomeScreen extends StatelessWidget {
                   outcome?.narrativeResult ?? scene.narrative,
                   textAlign: TextAlign.center,
                   style: const TextStyle(
-                    color: AppTheme.darkBrown,
+                    color: AppTheme.lightText,
                     fontSize: 16,
                     height: 1.6,
                   ),
                 ),
               ),
               const SizedBox(height: 24),
-              // Points earned
               if (points > 0)
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -63,7 +60,7 @@ class OutcomeScreen extends StatelessWidget {
                   child: Text(
                     '+$points points',
                     style: const TextStyle(
-                      color: AppTheme.darkBrown,
+                      color: AppTheme.darkNavy,
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
                     ),
@@ -83,7 +80,7 @@ class OutcomeScreen extends StatelessWidget {
 }
 
 class _HappinessMeter extends StatelessWidget {
-  final int level; // -3 to +3 cumulative
+  final int level;
 
   const _HappinessMeter({required this.level});
 
@@ -103,7 +100,7 @@ class _HappinessMeter extends StatelessWidget {
       children: [
         Text(emoji, style: const TextStyle(fontSize: 56)),
         const SizedBox(height: 8),
-        Text(
+        const Text(
           'Family happiness',
           style: TextStyle(color: Colors.white60, fontSize: 13),
         ),
