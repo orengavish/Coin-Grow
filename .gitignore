@@ -1,4 +1,4 @@
-lessons/
+/lessons/
 __pycache__/
 *.pyc
 .env

@@ -1,0 +1,193 @@
+{
+  "lesson": {
+    "version": "prompt-v0.1",
+    "lesson_number": 1,
+    "title": "The Barter Problem",
+    "topic": "Why money was invented",
+    "age_group": "12-15",
+    "difficulty": "beginner",
+    "estimated_minutes": 12,
+    "emotional_hook": "You're a kid in 800 BCE. You make bread. You want a chicken. But the farmer only wants shoes. And you don't make shoes..."
+  },
+  "world": {
+    "setting": "Ancient marketplace in a small farming village, 800 BCE. Dusty stone stalls, goats wandering, merchants haggling loudly.",
+    "time_period": "ancient",
+    "family_name": "The Bakers"
+  },
+  "characters": {
+    "player": {
+      "name": "Mira",
+      "role": "player",
+      "description": "A 13-year-old baker's apprentice who is good at making bread but terrible at bartering.",
+      "emotion_default": "curious"
+    },
+    "mentor": {
+      "name": "Old Hasan",
+      "role": "mentor",
+      "description": "A wise travelling merchant who has seen empires rise and fall. He always speaks in questions.",
+      "emotion_default": "warm"
+    },
+    "farmer": {
+      "name": "Dara",
+      "role": "npc",
+      "description": "A chicken farmer who needs shoes, not bread.",
+      "emotion_default": "skeptical"
+    }
+  },
+  "scenes": [
+    {
+      "id": "scene_intro",
+      "type": "cutscene",
+      "narrative": "It's market day. You clutch two warm loaves of bread — your best work yet. The smell of fresh bread fills the dusty air. You spot exactly what you need: Dara's chickens. A fat one would feed your family for a week.",
+      "visual_description": "Bustling ancient marketplace, stone stalls, merchants arguing, goats wandering between buyers",
+      "next_scene_id": "scene_negotiation"
+    },
+    {
+      "id": "scene_negotiation",
+      "type": "dialogue",
+      "narrative": "You approach Dara with your bread. She eyes it, then shakes her head.",
+      "visual_description": "Chicken farmer's stall, cages of squawking birds, dust and feathers in the air",
+      "npc_dialogue": [
+        {
+          "character_id": "farmer",
+          "line": "Bread? I have plenty of bread. My neighbor bakes all day. What I need is a good pair of sandals — my old ones split this morning.",
+          "emotion": "skeptical"
+        },
+        {
+          "character_id": "player",
+          "line": "But my bread is the best in the village! Surely it's worth one chicken?",
+          "emotion": "frustrated"
+        },
+        {
+          "character_id": "farmer",
+          "line": "Worth to YOU, maybe. But I need SANDALS. Come back when you have sandals.",
+          "emotion": "dismissive"
+        }
+      ],
+      "next_scene_id": "scene_mentor_appears"
+    },
+    {
+      "id": "scene_mentor_appears",
+      "type": "dialogue",
+      "narrative": "Old Hasan appears from behind a spice stall, his eyes twinkling.",
+      "visual_description": "Old merchant with weathered face, colorful robes, a camel laden with goods nearby",
+      "npc_dialogue": [
+        {
+          "character_id": "mentor",
+          "line": "Difficult, isn't it? She has what you want. You have what she doesn't need. Tell me — what do you call this problem?",
+          "emotion": "warm"
+        }
+      ],
+      "next_scene_id": "scene_choice_1"
+    },
+    {
+      "id": "scene_choice_1",
+      "type": "choice",
+      "narrative": "Old Hasan is waiting for your answer. This problem has been plaguing traders for generations. What IS this called?",
+      "visual_description": "Old Hasan gestures around the chaotic marketplace",
+      "choices": [
+        {
+          "id": "choice_double_coincidence",
+          "label": "The double coincidence of wants — we both need to want what the other has",
+          "financial_quality": "optimal",
+          "points_awarded": 25,
+          "happiness_delta": 1,
+          "leads_to_scene": "outcome_correct",
+          "consequence_preview": "Hasan nods slowly, impressed."
+        },
+        {
+          "id": "choice_unfair_trade",
+          "label": "She's being unfair — bread should be accepted everywhere",
+          "financial_quality": "poor",
+          "points_awarded": 5,
+          "happiness_delta": 0,
+          "leads_to_scene": "outcome_poor",
+          "consequence_preview": "Hasan strokes his beard, uncertain."
+        },
+        {
+          "id": "choice_give_up",
+          "label": "There's no solution — some things just can't be traded",
+          "financial_quality": "catastrophic",
+          "points_awarded": 0,
+          "happiness_delta": -1,
+          "leads_to_scene": "outcome_catastrophic",
+          "consequence_preview": "Hasan sighs deeply."
+        }
+      ]
+    },
+    {
+      "id": "outcome_correct",
+      "type": "outcome",
+      "narrative": "Old Hasan's face lights up. 'Exactly! The double coincidence of wants. She needs sandals. The sandal maker needs grain. The grain farmer needs cloth. Everyone wants something different at the same time — this is why barter is chaos! Now... what might solve this problem?'",
+      "visual_description": "Hasan draws a circle in the dust — arrows pointing between bread, sandals, chickens, grain",
+      "outcome": {
+        "points_awarded": 25,
+        "happiness_delta": 1,
+        "narrative_result": "You've named the core problem that stumped humanity for thousands of years. The double coincidence of wants is the fundamental flaw in barter — and the very reason money was invented.",
+        "financial_quality": "optimal"
+      },
+      "next_scene_id": "scene_solution"
+    },
+    {
+      "id": "outcome_poor",
+      "type": "outcome",
+      "narrative": "Hasan tilts his head. 'Is she being unfair? Or is she simply looking for what she needs? The problem isn't fairness — it's a coordination problem. She has what you want. You don't have what she wants. In a world of barter, this happens constantly.'",
+      "visual_description": "Hasan points to a dozen simultaneous trade arguments around the market",
+      "outcome": {
+        "points_awarded": 5,
+        "happiness_delta": 0,
+        "narrative_result": "Close, but the problem isn't unfairness — it's the mismatch between wants. Hasan explains the real issue.",
+        "financial_quality": "poor"
+      },
+      "next_scene_id": "scene_solution"
+    },
+    {
+      "id": "outcome_catastrophic",
+      "type": "outcome",
+      "narrative": "Hasan chuckles gently. 'Give up? Every civilization that gave up on trade stayed small and poor. No — humans are creative. We found a solution that changed everything. Want to know what it was?'",
+      "visual_description": "Hasan looks at all the failed trade attempts around the market",
+      "outcome": {
+        "points_awarded": 0,
+        "happiness_delta": -1,
+        "narrative_result": "Every stalled barter attempt in history pushed people toward finding a better solution. Hasan explains what civilizations discovered.",
+        "financial_quality": "catastrophic"
+      },
+      "next_scene_id": "scene_solution"
+    },
+    {
+      "id": "scene_solution",
+      "type": "cutscene",
+      "narrative": "Hasan picks up a small clay disk from his bag. 'What if there was something everyone agreed had value — something you could trade for ANYTHING? You'd give Dara this, she'd give you a chicken, then she'd trade the disk to the sandal maker, and he'd trade it to the grain farmer...' He draws a web of connections in the dust. 'One object. Solves everything.'",
+      "visual_description": "Clay coin glinting in the sunlight, Hasan's web of trade connections in the dust, everyone in the market suddenly at peace",
+      "next_scene_id": "scene_debrief"
+    },
+    {
+      "id": "scene_debrief",
+      "type": "debrief",
+      "narrative": "Today you discovered why money exists.",
+      "visual_description": "Trophy room, coins floating, Mira holding a gold coin triumphantly"
+    }
+  ],
+  "scoring": {
+    "max_points": 25,
+    "trophy": {
+      "name": "First Coin",
+      "icon": "coin_bronze",
+      "unlock_message": "You understand why barter failed and money was born."
+    },
+    "grade_thresholds": {
+      "gold": 25,
+      "silver": 15
+    },
+    "classroom_leaderboard": {
+      "shareable_result_template": "{player_name} scored {score}/{max} on '{lesson_title}' — {grade} medal!"
+    }
+  },
+  "debrief": {
+    "concept_name": "Double Coincidence of Wants",
+    "concept_explanation": "Barter only works when both people happen to want exactly what the other has — right now, at the same time. This almost never happens perfectly, which is why ancient economies were inefficient. Money solves this by giving everyone a universal medium of exchange.",
+    "real_world_connection": "Even today, this problem exists in some situations — a trade agreement between countries, a barter economy after a crisis, or even swapping lunch at school. Money isn't magic; it's a social agreement that everyone accepts the same thing as valuable.",
+    "reflection_question": "If you were starting a new civilization from scratch, what would you choose as your 'money' — and why would people trust it?",
+    "teaser_next_lesson": "Lesson 2: Saving — why future-you is a different person, and why that matters for money"
+  }
+}
