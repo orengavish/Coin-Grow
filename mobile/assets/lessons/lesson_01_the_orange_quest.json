@@ -1,9 +1,9 @@
-{
+﻿{
   "lesson": {
     "version": "prompt-v0.2",
     "lesson_number": 1,
     "title": "The Orange Quest",
-    "topic": "Barter — how trading works without money",
+    "topic": "Barter â€” how trading works without money",
     "concept": "double_coincidence_of_wants",
     "age_group": "8-15",
     "difficulty": "beginner",
@@ -15,7 +15,7 @@
   "world": {
     "setting": {
       "en": "A warm Mediterranean village market, 500 years ago. Cobblestone streets wind between stalls draped in coloured awnings. The smell of bread, fish, and spices mingles in the morning air. The sky is cloudless. Everything looks like a painting in a storybook.",
-      "it": "Un caldo mercato di villaggio mediterraneo, 500 anni fa. Strade di ciottoli si snodano tra bancarelle coperte da tende colorate. L'odore del pane, del pesce e delle spezie si mescola nell'aria mattutina. Il cielo è senza nuvole. Tutto sembra un dipinto in un libro di fiabe."
+      "it": "Un caldo mercato di villaggio mediterraneo, 500 anni fa. Strade di ciottoli si snodano tra bancarelle coperte da tende colorate. L'odore del pane, del pesce e delle spezie si mescola nell'aria mattutina. Il cielo Ã¨ senza nuvole. Tutto sembra un dipinto in un libro di fiabe."
     },
     "time_period": "medieval_mediterranean",
     "family_name": {
@@ -31,28 +31,28 @@
       "role": "player",
       "age": 12,
       "description": {
-        "en": "A baker's kid — brave, quick-thinking, a little impulsive. Everyone in the village knows Eli is good at fishing. Acts first, thinks second.",
-        "it": "Il figlio del fornaio — coraggioso, sveglio, un po' impulsivo. Tutti nel villaggio sanno che Eli è bravo a pescare. Prima agisce, poi pensa."
+        "en": "A baker's kid â€” brave, quick-thinking, a little impulsive. Everyone in the village knows Eli is good at fishing. Acts first, thinks second.",
+        "it": "Il figlio del fornaio â€” coraggioso, sveglio, un po' impulsivo. Tutti nel villaggio sanno che Eli Ã¨ bravo a pescare. Prima agisce, poi pensa."
       },
       "personality": {
         "en": "Determined, loyal, occasionally reckless. Loves their little brother more than anything.",
-        "it": "Determinato, leale, a volte avventato. Vuole bene al fratellino più di qualsiasi altra cosa al mondo."
+        "it": "Determinato, leale, a volte avventato. Vuole bene al fratellino piÃ¹ di qualsiasi altra cosa al mondo."
       },
       "needs": [],
       "gives": []
     },
-    "beni": {
-      "id": "beni",
-      "name": "Beni",
+    "Luca": {
+      "id": "Luca",
+      "name": "Luca",
       "role": "npc",
       "age": 7,
       "description": {
-        "en": "Eli's little brother. Pale from fever, wrapped in a blanket. He trusts Eli completely. He barely speaks — he doesn't need to.",
-        "it": "Il fratellino di Eli. Pallido per la febbre, avvolto in una coperta. Si fida di Eli ciecamente. Parla poco — non ne ha bisogno."
+        "en": "Eli's little brother. Pale from fever, wrapped in a blanket. He trusts Eli completely. He barely speaks â€” he doesn't need to.",
+        "it": "Il fratellino di Eli. Pallido per la febbre, avvolto in una coperta. Si fida di Eli ciecamente. Parla poco â€” non ne ha bisogno."
       },
       "personality": {
         "en": "Gentle, trusting, sick. His silence is louder than any words.",
-        "it": "Dolce, fiducioso, malato. Il suo silenzio vale più di mille parole."
+        "it": "Dolce, fiducioso, malato. Il suo silenzio vale piÃ¹ di mille parole."
       },
       "needs": ["orange"],
       "gives": []
@@ -86,7 +86,7 @@
       },
       "personality": {
         "en": "Warm, Socratic, unhurried. Speaks in observations and questions. References what the player has already done or seen.",
-        "it": "Caldo, socratico, senza fretta. Parla per osservazioni e domande. Si riferisce a ciò che il giocatore ha già fatto o visto."
+        "it": "Caldo, socratico, senza fretta. Parla per osservazioni e domande. Si riferisce a ciÃ² che il giocatore ha giÃ  fatto o visto."
       },
       "needs": [],
       "gives": ["wisdom"]
@@ -97,12 +97,12 @@
       "role": "gatekeeper",
       "age": 52,
       "description": {
-        "en": "The only orange seller in the market. Silk headscarf, hands that have counted goods for thirty years. Kind but firm — she is not the villain, she just needs what she needs.",
-        "it": "L'unica venditrice di arance al mercato. Foulard di seta, mani che hanno contato merci per trent'anni. Gentile ma ferma — non è la cattiva della storia, ha solo bisogno di quello di cui ha bisogno."
+        "en": "The only orange seller in the market. Silk headscarf, hands that have counted goods for thirty years. Kind but firm â€” she is not the villain, she just needs what she needs.",
+        "it": "L'unica venditrice di arance al mercato. Foulard di seta, mani che hanno contato merci per trent'anni. Gentile ma ferma â€” non Ã¨ la cattiva della storia, ha solo bisogno di quello di cui ha bisogno."
       },
       "personality": {
         "en": "Direct, fair, not unkind. Respects a child who tries hard. Grew up in apple country and misses the taste.",
-        "it": "Diretta, giusta, non cattiva. Rispetta un bambino che si impegna. È cresciuta in una terra di mele e ne sente la mancanza."
+        "it": "Diretta, giusta, non cattiva. Rispetta un bambino che si impegna. Ãˆ cresciuta in una terra di mele e ne sente la mancanza."
       },
       "needs": ["silk_thread", "sandals", "apples"],
       "gives": ["orange"]
@@ -114,11 +114,11 @@
       "age": 68,
       "description": {
         "en": "The apple farmer. Enormous hands, slow careful speech, bad back. His nod of approval means more than most compliments.",
-        "it": "Il contadino delle mele. Mani enormi, parole lente e precise, schiena malata. Il suo cenno di approvazione vale più di mille complimenti."
+        "it": "Il contadino delle mele. Mani enormi, parole lente e precise, schiena malata. Il suo cenno di approvazione vale piÃ¹ di mille complimenti."
       },
       "personality": {
-        "en": "Few words, high standards, fair always. Work earns pay — that is all there is to it.",
-        "it": "Poche parole, standard elevati, sempre giusto. Il lavoro merita ricompensa — non c'è altro da dire."
+        "en": "Few words, high standards, fair always. Work earns pay â€” that is all there is to it.",
+        "it": "Poche parole, standard elevati, sempre giusto. Il lavoro merita ricompensa â€” non c'Ã¨ altro da dire."
       },
       "needs": ["help_harvesting_apples"],
       "gives": ["basket_of_apples"]
@@ -129,12 +129,12 @@
       "role": "npc",
       "age": 34,
       "description": {
-        "en": "The fisherman. Sunburned, laughs easily, knows everyone in the market by name. The market's newspaper — he knows every trader's business.",
-        "it": "Il pescatore. Abbronzato dal sole, ride facilmente, conosce tutti al mercato per nome. È il giornale del mercato — sa tutto di tutti."
+        "en": "The fisherman. Sunburned, laughs easily, knows everyone in the market by name. The market's newspaper â€” he knows every trader's business.",
+        "it": "Il pescatore. Abbronzato dal sole, ride facilmente, conosce tutti al mercato per nome. Ãˆ il giornale del mercato â€” sa tutto di tutti."
       },
       "personality": {
         "en": "Warm, chatty, generous. Ask him about anyone and he will tell you something useful.",
-        "it": "Caloroso, loquace, generoso. Chiedigli di chiunque e ti dirà qualcosa di utile."
+        "it": "Caloroso, loquace, generoso. Chiedigli di chiunque e ti dirÃ  qualcosa di utile."
       },
       "needs": ["nets_mended"],
       "gives": ["fresh_fish"]
@@ -146,8 +146,8 @@
       "role": "npc",
       "age": 51,
       "description": {
-        "en": "The baker. Flour in his hair, always slightly rushed. Easy to deal with — he loves fish and he is happy.",
-        "it": "Il fornaio. Farina tra i capelli, sempre di fretta. Facile da accontentare — ama il pesce ed è sempre di buon umore."
+        "en": "The baker. Flour in his hair, always slightly rushed. Easy to deal with â€” he loves fish and he is happy.",
+        "it": "Il fornaio. Farina tra i capelli, sempre di fretta. Facile da accontentare â€” ama il pesce ed Ã¨ sempre di buon umore."
       },
       "personality": {
         "en": "Cheerful, quick to agree, easily pleased. His wife has been asking for fish all week.",
@@ -162,12 +162,12 @@
       "role": "npc",
       "age": 43,
       "description": {
-        "en": "The silk weaver. Quiet, precise. Her hands never stop moving even when she talks. Means exactly what she says — no more, no less.",
-        "it": "La tessitrice di seta. Silenziosa, precisa. Le sue mani non si fermano mai, nemmeno quando parla. Dice esattamente quello che intende — né più né meno."
+        "en": "The silk weaver. Quiet, precise. Her hands never stop moving even when she talks. Means exactly what she says â€” no more, no less.",
+        "it": "La tessitrice di seta. Silenziosa, precisa. Le sue mani non si fermano mai, nemmeno quando parla. Dice esattamente quello che intende â€” nÃ© piÃ¹ nÃ© meno."
       },
       "personality": {
         "en": "Measured, trustworthy, no-nonsense. Has been weaving since dawn and forgot to eat.",
-        "it": "Misurata, affidabile, concreta. Tesse dall'alba e si è dimenticata di mangiare."
+        "it": "Misurata, affidabile, concreta. Tesse dall'alba e si Ã¨ dimenticata di mangiare."
       },
       "needs": ["fresh_bread"],
       "gives": ["silk_thread"]
@@ -179,8 +179,8 @@
       "role": "npc",
       "age": 54,
       "description": {
-        "en": "The cobbler. A quiet workshop full of beautiful things he has collected. Recognizes craftsmanship immediately. He holds the rod a moment before handing over the sandals — that pause is the lesson.",
-        "it": "Il calzolaio. Un laboratorio silenzioso pieno di belle cose che ha raccolto. Riconosce la maestria all'istante. Tiene in mano la canna un momento prima di consegnare i sandali — quella pausa è la lezione."
+        "en": "The cobbler. A quiet workshop full of beautiful things he has collected. Recognizes craftsmanship immediately. He holds the rod a moment before handing over the sandals â€” that pause is the lesson.",
+        "it": "Il calzolaio. Un laboratorio silenzioso pieno di belle cose che ha raccolto. Riconosce la maestria all'istante. Tiene in mano la canna un momento prima di consegnare i sandali â€” quella pausa Ã¨ la lezione."
       },
       "personality": {
         "en": "Quiet, appreciative, gently melancholy. Loves beautiful things made by hand.",
@@ -195,12 +195,12 @@
       "role": "dead_end_npc",
       "age": 71,
       "description": {
-        "en": "Old Miriam is beloved by everyone. Her honey is famous. She is not home today — left at dawn to visit her daughter, who just had a baby.",
-        "it": "La vecchia Miriam è amata da tutti. Il suo miele è famoso. Oggi non è a casa — è partita all'alba per visitare sua figlia, che ha appena avuto un bambino."
+        "en": "Old Miriam is beloved by everyone. Her honey is famous. She is not home today â€” left at dawn to visit her daughter, who just had a baby.",
+        "it": "La vecchia Miriam Ã¨ amata da tutti. Il suo miele Ã¨ famoso. Oggi non Ã¨ a casa â€” Ã¨ partita all'alba per visitare sua figlia, che ha appena avuto un bambino."
       },
       "personality": {
-        "en": "Sweet, generous — but absent today.",
-        "it": "Dolce, generosa — ma oggi è assente."
+        "en": "Sweet, generous â€” but absent today.",
+        "it": "Dolce, generosa â€” ma oggi Ã¨ assente."
       },
       "needs": [],
       "gives": ["honey"]
@@ -213,20 +213,20 @@
       "type": "cutscene",
       "narrative": {
         "en": "Before the sun is up, you are already awake. Beni is burning. His forehead is hot under your hand. He looks at you with tired eyes and tries to smile. The village healer arrives and kneels beside his bed. She speaks quietly, so he won't hear.",
-        "it": "Prima ancora che il sole sorga, sei già sveglio. Beni è in fiamme. La sua fronte è calda sotto la tua mano. Ti guarda con occhi stanchi e cerca di sorridere. La guaritrice del villaggio arriva e si inginocchia accanto al suo letto. Parla sottovoce, per non farlo sentire."
+        "it": "Prima ancora che il sole sorga, sei giÃ  sveglio. Beni Ã¨ in fiamme. La sua fronte Ã¨ calda sotto la tua mano. Ti guarda con occhi stanchi e cerca di sorridere. La guaritrice del villaggio arriva e si inginocchia accanto al suo letto. Parla sottovoce, per non farlo sentire."
       },
-      "visual_description": "Small warm bedroom, morning light barely at the window. Beni pale under a thick blanket. The healer — grey-haired, leather bag — whispering near the door.",
+      "visual_description": "Small warm bedroom, morning light barely at the window. Beni pale under a thick blanket. The healer â€” grey-haired, leather bag â€” whispering near the door.",
       "npc_dialogue": [
         {
           "character_id": "healer",
           "line": {
-            "en": "He needs orange juice. Fresh, by tonight. Fatima near the eastern wall is the only one who has them. But child — the village uses no coins. You will have to barter for it.",
-            "it": "Ha bisogno di succo d'arancia. Fresco, entro stasera. Fatima vicino al muro est è l'unica che le vende. Ma ragazzo — nel villaggio non si usano monete. Dovrai barattare."
+            "en": "He needs orange juice. Fresh, by tonight. Fatima near the eastern wall is the only one who has them. But child â€” the village uses no coins. You will have to barter for it.",
+            "it": "Ha bisogno di succo d'arancia. Fresco, entro stasera. Fatima vicino al muro est Ã¨ l'unica che le vende. Ma ragazzo â€” nel villaggio non si usano monete. Dovrai barattare."
           },
           "emotion": "serious"
         },
         {
-          "character_id": "beni",
+          "character_id": "Luca",
           "line": {
             "en": "Eli... I'm cold.",
             "it": "Eli... ho freddo."
@@ -240,10 +240,10 @@
       "id": "intro_arrive_market",
       "type": "cutscene",
       "narrative": {
-        "en": "You run to the market before the morning rush. Stalls are opening, merchants calling out, a goat escaping through someone's legs. You find Fatima easily — her stall glows with the colour of oranges. One orange. That is all you need.",
-        "it": "Corri al mercato prima della ressa mattutina. Le bancarelle si aprono, i mercanti chiamano i clienti, una capra scappa tra le gambe di qualcuno. Trovi Fatima facilmente — la sua bancarella brilla del colore delle arance. Un'arancia. È tutto quello che ti serve."
+        "en": "You run to the market before the morning rush. Stalls are opening, merchants calling out, a goat escaping through someone's legs. You find Fatima easily â€” her stall glows with the colour of oranges. One orange. That is all you need.",
+        "it": "Corri al mercato prima della ressa mattutina. Le bancarelle si aprono, i mercanti chiamano i clienti, una capra scappa tra le gambe di qualcuno. Trovi Fatima facilmente â€” la sua bancarella brilla del colore delle arance. Un'arancia. Ãˆ tutto quello che ti serve."
       },
-      "visual_description": "Village market at dawn. Colourful awnings, cheerful chaos. Fatima's stall glows orange in the morning light — fruit arranged perfectly.",
+      "visual_description": "Village market at dawn. Colourful awnings, cheerful chaos. Fatima's stall glows orange in the morning light â€” fruit arranged perfectly.",
       "npc_dialogue": [],
       "next_scene_id": "intro_fatima_rejection"
     },
@@ -251,16 +251,16 @@
       "id": "intro_fatima_rejection",
       "type": "dialogue",
       "narrative": {
-        "en": "You tell Fatima about Beni. She listens carefully — she is not a cruel woman. But when you finish, she shakes her head slowly.",
-        "it": "Spieghi a Fatima di Beni. Ascolta con attenzione — non è una donna crudele. Ma quando hai finito, scuote lentamente la testa."
+        "en": "You tell Fatima about Beni. She listens carefully â€” she is not a cruel woman. But when you finish, she shakes her head slowly.",
+        "it": "Spieghi a Fatima di Beni. Ascolta con attenzione â€” non Ã¨ una donna crudele. Ma quando hai finito, scuote lentamente la testa."
       },
-      "visual_description": "Fatima's stall. She listens to Eli with genuine sympathy — but her answer is firm.",
+      "visual_description": "Fatima's stall. She listens to Eli with genuine sympathy â€” but her answer is firm.",
       "npc_dialogue": [
         {
           "character_id": "fatima",
           "line": {
-            "en": "I am sorry about your brother. Truly. But I need silk thread — my headscarf is fraying and I cannot find any here. An orange for silk thread. That is my trade. What do you have?",
-            "it": "Mi dispiace per tuo fratello. Davvero. Ma ho bisogno di filo di seta — il mio foulard si sta sfilacciando e non riesco a trovarne. Un'arancia per del filo di seta. Questo è il mio scambio. Cosa hai tu?"
+            "en": "I am sorry about your brother. Truly. But I need silk thread â€” my headscarf is fraying and I cannot find any here. An orange for silk thread. That is my trade. What do you have?",
+            "it": "Mi dispiace per tuo fratello. Davvero. Ma ho bisogno di filo di seta â€” il mio foulard si sta sfilacciando e non riesco a trovarne. Un'arancia per del filo di seta. Questo Ã¨ il mio scambio. Cosa hai tu?"
           },
           "emotion": "sympathetic_but_firm"
         },
@@ -276,7 +276,7 @@
           "character_id": "fatima",
           "line": {
             "en": "Then go and find it. I will be here until sundown.",
-            "it": "Allora vai a trovarlo. Sarò qui fino al tramonto."
+            "it": "Allora vai a trovarlo. SarÃ² qui fino al tramonto."
           },
           "emotion": "neutral"
         }
@@ -309,16 +309,16 @@
           "id": "apple_yosef_approach",
           "type": "dialogue",
           "narrative": {
-            "en": "Yosef's orchard is at the edge of the market. The trees are heavy with apples — red and gold, more than one old man can pick alone. He sees you coming and says nothing. He waits.",
-            "it": "Il frutteto di Yosef è ai margini del mercato. Gli alberi sono carichi di mele — rosse e dorate, più di quante un vecchio possa raccogliere da solo. Ti vede arrivare e non dice nulla. Aspetta."
+            "en": "Yosef's orchard is at the edge of the market. The trees are heavy with apples â€” red and gold, more than one old man can pick alone. He sees you coming and says nothing. He waits.",
+            "it": "Il frutteto di Yosef Ã¨ ai margini del mercato. Gli alberi sono carichi di mele â€” rosse e dorate, piÃ¹ di quante un vecchio possa raccogliere da solo. Ti vede arrivare e non dice nulla. Aspetta."
           },
-          "visual_description": "Apple orchard, heavy trees, red and golden fruit. Yosef — enormous hands, crooked back — watching Eli approach.",
+          "visual_description": "Apple orchard, heavy trees, red and golden fruit. Yosef â€” enormous hands, crooked back â€” watching Eli approach.",
           "npc_dialogue": [
             {
               "character_id": "yosef",
               "line": {
-                "en": "My back gave out two days ago. Trees don't wait. Two hours of picking — honest work — and you take home a full basket. Yes or no.",
-                "it": "La schiena mi ha abbandonato due giorni fa. Gli alberi non aspettano. Due ore di raccolta — lavoro onesto — e porti a casa un cesto pieno. Sì o no."
+                "en": "My back gave out two days ago. Trees don't wait. Two hours of picking â€” honest work â€” and you take home a full basket. Yes or no.",
+                "it": "La schiena mi ha abbandonato due giorni fa. Gli alberi non aspettano. Due ore di raccolta â€” lavoro onesto â€” e porti a casa un cesto pieno. SÃ¬ o no."
               },
               "emotion": "serious"
             },
@@ -326,7 +326,7 @@
               "character_id": "player",
               "line": {
                 "en": "Yes.",
-                "it": "Sì."
+                "it": "SÃ¬."
               },
               "emotion": "determined"
             }
@@ -338,7 +338,7 @@
           "type": "cutscene",
           "narrative": {
             "en": "Two hours. Arms aching, fingers sticky with juice. Yosef watches from the shade, saying nothing. When the basket is full, he walks over slowly, looks at your work, and nods once. That nod is worth more than any thank you.",
-            "it": "Due ore. Braccia indolenzite, dita appiccicose di succo. Yosef osserva dall'ombra, senza dire una parola. Quando il cesto è pieno, si avvicina lentamente, guarda il tuo lavoro e annuisce una volta. Quel cenno vale più di qualsiasi grazie."
+            "it": "Due ore. Braccia indolenzite, dita appiccicose di succo. Yosef osserva dall'ombra, senza dire una parola. Quando il cesto Ã¨ pieno, si avvicina lentamente, guarda il tuo lavoro e annuisce una volta. Quel cenno vale piÃ¹ di qualsiasi grazie."
           },
           "visual_description": "Time-lapse of apple picking. Sun rising higher. Eli stretching for high branches. The basket filling apple by apple. Yosef in the shade, watching with careful eyes.",
           "npc_dialogue": [],
@@ -349,15 +349,15 @@
           "type": "dialogue",
           "narrative": {
             "en": "You carry the basket back to Fatima's stall. It is heavy. Your arms remember every apple. When she sees what you are carrying, something changes in her face.",
-            "it": "Porti il cesto alla bancarella di Fatima. È pesante. Le tue braccia ricordano ogni mela. Quando vede cosa stai portando, qualcosa cambia nel suo viso."
+            "it": "Porti il cesto alla bancarella di Fatima. Ãˆ pesante. Le tue braccia ricordano ogni mela. Quando vede cosa stai portando, qualcosa cambia nel suo viso."
           },
-          "visual_description": "Eli arriving at Fatima's stall with a heavy basket. Fatima's eyes widen — she recognises these apples.",
+          "visual_description": "Eli arriving at Fatima's stall with a heavy basket. Fatima's eyes widen â€” she recognises these apples.",
           "npc_dialogue": [
             {
               "character_id": "fatima",
               "line": {
-                "en": "Yosef's apples. From the northern orchard. I grew up near trees like these — I have not tasted one in fifteen years.",
-                "it": "Le mele di Yosef. Dal frutteto del nord. Sono cresciuta vicino ad alberi come questi — non ne assaggio una da quindici anni."
+                "en": "Yosef's apples. From the northern orchard. I grew up near trees like these â€” I have not tasted one in fifteen years.",
+                "it": "Le mele di Yosef. Dal frutteto del nord. Sono cresciuta vicino ad alberi come questi â€” non ne assaggio una da quindici anni."
               },
               "emotion": "surprised_nostalgic"
             },
@@ -365,7 +365,7 @@
               "character_id": "fatima",
               "line": {
                 "en": "You worked for those. I can see it on your face. Take your orange. Your brother needs it more than I need silk.",
-                "it": "Hai lavorato per queste. Lo vedo sulla tua faccia. Prendi la tua arancia. Tuo fratello ne ha più bisogno di quanto io abbia bisogno della seta."
+                "it": "Hai lavorato per queste. Lo vedo sulla tua faccia. Prendi la tua arancia. Tuo fratello ne ha piÃ¹ bisogno di quanto io abbia bisogno della seta."
               },
               "emotion": "warm"
             }
@@ -379,8 +379,8 @@
         "leads_to_orange": true,
         "steps_remaining": 1,
         "journal_entry": {
-          "en": "Picked apples with Yosef (2 hrs) → basket of apples → Fatima traded orange for apples ✅",
-          "it": "Raccolto mele con Yosef (2 ore) → cesto di mele → Fatima ha scambiato l'arancia con le mele ✅"
+          "en": "Picked apples with Yosef (2 hrs) â†’ basket of apples â†’ Fatima traded orange for apples âœ…",
+          "it": "Raccolto mele con Yosef (2 ore) â†’ cesto di mele â†’ Fatima ha scambiato l'arancia con le mele âœ…"
         }
       }
     },
@@ -408,16 +408,16 @@
           "id": "fish_marco_approach",
           "type": "dialogue",
           "narrative": {
-            "en": "Marco is sitting on a crate at the water's edge, holding his nets up to the light and shaking his head. Three big holes. He sighs when he sees you — not at you, at the nets.",
-            "it": "Marco è seduto su una cassa ai margini del mercato, tiene le reti verso la luce e scuote la testa. Tre grandi buchi. Sospira quando ti vede — non verso di te, verso le reti."
+            "en": "Marco is sitting on a crate at the water's edge, holding his nets up to the light and shaking his head. Three big holes. He sighs when he sees you â€” not at you, at the nets.",
+            "it": "Marco Ã¨ seduto su una cassa ai margini del mercato, tiene le reti verso la luce e scuote la testa. Tre grandi buchi. Sospira quando ti vede â€” non verso di te, verso le reti."
           },
           "visual_description": "Marco on crates, nets spread across his lap with three visible tears. The expression of a man who has lost three catches to a problem he can't fix alone.",
           "npc_dialogue": [
             {
               "character_id": "marco",
               "line": {
-                "en": "Lost three catches this week to these holes. Fix them and I give you the best fish I have — fresh, caught this morning.",
-                "it": "Ho perso tre pescate questa settimana per questi buchi. Aggiustale e ti do il pesce migliore che ho — fresco, pescato stamattina."
+                "en": "Lost three catches this week to these holes. Fix them and I give you the best fish I have â€” fresh, caught this morning.",
+                "it": "Ho perso tre pescate questa settimana per questi buchi. Aggiustale e ti do il pesce migliore che ho â€” fresco, pescato stamattina."
               },
               "emotion": "frustrated_hopeful"
             }
@@ -428,16 +428,16 @@
           "id": "fish_nets_mending",
           "type": "cutscene",
           "narrative": {
-            "en": "The mending takes patience. Marco talks as you work — about the market, about who needs what. By the time you finish, you know more about this market than you did an hour ago.",
-            "it": "La riparazione richiede pazienza. Marco parla mentre lavori — del mercato, di chi ha bisogno di cosa. Quando hai finito, sai più cose su questo mercato di quante ne sapessi un'ora fa."
+            "en": "The mending takes patience. Marco talks as you work â€” about the market, about who needs what. By the time you finish, you know more about this market than you did an hour ago.",
+            "it": "La riparazione richiede pazienza. Marco parla mentre lavori â€” del mercato, di chi ha bisogno di cosa. Quando hai finito, sai piÃ¹ cose su questo mercato di quante ne sapessi un'ora fa."
           },
           "visual_description": "Hands threading twine through a fishing net. Marco nearby, talking animatedly, pointing across the market.",
           "npc_dialogue": [
             {
               "character_id": "marco",
               "line": {
-                "en": "Tomas the baker has been asking for fish all week — his wife loves it. Elena the weaver forgot to eat breakfast again. And Fatima — did you see her limping? Her sandals split yesterday.",
-                "it": "Tommaso il fornaio chiede pesce da tutta la settimana — sua moglie lo adora. Elena la tessitrice ha dimenticato di fare colazione ancora. E Fatima — l'hai vista zoppicare? I suoi sandali si sono rotti ieri."
+                "en": "Tomas the baker has been asking for fish all week â€” his wife loves it. Elena the weaver forgot to eat breakfast again. And Fatima â€” did you see her limping? Her sandals split yesterday.",
+                "it": "Tommaso il fornaio chiede pesce da tutta la settimana â€” sua moglie lo adora. Elena la tessitrice ha dimenticato di fare colazione ancora. E Fatima â€” l'hai vista zoppicare? I suoi sandali si sono rotti ieri."
               },
               "emotion": "chatty"
             }
@@ -448,8 +448,8 @@
           "id": "fish_earned",
           "type": "outcome",
           "narrative": {
-            "en": "Marco holds up the mended net and grins. He reaches into his catch and pulls out the best fish — fat, silver, still cold from the river. He hands it to you without ceremony.",
-            "it": "Marco alza la rete riparata e sorride. Fruga nel suo pescato e tira fuori il pesce migliore — grosso, argentato, ancora freddo di fiume. Te lo porge senza cerimonie."
+            "en": "Marco holds up the mended net and grins. He reaches into his catch and pulls out the best fish â€” fat, silver, still cold from the river. He hands it to you without ceremony.",
+            "it": "Marco alza la rete riparata e sorride. Fruga nel suo pescato e tira fuori il pesce migliore â€” grosso, argentato, ancora freddo di fiume. Te lo porge senza cerimonie."
           },
           "visual_description": "Marco grinning, holding the repaired net to the light. He presents a large silver fish to Eli.",
           "npc_dialogue": [],
@@ -460,15 +460,15 @@
           "type": "dialogue",
           "narrative": {
             "en": "You find Tomas at his bakery stall. When he smells the fish, he turns around so fast he almost drops his tray.",
-            "it": "Trovi Tommaso alla sua bancarella. Quando sente l'odore del pesce, si gira così velocemente che quasi fa cadere il vassoio."
+            "it": "Trovi Tommaso alla sua bancarella. Quando sente l'odore del pesce, si gira cosÃ¬ velocemente che quasi fa cadere il vassoio."
           },
           "visual_description": "Tomas's bakery stall, warm bread smells everywhere. He spins at the smell of fish.",
           "npc_dialogue": [
             {
               "character_id": "tomas",
               "line": {
-                "en": "Fresh fish! My wife will love me tonight. Three loaves — still warm — for that fish. Deal?",
-                "it": "Pesce fresco! Mia moglie mi vorrà bene stasera. Tre pagnotte — ancora calde — per quel pesce. Affare?"
+                "en": "Fresh fish! My wife will love me tonight. Three loaves â€” still warm â€” for that fish. Deal?",
+                "it": "Pesce fresco! Mia moglie mi vorrÃ  bene stasera. Tre pagnotte â€” ancora calde â€” per quel pesce. Affare?"
               },
               "emotion": "delighted"
             },
@@ -487,8 +487,8 @@
           "id": "fish_elena_trade",
           "type": "dialogue",
           "narrative": {
-            "en": "Elena's loom is at the back of the market, half-hidden behind bolts of coloured cloth. Her hands move without stopping. She doesn't look up when you approach — but she speaks.",
-            "it": "Il telaio di Elena è in fondo al mercato, semi-nascosto dietro rotoli di tessuto colorato. Le sue mani si muovono senza sosta. Non alza lo sguardo quando ti avvicini — ma parla."
+            "en": "Elena's loom is at the back of the market, half-hidden behind bolts of coloured cloth. Her hands move without stopping. She doesn't look up when you approach â€” but she speaks.",
+            "it": "Il telaio di Elena Ã¨ in fondo al mercato, semi-nascosto dietro rotoli di tessuto colorato. Le sue mani si muovono senza sosta. Non alza lo sguardo quando ti avvicini â€” ma parla."
           },
           "visual_description": "Elena's weaving stall. Colourful bolts of fabric everywhere. Her loom clickclacks steadily.",
           "npc_dialogue": [
@@ -531,8 +531,8 @@
             {
               "character_id": "fatima",
               "line": {
-                "en": "Elena's work. The best in the village. You found exactly what I needed. Take the orange. Go quickly — your brother is waiting.",
-                "it": "Il lavoro di Elena. Il migliore del villaggio. Hai trovato esattamente quello di cui avevo bisogno. Prendi l'arancia. Vai in fretta — tuo fratello ti aspetta."
+                "en": "Elena's work. The best in the village. You found exactly what I needed. Take the orange. Go quickly â€” your brother is waiting.",
+                "it": "Il lavoro di Elena. Il migliore del villaggio. Hai trovato esattamente quello di cui avevo bisogno. Prendi l'arancia. Vai in fretta â€” tuo fratello ti aspetta."
               },
               "emotion": "warm_approving"
             }
@@ -546,8 +546,8 @@
         "leads_to_orange": true,
         "steps_remaining": 0,
         "journal_entry": {
-          "en": "Mended Marco's nets → fish → Tomas → bread → Elena → silk → Fatima → orange ✅ (4 trades)",
-          "it": "Riparate le reti di Marco → pesce → Tommaso → pane → Elena → seta → Fatima → arancia ✅ (4 scambi)"
+          "en": "Mended Marco's nets â†’ fish â†’ Tomas â†’ bread â†’ Elena â†’ silk â†’ Fatima â†’ orange âœ… (4 trades)",
+          "it": "Riparate le reti di Marco â†’ pesce â†’ Tommaso â†’ pane â†’ Elena â†’ seta â†’ Fatima â†’ arancia âœ… (4 scambi)"
         }
       }
     },
@@ -575,8 +575,8 @@
           "id": "rod_dov_approach",
           "type": "dialogue",
           "narrative": {
-            "en": "Dov's workshop is quiet. The walls are covered with beautiful things — carved boxes, painted tiles, a copper mirror. He is stitching a shoe when you enter. He looks up, and then he sees what is in your hand. He puts the shoe down.",
-            "it": "Il laboratorio di Davide è silenzioso. Le pareti sono coperte di cose belle — scatole intagliate, piastrelle dipinte, uno specchio di rame. Sta cucendo una scarpa quando entri. Alza lo sguardo, e poi vede quello che hai in mano. Posa la scarpa."
+            "en": "Dov's workshop is quiet. The walls are covered with beautiful things â€” carved boxes, painted tiles, a copper mirror. He is stitching a shoe when you enter. He looks up, and then he sees what is in your hand. He puts the shoe down.",
+            "it": "Il laboratorio di Davide Ã¨ silenzioso. Le pareti sono coperte di cose belle â€” scatole intagliate, piastrelle dipinte, uno specchio di rame. Sta cucendo una scarpa quando entri. Alza lo sguardo, e poi vede quello che hai in mano. Posa la scarpa."
           },
           "visual_description": "Dov's cobbler workshop, beautiful objects on every surface. Dov sets down his work the moment he sees the fishing rod.",
           "npc_dialogue": [
@@ -611,8 +611,8 @@
           "id": "rod_dov_trade",
           "type": "outcome",
           "narrative": {
-            "en": "Dov takes the rod gently, the way you hold something fragile. He turns it over once. Twice. Then he sets it down and goes to the back. He returns with the sandals. He holds them out — but for just a moment, his eyes drift back to the rod. Then he hands them over. The trade is done.",
-            "it": "Davide prende la canna con delicatezza, come si tiene qualcosa di fragile. La rigira una volta. Due volte. Poi la posa e va nel retro. Torna con i sandali. Li porge — ma per un solo momento, i suoi occhi tornano alla canna. Poi li consegna. Lo scambio è fatto."
+            "en": "Dov takes the rod gently, the way you hold something fragile. He turns it over once. Twice. Then he sets it down and goes to the back. He returns with the sandals. He holds them out â€” but for just a moment, his eyes drift back to the rod. Then he hands them over. The trade is done.",
+            "it": "Davide prende la canna con delicatezza, come si tiene qualcosa di fragile. La rigira una volta. Due volte. Poi la posa e va nel retro. Torna con i sandali. Li porge â€” ma per un solo momento, i suoi occhi tornano alla canna. Poi li consegna. Lo scambio Ã¨ fatto."
           },
           "visual_description": "Dov turning the rod slowly in his hands, deep appreciation on his face. Then that moment of hesitation before handing over the sandals.",
           "npc_dialogue": [],
@@ -625,7 +625,7 @@
             "en": "You return to Fatima. She is serving a customer, and you notice for the first time that she is favouring one foot. When she sees the sandals, her eyes go straight to them.",
             "it": "Torni da Fatima. Sta servendo un cliente, e noti per la prima volta che zoppica. Quando vede i sandali, i suoi occhi vanno direttamente a loro."
           },
-          "visual_description": "Fatima serving a customer, limping slightly. She turns and sees the sandals — her expression shifts immediately.",
+          "visual_description": "Fatima serving a customer, limping slightly. She turns and sees the sandals â€” her expression shifts immediately.",
           "npc_dialogue": [
             {
               "character_id": "fatima",
@@ -647,7 +647,7 @@
               "character_id": "fatima",
               "line": {
                 "en": "Yes. They are. Take the orange.",
-                "it": "Sì. Lo sono. Prendi l'arancia."
+                "it": "SÃ¬. Lo sono. Prendi l'arancia."
               },
               "emotion": "grateful"
             }
@@ -661,8 +661,8 @@
         "leads_to_orange": true,
         "steps_remaining": 1,
         "journal_entry": {
-          "en": "Traded grandfather's rod to Dov → sandals → Fatima needed sandals → orange ✅ (fastest — but the rod is gone)",
-          "it": "Scambiata la canna del nonno con Davide → sandali → Fatima aveva bisogno di sandali → arancia ✅ (il più veloce — ma la canna è perduta)"
+          "en": "Traded grandfather's rod to Dov â†’ sandals â†’ Fatima needed sandals â†’ orange âœ… (fastest â€” but the rod is gone)",
+          "it": "Scambiata la canna del nonno con Davide â†’ sandali â†’ Fatima aveva bisogno di sandali â†’ arancia âœ… (il piÃ¹ veloce â€” ma la canna Ã¨ perduta)"
         }
       }
     },
@@ -689,14 +689,14 @@
       "dead_end": {
         "scene": {
           "narrative": {
-            "en": "You walk to Miriam's house at the edge of the village. The gate is locked. The shutters are dark. A neighbour leans from an upstairs window: 'Miriam left at dawn — her daughter just had a baby, two villages over. She won't be back until the weekend.' You stand at the locked gate. The morning is getting later.",
-            "it": "Cammini verso casa di Miriam ai margini del villaggio. Il cancello è chiuso. Le imposte sono scure. Una vicina si sporge dalla finestra: 'Miriam è partita all'alba — sua figlia ha appena avuto un bambino, a due villaggi di distanza. Non torna fino al fine settimana.' Rimani davanti al cancello chiuso. La mattina si fa tarda."
+            "en": "You walk to Miriam's house at the edge of the village. The gate is locked. The shutters are dark. A neighbour leans from an upstairs window: 'Miriam left at dawn â€” her daughter just had a baby, two villages over. She won't be back until the weekend.' You stand at the locked gate. The morning is getting later.",
+            "it": "Cammini verso casa di Miriam ai margini del villaggio. Il cancello Ã¨ chiuso. Le imposte sono scure. Una vicina si sporge dalla finestra: 'Miriam Ã¨ partita all'alba â€” sua figlia ha appena avuto un bambino, a due villaggi di distanza. Non torna fino al fine settimana.' Rimani davanti al cancello chiuso. La mattina si fa tarda."
           },
           "visual_description": "Miriam's house, closed gate with heavy latch, dark shutters. A neighbour leaning from an upstairs window, gesturing apologetically."
         },
         "micro_lesson": {
           "en": "A plan without information is a guess.",
-          "it": "Un piano senza informazioni è solo una supposizione."
+          "it": "Un piano senza informazioni Ã¨ solo una supposizione."
         },
         "owl_response": {
           "en": "I flew past Miriam's house this morning. Her windows were dark and her chimney was cold. You could have known this before you walked all the way here. What would you have done differently?",
@@ -720,8 +720,8 @@
           "it": "Circa un'ora"
         },
         "visible_reward": {
-          "en": "The orange — no trade needed",
-          "it": "L'arancia — nessuno scambio necessario"
+          "en": "The orange â€” no trade needed",
+          "it": "L'arancia â€” nessuno scambio necessario"
         }
       },
       "scenes": [
@@ -729,8 +729,8 @@
           "id": "direct_fatima_offer",
           "type": "dialogue",
           "narrative": {
-            "en": "You go back to Fatima. Not to beg — to offer. You look at the six heavy crates behind her stall, then at her, and you ask.",
-            "it": "Torni da Fatima. Non a supplicare — a offrire. Guardi le sei pesanti casse dietro la sua bancarella, poi lei, e chiedi."
+            "en": "You go back to Fatima. Not to beg â€” to offer. You look at the six heavy crates behind her stall, then at her, and you ask.",
+            "it": "Torni da Fatima. Non a supplicare â€” a offrire. Guardi le sei pesanti casse dietro la sua bancarella, poi lei, e chiedi."
           },
           "visual_description": "Fatima's stall. Six large wooden crates stacked awkwardly behind it, clearly needing to be moved before the afternoon rush.",
           "npc_dialogue": [
@@ -773,10 +773,10 @@
           "id": "direct_work_crates",
           "type": "cutscene",
           "narrative": {
-            "en": "The crates are heavy. You knew they would be. You move them one at a time, arms shaking, cheeks burning. Fatima watches the whole time. She says nothing — she just watches. When the last crate is in place, you straighten up and face her.",
-            "it": "Le casse sono pesanti. Lo sapevi che lo sarebbero state. Le sposti una alla volta, le braccia tremanti, le guance in fiamme. Fatima guarda per tutto il tempo. Non dice nulla — guarda e basta. Quando l'ultima cassa è al suo posto, ti raddrizi e la guardi."
+            "en": "The crates are heavy. You knew they would be. You move them one at a time, arms shaking, cheeks burning. Fatima watches the whole time. She says nothing â€” she just watches. When the last crate is in place, you straighten up and face her.",
+            "it": "Le casse sono pesanti. Lo sapevi che lo sarebbero state. Le sposti una alla volta, le braccia tremanti, le guance in fiamme. Fatima guarda per tutto il tempo. Non dice nulla â€” guarda e basta. Quando l'ultima cassa Ã¨ al suo posto, ti raddrizi e la guardi."
           },
-          "visual_description": "Eli moving heavy crates one by one. Straining. Sweating. Fatima arms-crossed, watching carefully — evaluating, not unkindly.",
+          "visual_description": "Eli moving heavy crates one by one. Straining. Sweating. Fatima arms-crossed, watching carefully â€” evaluating, not unkindly.",
           "npc_dialogue": [],
           "next_scene_id": "direct_fatima_respect"
         },
@@ -784,16 +784,16 @@
           "id": "direct_fatima_respect",
           "type": "outcome",
           "narrative": {
-            "en": "Fatima walks around the reorganised crates, checks each one. Then she turns to you, reaches behind her, and places the orange in your hands. Not carelessly — deliberately. With respect.",
-            "it": "Fatima cammina attorno alle casse riorganizzate, controlla ognuna. Poi si gira verso di te, si sporge dietro la bancarella e ti mette l'arancia tra le mani. Non con noncuranza — deliberatamente. Con rispetto."
+            "en": "Fatima walks around the reorganised crates, checks each one. Then she turns to you, reaches behind her, and places the orange in your hands. Not carelessly â€” deliberately. With respect.",
+            "it": "Fatima cammina attorno alle casse riorganizzate, controlla ognuna. Poi si gira verso di te, si sporge dietro la bancarella e ti mette l'arancia tra le mani. Non con noncuranza â€” deliberatamente. Con rispetto."
           },
-          "visual_description": "Fatima carefully placing the orange into Eli's hands — a deliberate, respectful gesture.",
+          "visual_description": "Fatima carefully placing the orange into Eli's hands â€” a deliberate, respectful gesture.",
           "npc_dialogue": [
             {
               "character_id": "fatima",
               "line": {
                 "en": "You came back and you worked. Most people give up when I say no the first time. Your brother is lucky to have you.",
-                "it": "Sei tornato e hai lavorato. La maggior parte delle persone si arrende quando dico no la prima volta. Tuo fratello è fortunato ad averti."
+                "it": "Sei tornato e hai lavorato. La maggior parte delle persone si arrende quando dico no la prima volta. Tuo fratello Ã¨ fortunato ad averti."
               },
               "emotion": "respectful"
             }
@@ -807,8 +807,8 @@
         "leads_to_orange": true,
         "steps_remaining": 0,
         "journal_entry": {
-          "en": "Offered to move Fatima's crates → hard work, but she gave the orange directly ✅",
-          "it": "Offerto di spostare le casse di Fatima → lavoro duro, ma ha dato l'arancia direttamente ✅"
+          "en": "Offered to move Fatima's crates â†’ hard work, but she gave the orange directly âœ…",
+          "it": "Offerto di spostare le casse di Fatima â†’ lavoro duro, ma ha dato l'arancia direttamente âœ…"
         }
       }
     }
@@ -819,8 +819,8 @@
       "id": "ending_run_home",
       "type": "cutscene",
       "narrative": {
-        "en": "You run. The orange is in your hands and you run the whole way home without stopping. The market blurs behind you. The cobblestones, the stalls, the sounds — all of it falling away as you run toward the only thing that matters.",
-        "it": "Corri. L'arancia è tra le mani e corri per tutto il tragitto senza fermarti. Il mercato sfuma dietro di te. I ciottoli, le bancarelle, i suoni — tutto svanisce mentre corri verso l'unica cosa che conta."
+        "en": "You run. The orange is in your hands and you run the whole way home without stopping. The market blurs behind you. The cobblestones, the stalls, the sounds â€” all of it falling away as you run toward the only thing that matters.",
+        "it": "Corri. L'arancia Ã¨ tra le mani e corri per tutto il tragitto senza fermarti. Il mercato sfuma dietro di te. I ciottoli, le bancarelle, i suoni â€” tutto svanisce mentre corri verso l'unica cosa che conta."
       },
       "visual_description": "Eli running through the village. Motion blur. Market behind, home ahead. The orange warm in the morning light.",
       "npc_dialogue": [],
@@ -830,16 +830,16 @@
       "id": "ending_beni_recovery",
       "type": "cutscene",
       "narrative": {
-        "en": "Beni drinks slowly. You watch his face. The fever does not break immediately — that is not how it works. But by the time the sun goes down, his forehead is cooler. He opens his eyes and looks at you the way little brothers look at you when they know you would do anything for them.",
-        "it": "Beni beve lentamente. Osservi il suo viso. La febbre non passa immediatamente — non funziona così. Ma quando il sole tramonta, la sua fronte è più fresca. Apre gli occhi e ti guarda nel modo in cui i fratellini ti guardano quando sanno che faresti qualsiasi cosa per loro."
+        "en": "Beni drinks slowly. You watch his face. The fever does not break immediately â€” that is not how it works. But by the time the sun goes down, his forehead is cooler. He opens his eyes and looks at you the way little brothers look at you when they know you would do anything for them.",
+        "it": "Beni beve lentamente. Osservi il suo viso. La febbre non passa immediatamente â€” non funziona cosÃ¬. Ma quando il sole tramonta, la sua fronte Ã¨ piÃ¹ fresca. Apre gli occhi e ti guarda nel modo in cui i fratellini ti guardano quando sanno che faresti qualsiasi cosa per loro."
       },
       "visual_description": "Beni's bedroom, warm evening light. Beni drinking orange juice slowly, his colour returning. Eli beside the bed, watching. A quiet, warm moment.",
       "npc_dialogue": [
         {
-          "character_id": "beni",
+          "character_id": "Luca",
           "line": {
             "en": "It's sweet.",
-            "it": "È dolce."
+            "it": "Ãˆ dolce."
           },
           "emotion": "weak_but_peaceful"
         }
@@ -850,8 +850,8 @@
       "id": "ending_owl_question",
       "type": "dialogue",
       "narrative": {
-        "en": "Later, when Beni is asleep, you sit by the window. The owl is there — of course he is. He has been watching all day. He tilts his head and speaks quietly.",
-        "it": "Più tardi, quando Beni dorme, ti siedi accanto alla finestra. Il gufo è lì — naturalmente. Ha osservato tutto il giorno. Inclina la testa e parla sottovoce."
+        "en": "Later, when Beni is asleep, you sit by the window. The owl is there â€” of course he is. He has been watching all day. He tilts his head and speaks quietly.",
+        "it": "PiÃ¹ tardi, quando Beni dorme, ti siedi accanto alla finestra. Il gufo Ã¨ lÃ¬ â€” naturalmente. Ha osservato tutto il giorno. Inclina la testa e parla sottovoce."
       },
       "visual_description": "Evening. Beni sleeping. Eli at the window. The owl perched on the windowsill, feathers catching the last light.",
       "npc_dialogue": [
@@ -870,8 +870,8 @@
       "id": "ending_debrief",
       "type": "debrief",
       "narrative": {
-        "en": "Today you learned how barter works — by doing it.",
-        "it": "Oggi hai imparato come funziona il baratto — facendolo."
+        "en": "Today you learned how barter works â€” by doing it.",
+        "it": "Oggi hai imparato come funziona il baratto â€” facendolo."
       },
       "visual_description": "Trophy room, warm lantern light. A bronze handshake medallion floating gently.",
       "npc_dialogue": [],
@@ -892,8 +892,8 @@
         "it": "Cosa posso ottenere con un cesto di mele?"
       },
       "answer": {
-        "en": "Yosef's apples come from the northern orchard — the best in the region. I have watched Fatima's eyes go quiet whenever a trader passes with apples. She grew up near those trees. She has not tasted one in many years. What do you think that means for a full basket?",
-        "it": "Le mele di Yosef vengono dal frutteto del nord — le migliori della regione. Ho visto gli occhi di Fatima farsi silenziosi ogni volta che un mercante passa con delle mele. È cresciuta vicino a quegli alberi. Non ne assaggia una da molti anni. Cosa pensi che significhi per un cesto pieno?"
+        "en": "Yosef's apples come from the northern orchard â€” the best in the region. I have watched Fatima's eyes go quiet whenever a trader passes with apples. She grew up near those trees. She has not tasted one in many years. What do you think that means for a full basket?",
+        "it": "Le mele di Yosef vengono dal frutteto del nord â€” le migliori della regione. Ho visto gli occhi di Fatima farsi silenziosi ogni volta che un mercante passa con delle mele. Ãˆ cresciuta vicino a quegli alberi. Non ne assaggia una da molti anni. Cosa pensi che significhi per un cesto pieno?"
       }
     },
     {
@@ -901,15 +901,15 @@
       "context": "path_fish_chain",
       "bubble_label": {
         "en": "What can fish get me?",
-        "it": "Cosa mi dà il pesce?"
+        "it": "Cosa mi dÃ  il pesce?"
       },
       "question": {
         "en": "What can fresh fish get me in this market?",
-        "it": "Cosa mi può dare del pesce fresco in questo mercato?"
+        "it": "Cosa mi puÃ² dare del pesce fresco in questo mercato?"
       },
       "answer": {
-        "en": "Fresh fish is wanted by more people here than almost anything else. The baker has been asking for it all week. But fish alone will not be your last step — I have not heard Fatima mention fish. Fish is useful because it can move you toward something else. Think about who you know who wants fish, and what they have.",
-        "it": "Il pesce fresco è cercato da più persone qui rispetto a quasi qualsiasi altra cosa. Il fornaio lo chiede da tutta la settimana. Ma il pesce da solo non sarà il tuo ultimo passo — non ho sentito Fatima menzionare il pesce. Il pesce è utile perché ti può avvicinare a qualcos'altro. Pensa a chi conosci che vuole pesce, e cosa ha lui."
+        "en": "Fresh fish is wanted by more people here than almost anything else. The baker has been asking for it all week. But fish alone will not be your last step â€” I have not heard Fatima mention fish. Fish is useful because it can move you toward something else. Think about who you know who wants fish, and what they have.",
+        "it": "Il pesce fresco Ã¨ cercato da piÃ¹ persone qui rispetto a quasi qualsiasi altra cosa. Il fornaio lo chiede da tutta la settimana. Ma il pesce da solo non sarÃ  il tuo ultimo passo â€” non ho sentito Fatima menzionare il pesce. Il pesce Ã¨ utile perchÃ© ti puÃ² avvicinare a qualcos'altro. Pensa a chi conosci che vuole pesce, e cosa ha lui."
       }
     },
     {
@@ -924,8 +924,8 @@
         "it": "Quanto vale la canna da pesca di mio nonno?"
       },
       "answer": {
-        "en": "Dov the cobbler has been looking at that rod for three years. He knows your grandfather's carving — he has a box your grandfather made on his shelf. A thing that someone has wanted for three years is worth a great deal to that person. He would trade his finest sandals for it. Though I will say this once: once something is traded, it does not come back.",
-        "it": "Davide il calzolaio guarda quella canna da tre anni. Riconosce le incisioni di tuo nonno — ha una scatola che tuo nonno ha fatto sulla sua mensola. Una cosa che qualcuno desidera da tre anni vale moltissimo per quella persona. Trafficherebbe i suoi sandali migliori per averla. Anche se lo dico una volta sola: una volta che qualcosa è stato scambiato, non torna indietro."
+        "en": "Dov the cobbler has been looking at that rod for three years. He knows your grandfather's carving â€” he has a box your grandfather made on his shelf. A thing that someone has wanted for three years is worth a great deal to that person. He would trade his finest sandals for it. Though I will say this once: once something is traded, it does not come back.",
+        "it": "Davide il calzolaio guarda quella canna da tre anni. Riconosce le incisioni di tuo nonno â€” ha una scatola che tuo nonno ha fatto sulla sua mensola. Una cosa che qualcuno desidera da tre anni vale moltissimo per quella persona. Trafficherebbe i suoi sandali migliori per averla. Anche se lo dico una volta sola: una volta che qualcosa Ã¨ stato scambiato, non torna indietro."
       }
     },
     {
@@ -933,15 +933,15 @@
       "context": "path_miriam_yard",
       "bubble_label": {
         "en": "What will honey get me?",
-        "it": "Cosa mi dà il miele?"
+        "it": "Cosa mi dÃ  il miele?"
       },
       "question": {
         "en": "What can a jar of Miriam's honey get me?",
         "it": "Cosa posso ottenere con un barattolo del miele di Miriam?"
       },
       "answer": {
-        "en": "Miriam's honey is famous — she keeps bees near the river. The baker uses it in his pastries. But I have not heard Fatima mention honey. Before you walk all the way to Miriam's house, there is something worth knowing: I flew over that part of the village this morning. Her windows were dark.",
-        "it": "Il miele di Miriam è famoso — tiene le api vicino al fiume. Il fornaio lo usa nei suoi dolci. Ma non ho sentito Fatima menzionare il miele. Prima di camminare fino a casa di Miriam, c'è qualcosa che vale la pena sapere: ho sorvolato quella parte del villaggio stamattina. Le sue finestre erano scure."
+        "en": "Miriam's honey is famous â€” she keeps bees near the river. The baker uses it in his pastries. But I have not heard Fatima mention honey. Before you walk all the way to Miriam's house, there is something worth knowing: I flew over that part of the village this morning. Her windows were dark.",
+        "it": "Il miele di Miriam Ã¨ famoso â€” tiene le api vicino al fiume. Il fornaio lo usa nei suoi dolci. Ma non ho sentito Fatima menzionare il miele. Prima di camminare fino a casa di Miriam, c'Ã¨ qualcosa che vale la pena sapere: ho sorvolato quella parte del villaggio stamattina. Le sue finestre erano scure."
       }
     },
     {
@@ -953,11 +953,11 @@
       },
       "question": {
         "en": "What does Fatima need? What will she trade the orange for?",
-        "it": "Di cosa ha bisogno Fatima? Per cosa scambierà l'arancia?"
+        "it": "Di cosa ha bisogno Fatima? Per cosa scambierÃ  l'arancia?"
       },
       "answer": {
-        "en": "She told you she wants silk thread — her headscarf is fraying. That is what she offered first. But Fatima has been in this market for thirty years. Merchants usually want more than one thing. She has been limping a little this morning. And she grew up in apple country, far from here. Look carefully at her stall — and perhaps ask her again.",
-        "it": "Ti ha detto che vuole filo di seta — il suo foulard si sta sfilacciando. Quello è quello che ha offerto per primo. Ma Fatima lavora in questo mercato da trent'anni. I mercanti vogliono di solito più di una cosa. Stamattina zoppica un po'. Ed è cresciuta in una terra di mele, lontano da qui. Guarda con attenzione la sua bancarella — e forse chiedile di nuovo."
+        "en": "She told you she wants silk thread â€” her headscarf is fraying. That is what she offered first. But Fatima has been in this market for thirty years. Merchants usually want more than one thing. She has been limping a little this morning. And she grew up in apple country, far from here. Look carefully at her stall â€” and perhaps ask her again.",
+        "it": "Ti ha detto che vuole filo di seta â€” il suo foulard si sta sfilacciando. Quello Ã¨ quello che ha offerto per primo. Ma Fatima lavora in questo mercato da trent'anni. I mercanti vogliono di solito piÃ¹ di una cosa. Stamattina zoppica un po'. Ed Ã¨ cresciuta in una terra di mele, lontano da qui. Guarda con attenzione la sua bancarella â€” e forse chiedile di nuovo."
       }
     },
     {
@@ -965,15 +965,15 @@
       "context": "path_miriam_yard",
       "bubble_label": {
         "en": "Why didn't Miriam's plan work?",
-        "it": "Perché il piano di Miriam non ha funzionato?"
+        "it": "PerchÃ© il piano di Miriam non ha funzionato?"
       },
       "question": {
         "en": "Why didn't my plan to clean Miriam's yard work?",
-        "it": "Perché il mio piano di pulire il cortile di Miriam non ha funzionato?"
+        "it": "PerchÃ© il mio piano di pulire il cortile di Miriam non ha funzionato?"
       },
       "answer": {
-        "en": "You had a plan — and that is more than most people manage. But a plan needs information to become a route. You knew Miriam gives honey for yard work. You did not know whether Miriam was home. One missing piece of information is enough to stop the best plan. What could you have done before walking all the way there?",
-        "it": "Avevi un piano — e questo è già più di quanto riescano a fare la maggior parte delle persone. Ma un piano ha bisogno di informazioni per diventare un percorso. Sapevi che Miriam dà miele per il lavoro nel cortile. Non sapevi se Miriam era a casa. Un'informazione mancante è sufficiente per fermare il piano migliore. Cosa avresti potuto fare prima di camminare fino a lì?"
+        "en": "You had a plan â€” and that is more than most people manage. But a plan needs information to become a route. You knew Miriam gives honey for yard work. You did not know whether Miriam was home. One missing piece of information is enough to stop the best plan. What could you have done before walking all the way there?",
+        "it": "Avevi un piano â€” e questo Ã¨ giÃ  piÃ¹ di quanto riescano a fare la maggior parte delle persone. Ma un piano ha bisogno di informazioni per diventare un percorso. Sapevi che Miriam dÃ  miele per il lavoro nel cortile. Non sapevi se Miriam era a casa. Un'informazione mancante Ã¨ sufficiente per fermare il piano migliore. Cosa avresti potuto fare prima di camminare fino a lÃ¬?"
       }
     },
     {
@@ -988,8 +988,8 @@
         "it": "Ho del pesce fresco. Chi in questo mercato vuole del pesce?"
       },
       "answer": {
-        "en": "Marco mentioned someone while you were mending his nets — were you listening? Fish moves easily in this market on a Friday morning. Think about what Marco said while your hands were busy with the twine.",
-        "it": "Marco ha nominato qualcuno mentre riparavi le sue reti — stavi ascoltando? Il pesce si muove facilmente in questo mercato il venerdì mattina. Pensa a quello che Marco ha detto mentre le tue mani erano impegnate con lo spago."
+        "en": "Marco mentioned someone while you were mending his nets â€” were you listening? Fish moves easily in this market on a Friday morning. Think about what Marco said while your hands were busy with the twine.",
+        "it": "Marco ha nominato qualcuno mentre riparavi le sue reti â€” stavi ascoltando? Il pesce si muove facilmente in questo mercato il venerdÃ¬ mattina. Pensa a quello che Marco ha detto mentre le tue mani erano impegnate con lo spago."
       }
     },
     {
@@ -1004,8 +1004,8 @@
         "it": "Ho tre pagnotte. Chi ha bisogno di pane?"
       },
       "answer": {
-        "en": "Elena the weaver is at the back of the market, behind the coloured cloth. Her loom has been running since before sunrise — I can hear it from here. Her hands never stop. But a weaver who has not eaten since yesterday does not say no to fresh bread.",
-        "it": "Elena la tessitrice è in fondo al mercato, dietro i tessuti colorati. Il suo telaio funziona da prima dell'alba — lo sento da qui. Le sue mani non si fermano mai. Ma una tessitrice che non mangia da ieri non dice no al pane fresco."
+        "en": "Elena the weaver is at the back of the market, behind the coloured cloth. Her loom has been running since before sunrise â€” I can hear it from here. Her hands never stop. But a weaver who has not eaten since yesterday does not say no to fresh bread.",
+        "it": "Elena la tessitrice Ã¨ in fondo al mercato, dietro i tessuti colorati. Il suo telaio funziona da prima dell'alba â€” lo sento da qui. Le sue mani non si fermano mai. Ma una tessitrice che non mangia da ieri non dice no al pane fresco."
       }
     }
   ],
@@ -1016,56 +1016,56 @@
       "it": "Arrivato al mercato del villaggio"
     },
     "fatima_said_no": {
-      "en": "Fatima said no — she needs silk thread (and maybe other things...)",
-      "it": "Fatima ha detto no — ha bisogno di filo di seta (e forse d'altro...)"
+      "en": "Fatima said no â€” she needs silk thread (and maybe other things...)",
+      "it": "Fatima ha detto no â€” ha bisogno di filo di seta (e forse d'altro...)"
     },
     "path_apple_harvest_start": {
       "en": "Went to Farmer Yosef's orchard to pick apples",
       "it": "Andato al frutteto di Yosef per raccogliere le mele"
     },
     "path_apple_harvest_complete": {
-      "en": "Picked apples for 2 hours → basket of apples → Fatima traded orange for apples ✅",
-      "it": "Raccolto mele per 2 ore → cesto di mele → Fatima ha scambiato l'arancia con le mele ✅"
+      "en": "Picked apples for 2 hours â†’ basket of apples â†’ Fatima traded orange for apples âœ…",
+      "it": "Raccolto mele per 2 ore â†’ cesto di mele â†’ Fatima ha scambiato l'arancia con le mele âœ…"
     },
     "path_fish_chain_start": {
       "en": "Went to Marco the fisherman to mend his nets",
       "it": "Andato da Marco il pescatore per riparare le reti"
     },
     "path_fish_chain_complete": {
-      "en": "Mended nets → fish → bread → silk → orange ✅ (4 trades)",
-      "it": "Reti riparate → pesce → pane → seta → arancia ✅ (4 scambi)"
+      "en": "Mended nets â†’ fish â†’ bread â†’ silk â†’ orange âœ… (4 trades)",
+      "it": "Reti riparate â†’ pesce â†’ pane â†’ seta â†’ arancia âœ… (4 scambi)"
     },
     "path_fishing_rod_start": {
       "en": "Went to Dov the cobbler with grandfather's fishing rod",
       "it": "Andato da Davide il calzolaio con la canna da pesca del nonno"
     },
     "path_fishing_rod_complete": {
-      "en": "Traded grandfather's rod → sandals → orange ✅ (fastest path — the rod is gone)",
-      "it": "Scambiata la canna del nonno → sandali → arancia ✅ (il più veloce — la canna è perduta)"
+      "en": "Traded grandfather's rod â†’ sandals â†’ orange âœ… (fastest path â€” the rod is gone)",
+      "it": "Scambiata la canna del nonno â†’ sandali â†’ arancia âœ… (il piÃ¹ veloce â€” la canna Ã¨ perduta)"
     },
     "path_miriam_start": {
       "en": "Went to Miriam's house to clean her yard",
       "it": "Andato a casa di Miriam per pulire il cortile"
     },
     "path_miriam_dead_end": {
-      "en": "Miriam wasn't home — left at dawn ✗  Lesson: check before you go",
-      "it": "Miriam non era a casa — partita all'alba ✗  Lezione: controlla prima di andare"
+      "en": "Miriam wasn't home â€” left at dawn âœ—  Lesson: check before you go",
+      "it": "Miriam non era a casa â€” partita all'alba âœ—  Lezione: controlla prima di andare"
     },
     "path_direct_work_start": {
       "en": "Offered to move Fatima's heavy crates",
       "it": "Offerto di spostare le casse pesanti di Fatima"
     },
     "path_direct_work_complete": {
-      "en": "Moved all crates → Fatima gave orange directly ✅ (hardest work, most direct)",
-      "it": "Spostate tutte le casse → Fatima ha dato l'arancia direttamente ✅ (lavoro più duro, percorso diretto)"
+      "en": "Moved all crates â†’ Fatima gave orange directly âœ… (hardest work, most direct)",
+      "it": "Spostate tutte le casse â†’ Fatima ha dato l'arancia direttamente âœ… (lavoro piÃ¹ duro, percorso diretto)"
     },
     "got_the_orange": {
-      "en": "Got the orange! 🍊",
-      "it": "Presa l'arancia! 🍊"
+      "en": "Got the orange! ðŸŠ",
+      "it": "Presa l'arancia! ðŸŠ"
     },
     "beni_better": {
-      "en": "Beni's fever broke by evening ❤️",
-      "it": "La febbre di Beni è scesa verso sera ❤️"
+      "en": "Beni's fever broke by evening â¤ï¸",
+      "it": "La febbre di Beni Ã¨ scesa verso sera â¤ï¸"
     }
   },
 
@@ -1084,8 +1084,8 @@
       },
       "icon": "handshake_bronze",
       "unlock_message": {
-        "en": "You learned that barter works — but it takes time, the right people, and sometimes something precious.",
-        "it": "Hai imparato che il baratto funziona — ma richiede tempo, le persone giuste, e a volte qualcosa di prezioso."
+        "en": "You learned that barter works â€” but it takes time, the right people, and sometimes something precious.",
+        "it": "Hai imparato che il baratto funziona â€” ma richiede tempo, le persone giuste, e a volte qualcosa di prezioso."
       }
     },
     "grade_thresholds": {
@@ -1094,8 +1094,8 @@
     },
     "classroom_leaderboard": {
       "shareable_result_template": {
-        "en": "{player_name} completed The Orange Quest with {score}/100 — {grade} trader! Path: {path_name}",
-        "it": "{player_name} ha completato La Ricerca dell'Arancia con {score}/100 — mercante {grade}! Percorso: {path_name}"
+        "en": "{player_name} completed The Orange Quest with {score}/100 â€” {grade} trader! Path: {path_name}",
+        "it": "{player_name} ha completato La Ricerca dell'Arancia con {score}/100 â€” mercante {grade}! Percorso: {path_name}"
       }
     }
   },
@@ -1106,12 +1106,12 @@
       "it": "Il Baratto"
     },
     "concept_explanation": {
-      "en": "Barter is trading one thing directly for another — no coins, no money. It works. You just proved it. But every successful barter required finding the exact person who wanted what you had, at the right moment. In a village of ten people, that is hard. In a city of ten thousand, trading ten thousand different things every day — the search never ends.",
-      "it": "Il baratto è scambiare una cosa direttamente con un'altra — senza monete, senza denaro. Funziona. L'hai appena dimostrato. Ma ogni baratto riuscito ha richiesto di trovare esattamente la persona che voleva quello che avevi, al momento giusto. In un villaggio di dieci persone, è difficile. In una città di diecimila persone, che scambiano diecimila cose diverse ogni giorno — la ricerca non finisce mai."
+      "en": "Barter is trading one thing directly for another â€” no coins, no money. It works. You just proved it. But every successful barter required finding the exact person who wanted what you had, at the right moment. In a village of ten people, that is hard. In a city of ten thousand, trading ten thousand different things every day â€” the search never ends.",
+      "it": "Il baratto Ã¨ scambiare una cosa direttamente con un'altra â€” senza monete, senza denaro. Funziona. L'hai appena dimostrato. Ma ogni baratto riuscito ha richiesto di trovare esattamente la persona che voleva quello che avevi, al momento giusto. In un villaggio di dieci persone, Ã¨ difficile. In una cittÃ  di diecimila persone, che scambiano diecimila cose diverse ogni giorno â€” la ricerca non finisce mai."
     },
     "real_world_connection": {
-      "en": "Barter still exists today. When two countries trade goods directly — wheat for oil — that is barter. When friends swap games, that is barter. It works best when both people want exactly what the other has. That is rare. Which is why almost every civilisation that grew large eventually invented something else.",
-      "it": "Il baratto esiste ancora oggi. Quando due paesi scambiano beni direttamente — grano per petrolio — quello è baratto. Quando gli amici si scambiano i giochi, quello è baratto. Funziona meglio quando entrambe le persone vogliono esattamente quello che l'altra ha. Questo è raro. Ecco perché quasi ogni civiltà che è cresciuta ha finito per inventare qualcos'altro."
+      "en": "Barter still exists today. When two countries trade goods directly â€” wheat for oil â€” that is barter. When friends swap games, that is barter. It works best when both people want exactly what the other has. That is rare. Which is why almost every civilisation that grew large eventually invented something else.",
+      "it": "Il baratto esiste ancora oggi. Quando due paesi scambiano beni direttamente â€” grano per petrolio â€” quello Ã¨ baratto. Quando gli amici si scambiano i giochi, quello Ã¨ baratto. Funziona meglio quando entrambe le persone vogliono esattamente quello che l'altra ha. Questo Ã¨ raro. Ecco perchÃ© quasi ogni civiltÃ  che Ã¨ cresciuta ha finito per inventare qualcos'altro."
     },
     "reflection_question": {
       "en": "You needed one orange. How many people were involved in getting it? Now imagine this village had 10,000 people. What would that search look like?",
@@ -1119,7 +1119,8 @@
     },
     "teaser_next_lesson": {
       "en": "The village elders are calling a meeting. They have an idea that will change everything. Tomorrow.",
-      "it": "Gli anziani del villaggio convocano una riunione. Hanno un'idea che cambierà tutto. Domani."
+      "it": "Gli anziani del villaggio convocano una riunione. Hanno un'idea che cambierÃ  tutto. Domani."
     }
   }
 }
+

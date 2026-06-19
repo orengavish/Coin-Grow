@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../models/lesson.dart';
 import '../theme/app_theme.dart';
+import 'cinematic_intro_screen.dart';
 import 'lesson_player.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -49,17 +50,23 @@ class HomeScreen extends StatelessWidget {
                 onPressed: () async {
                   try {
                     final lesson = await _loadLesson();
-                    if (context.mounted) {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => LessonPlayer(
-                            lesson: lesson,
-                            onComplete: () => Navigator.pop(context),
+                    if (!context.mounted) return;
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => CinematicIntroScreen(
+                          onComplete: () => Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => LessonPlayer(
+                                lesson: lesson,
+                                onComplete: () => Navigator.pop(context),
+                              ),
+                            ),
                           ),
                         ),
-                      );
-                    }
+                      ),
+                    );
                   } catch (e) {
                     if (context.mounted) {
                       ScaffoldMessenger.of(context).showSnackBar(
