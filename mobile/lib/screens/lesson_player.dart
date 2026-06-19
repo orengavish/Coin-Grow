@@ -79,38 +79,52 @@ class _LessonPlayerState extends State<LessonPlayer> {
     }
   }
 
+  Widget _currentChild() => switch (_zone) {
+        _Zone.intro => buildScene(
+            scene: widget.lesson.introScenes[_introIndex],
+            lesson: widget.lesson,
+            totalPoints: _totalPoints,
+            onAdvance: _onIntroAdvance,
+          ),
+        _Zone.pathSelect => _activeDeadEnd != null
+            ? DeadEndScreen(
+                key: ValueKey('dead_${_activeDeadEnd!.id}'),
+                deadEnd: _activeDeadEnd!.deadEnd!,
+                owlName: _owlName,
+                onDismiss: _onDeadEndDismissed,
+              )
+            : PathSelectionScreen(
+                key: const ValueKey('pathSelect'),
+                paths: widget.lesson.paths,
+                triedDeadEnds: _triedDeadEnds,
+                onSelect: _onPathSelected,
+              ),
+        _Zone.pathScenes => buildScene(
+            scene: _selectedPath!.scenes[_pathSceneIndex],
+            lesson: widget.lesson,
+            totalPoints: _totalPoints,
+            onAdvance: _onPathSceneAdvance,
+          ),
+        _Zone.ending => buildScene(
+            scene: widget.lesson.endingScenes[_endingIndex],
+            lesson: widget.lesson,
+            totalPoints: _totalPoints,
+            onAdvance: _onEndingAdvance,
+          ),
+      };
+
   @override
   Widget build(BuildContext context) {
-    return switch (_zone) {
-      _Zone.intro => buildScene(
-          scene: widget.lesson.introScenes[_introIndex],
-          lesson: widget.lesson,
-          totalPoints: _totalPoints,
-          onAdvance: _onIntroAdvance,
-        ),
-      _Zone.pathSelect => _activeDeadEnd != null
-          ? DeadEndScreen(
-              deadEnd: _activeDeadEnd!.deadEnd!,
-              owlName: _owlName,
-              onDismiss: _onDeadEndDismissed,
-            )
-          : PathSelectionScreen(
-              paths: widget.lesson.paths,
-              triedDeadEnds: _triedDeadEnds,
-              onSelect: _onPathSelected,
-            ),
-      _Zone.pathScenes => buildScene(
-          scene: _selectedPath!.scenes[_pathSceneIndex],
-          lesson: widget.lesson,
-          totalPoints: _totalPoints,
-          onAdvance: _onPathSceneAdvance,
-        ),
-      _Zone.ending => buildScene(
-          scene: widget.lesson.endingScenes[_endingIndex],
-          lesson: widget.lesson,
-          totalPoints: _totalPoints,
-          onAdvance: _onEndingAdvance,
-        ),
-    };
+    return AnimatedSwitcher(
+      duration: const Duration(milliseconds: 400),
+      transitionBuilder: (child, anim) => FadeTransition(
+        opacity: anim,
+        child: child,
+      ),
+      child: KeyedSubtree(
+        key: ValueKey('${_zone}_${_introIndex}_${_pathSceneIndex}_${_endingIndex}_${_activeDeadEnd?.id}'),
+        child: _currentChild(),
+      ),
+    );
   }
 }

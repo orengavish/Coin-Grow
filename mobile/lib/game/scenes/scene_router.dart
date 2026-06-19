@@ -21,7 +21,7 @@ Widget buildScene({
   }
 
   if (scene.npcDialogue.isEmpty) {
-    return CutsceneScreen(scene: scene, onAdvance: onAdvance);
+    return CutsceneScreen(scene: scene, lesson: lesson, onAdvance: onAdvance);
   }
 
   return DialogueScreen(

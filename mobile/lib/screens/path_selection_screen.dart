@@ -21,11 +21,11 @@ class PathSelectionScreen extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(24, 24, 24, 12),
+            const Padding(
+              padding: EdgeInsets.fromLTRB(24, 24, 24, 12),
               child: Column(
                 children: [
-                  const Text(
+                  Text(
                     'How will you get the orange?',
                     textAlign: TextAlign.center,
                     style: TextStyle(
@@ -34,8 +34,8 @@ class PathSelectionScreen extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(height: 6),
-                  const Text(
+                  SizedBox(height: 6),
+                  Text(
                     'Choose a path. The owl can help if you ask.',
                     textAlign: TextAlign.center,
                     style: TextStyle(color: Colors.white54, fontSize: 14),
@@ -59,13 +59,13 @@ class PathSelectionScreen extends StatelessWidget {
                 },
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20, 8, 20, 20),
+            const Padding(
+              padding: EdgeInsets.fromLTRB(20, 8, 20, 20),
               child: Row(
                 children: [
-                  const Text('🦉', style: TextStyle(fontSize: 22)),
-                  const SizedBox(width: 8),
-                  const Text(
+                  Text('🦉', style: TextStyle(fontSize: 22)),
+                  SizedBox(width: 8),
+                  Text(
                     'Prof Penny  ·  tap me for a hint',
                     style: TextStyle(color: Colors.white38, fontSize: 13),
                   ),

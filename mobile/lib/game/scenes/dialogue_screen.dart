@@ -20,12 +20,34 @@ class DialogueScreen extends StatefulWidget {
   State<DialogueScreen> createState() => _DialogueScreenState();
 }
 
-class _DialogueScreenState extends State<DialogueScreen> {
+class _DialogueScreenState extends State<DialogueScreen>
+    with SingleTickerProviderStateMixin {
   int _lineIndex = 0;
+  late final AnimationController _fadeCtrl;
+  late final Animation<double> _fadeAnim;
 
-  void _next() {
+  @override
+  void initState() {
+    super.initState();
+    _fadeCtrl = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 300),
+      value: 1,
+    );
+    _fadeAnim = CurvedAnimation(parent: _fadeCtrl, curve: Curves.easeIn);
+  }
+
+  @override
+  void dispose() {
+    _fadeCtrl.dispose();
+    super.dispose();
+  }
+
+  void _next() async {
     if (_lineIndex < widget.scene.npcDialogue.length - 1) {
+      await _fadeCtrl.reverse();
       setState(() => _lineIndex++);
+      _fadeCtrl.forward();
     } else {
       widget.onAdvance();
     }
@@ -50,17 +72,18 @@ class _DialogueScreenState extends State<DialogueScreen> {
                   Container(
                     width: double.infinity,
                     color: AppTheme.deepBlue,
-                    child: const Icon(Icons.landscape,
-                        size: 80, color: Colors.white12),
                   ),
                   if (speaker != null)
                     Positioned(
                       bottom: 0,
                       left: 0,
                       right: 0,
-                      child: CharacterPortrait(
-                        character: speaker,
-                        emotion: currentLine?.emotion ?? 'neutral',
+                      child: FadeTransition(
+                        opacity: _fadeAnim,
+                        child: CharacterPortrait(
+                          character: speaker,
+                          emotion: currentLine?.emotion ?? 'neutral',
+                        ),
                       ),
                     ),
                 ],
@@ -94,12 +117,15 @@ class _DialogueScreenState extends State<DialogueScreen> {
                               ),
                             const SizedBox(height: 8),
                             Expanded(
-                              child: Text(
-                                currentLine.line.text,
-                                style: const TextStyle(
-                                  color: AppTheme.lightText,
-                                  fontSize: 16,
-                                  height: 1.5,
+                              child: FadeTransition(
+                                opacity: _fadeAnim,
+                                child: Text(
+                                  currentLine.line.text,
+                                  style: const TextStyle(
+                                    color: AppTheme.lightText,
+                                    fontSize: 16,
+                                    height: 1.5,
+                                  ),
                                 ),
                               ),
                             ),

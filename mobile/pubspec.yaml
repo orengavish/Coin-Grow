@@ -10,7 +10,6 @@ dependencies:
   flutter:
     sdk: flutter
   flame: ^1.18.0          # 2D game engine for scene rendering
-  rive: ^0.13.0            # Character animation state machines
   lottie: ^3.1.0           # UI effect animations (trophies, coins)
   http: ^1.2.0             # Lesson API calls (future backend)
   go_router: ^13.0.0       # Navigation
@@ -26,6 +25,5 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - assets/animations/
-    - assets/audio/
+    - assets/images/
     - assets/lessons/
