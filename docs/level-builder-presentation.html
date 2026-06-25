@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coin Grow — Level Builder</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --gold: #D4A017;
+    --navy: #0A1628;
+    --deep: #0D2137;
+    --mid:  #0A1F3D;
+    --text: #CCE4FF;
+    --green: #2D6A4F;
+    --sky: #90CAF9;
+    --orange: #FF8C00;
+  }
+
+  body {
+    font-family: 'Georgia', serif;
+    background: var(--navy);
+    color: var(--text);
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+  }
+
+  /* ── Slide container ──────────────────────── */
+  .deck { width: 100%; height: 100vh; position: relative; }
+
+  .slide {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 60px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.6s ease;
+  }
+  .slide.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  /* ── Nav ──────────────────────────────────── */
+  .nav {
+    position: fixed;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    z-index: 100;
+  }
+  .nav button {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: white;
+    padding: 10px 24px;
+    border-radius: 24px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.2s;
+  }
+  .nav button:hover { background: rgba(255,255,255,0.15); }
+  .nav button:disabled { opacity: 0.3; cursor: default; }
+
+  .slide-counter {
+    color: rgba(255,255,255,0.35);
+    font-size: 13px;
+    min-width: 60px;
+    text-align: center;
+  }
+
+  /* ── Progress bar ─────────────────────────── */
+  .progress {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: rgba(255,255,255,0.08);
+    z-index: 100;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--gold);
+    transition: width 0.4s ease;
+  }
+
+  /* ── Typography ───────────────────────────── */
+  h1 { font-size: 52px; color: var(--gold); letter-spacing: 2px; line-height: 1.15; }
+  h2 { font-size: 36px; color: var(--gold); margin-bottom: 24px; }
+  h3 { font-size: 22px; color: var(--sky); margin-bottom: 12px; }
+  p  { font-size: 18px; line-height: 1.7; color: var(--text); max-width: 780px; }
+  .subtitle { font-size: 20px; color: rgba(255,255,255,0.5); margin-top: 12px; font-style: italic; }
+  .label { font-size: 11px; letter-spacing: 1.8px; color: rgba(255,255,255,0.4); text-transform: uppercase; margin-bottom: 8px; }
+
+  /* ── Cards / layout ───────────────────────── */
+  .cols { display: flex; gap: 32px; width: 100%; max-width: 1000px; }
+  .col  { flex: 1; }
+
+  .card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 16px;
+  }
+  .card.gold  { border-color: rgba(212,160,23,0.5); }
+  .card.green { border-color: rgba(45,106,79,0.6); }
+  .card.sky   { border-color: rgba(144,202,249,0.4); }
+
+  .pill {
+    display: inline-block;
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 0.8px;
+    margin: 4px 4px 4px 0;
+  }
+  .pill-gold   { background: rgba(212,160,23,0.2); color: var(--gold); border: 1px solid var(--gold); }
+  .pill-green  { background: rgba(45,106,79,0.2);  color: #5CB88A; border: 1px solid #2D6A4F; }
+  .pill-sky    { background: rgba(144,202,249,0.15); color: var(--sky); border: 1px solid var(--sky); }
+  .pill-orange { background: rgba(255,140,0,0.15); color: var(--orange); border: 1px solid var(--orange); }
+
+  .big-number { font-size: 64px; color: var(--gold); line-height: 1; }
+
+  /* ── Image slides ─────────────────────────── */
+  .scene-image {
+    width: 100%;
+    max-width: 900px;
+    max-height: 480px;
+    object-fit: cover;
+    border-radius: 16px;
+    border: 2px solid rgba(212,160,23,0.3);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+  }
+
+  .owl-img {
+    height: 220px;
+    object-fit: contain;
+    filter: drop-shadow(0 8px 24px rgba(0,0,0,0.5));
+  }
+
+  /* ── Flow diagram ─────────────────────────── */
+  .flow {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 900px;
+  }
+  .flow-step {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 12px;
+    padding: 14px 20px;
+    text-align: center;
+    min-width: 130px;
+  }
+  .flow-step .icon { font-size: 28px; display: block; margin-bottom: 6px; }
+  .flow-step .name { font-size: 13px; color: var(--text); }
+  .flow-arrow {
+    font-size: 22px;
+    color: var(--gold);
+    padding: 0 6px;
+  }
+
+  /* ── Code block ───────────────────────────── */
+  pre {
+    background: rgba(0,0,0,0.4);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 20px 24px;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    color: #A8D8A8;
+    text-align: left;
+    max-width: 860px;
+    width: 100%;
+    overflow-x: auto;
+    line-height: 1.7;
+  }
+  pre .c { color: rgba(255,255,255,0.35); }
+  pre .k { color: var(--sky); }
+  pre .s { color: var(--gold); }
+
+  /* ── Slide-specific backgrounds ───────────── */
+  .slide-title { background: radial-gradient(ellipse at 60% 40%, #1A2F50 0%, var(--navy) 70%); }
+  .slide-dark  { background: var(--navy); }
+  .slide-scene {
+    background: linear-gradient(to bottom, #060E1C, #0D2137);
+  }
+
+  /* ── Checklist ────────────────────────────── */
+  .check-list { list-style: none; max-width: 700px; width: 100%; }
+  .check-list li {
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    font-size: 17px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .check-list li span.icon { font-size: 20px; flex-shrink: 0; }
+  .check-list li.done span.icon::after { content: '✅'; }
+  .check-list li.todo span.icon::after { content: '🔲'; }
+  .check-list li.yours span.icon::after { content: '🎯'; }
+</style>
+</head>
+<body>
+
+<div class="progress"><div class="progress-fill" id="progressFill"></div></div>
+
+<div class="deck" id="deck">
+
+  <!-- ── SLIDE 1: Title ──────────────────────────── -->
+  <div class="slide slide-title active" id="s1">
+    <div style="text-align:center">
+      <div style="font-size:72px; margin-bottom:16px;">🪙</div>
+      <h1>Coin Grow</h1>
+      <p class="subtitle">Level Builder Machine — Junior Developer Brief</p>
+      <div style="margin-top:40px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+        <span class="pill pill-gold">Financial Literacy Game</span>
+        <span class="pill pill-green">AI-Generated Content</span>
+        <span class="pill pill-sky">Flutter + Flame</span>
+        <span class="pill pill-orange">Pre-funding</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SLIDE 2: The Game ──────────────────────── -->
+  <div class="slide slide-dark" id="s2">
+    <h2>What Is Coin Grow?</h2>
+    <div class="cols" style="max-width:900px;">
+      <div class="col">
+        <div class="card gold">
+          <div class="label">Core idea</div>
+          <p style="font-size:16px;">Kids learn money concepts by <strong style="color:var(--gold)">living them</strong> — bartering in a medieval market, making choices, facing real consequences.</p>
+        </div>
+        <div class="card sky">
+          <div class="label">The prompt is the product</div>
+          <p style="font-size:16px;">Claude AI generates all lesson content: story, characters, branching paths, outcomes. The game engine is just a delivery vehicle.</p>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card green">
+          <div class="label">Social layer</div>
+          <p style="font-size:16px;">Classrooms compete. Schools compete. Future: market simulator for investment competitions.</p>
+        </div>
+        <div class="card" style="text-align:center; padding: 32px;">
+          <div class="big-number">8+</div>
+          <div class="label" style="margin-top:8px;">Target age</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SLIDE 3: Lesson 1 Scene ─────────────────── -->
+  <div class="slide slide-scene" id="s3">
+    <div class="label" style="margin-bottom:16px;">Lesson 1 — The Orange Quest</div>
+    <img src="../Images/lesson1-screen1-option2.jpg" class="scene-image" alt="The Orange Quest opening scene" onerror="this.style.display='none'">
+    <p style="margin-top:24px; text-align:center; max-width:700px; font-size:16px; color:rgba(255,255,255,0.6)">
+      Eli (12) must barter for an orange to save his sick little brother Luca before dawn. No money. Just skill, persuasion, and trade.
+    </p>
+  </div>
+
+  <!-- ── SLIDE 4: Prof Penny ────────────────────── -->
+  <div class="slide slide-dark" id="s4">
+    <div class="cols" style="align-items:center; max-width:860px;">
+      <div class="col" style="text-align:center;">
+        <img src="../Images/penny-wave.png" class="owl-img" alt="Prof Penny waving" onerror="this.style.display='none'">
+        <div class="label" style="margin-top:12px;">Prof Penny — mentor owl</div>
+      </div>
+      <div class="col">
+        <h2 style="margin-bottom:16px;">Meet Prof Penny</h2>
+        <p style="margin-bottom:20px;">The player's guide through every lesson. She explains concepts, gives hints on dead-end paths, and celebrates breakthroughs.</p>
+        <div class="card gold">
+          <div class="label">3 poses (already built)</div>
+          <div style="display:flex; gap:8px; margin-top:8px; font-size:13px;">
+            <span class="pill pill-gold">wave — default</span>
+            <span class="pill pill-sky">thoughtful — hints</span>
+            <span class="pill pill-green">celebrate — victory</span>
+          </div>
+        </div>
+        <p style="font-size:15px; margin-top:16px; color:rgba(255,255,255,0.5);">Will become a Rive skeletal animation rig — for now, PNG with bobbing animation.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SLIDE 5: Lesson Flow ───────────────────── -->
+  <div class="slide slide-dark" id="s5">
+    <h2>How a Lesson Works</h2>
+    <div class="flow" style="margin-bottom: 24px;">
+      <div class="flow-step">
+        <span class="icon">🎬</span>
+        <span class="name">Cinematic Intro</span>
+      </div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-step">
+        <span class="icon">🦉</span>
+        <span class="name">Intro Scenes</span>
+      </div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-step" style="border-color:rgba(212,160,23,0.5)">
+        <span class="icon">🗺️</span>
+        <span class="name">Path Selection</span>
+      </div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-step" style="border-color:rgba(45,106,79,0.6)">
+        <span class="icon">🚶</span>
+        <span class="name">Play Path</span>
+      </div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-step">
+        <span class="icon">🏆</span>
+        <span class="name">Debrief</span>
+      </div>
+    </div>
+    <div class="cols" style="max-width:860px;">
+      <div class="card sky" style="flex:1">
+        <div class="label">Dead end paths</div>
+        <p style="font-size:15px;">Wrong choice → micro-lesson from Prof Penny → return to selection with that path marked ✗</p>
+      </div>
+      <div class="card green" style="flex:1">
+        <div class="label">Live paths</div>
+        <p style="font-size:15px;">Walk through scenes, meet NPCs, make exchanges, earn points. Consequence plays out.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SLIDE 6: Architecture ──────────────────── -->
+  <div class="slide slide-dark" id="s6">
+    <h2>Technology Stack</h2>
+    <div class="cols" style="max-width:960px;">
+      <div class="col">
+        <div class="card gold">
+          <div class="label">Game engine</div>
+          <h3 style="margin-bottom:4px;">Flutter + Flame</h3>
+          <p style="font-size:14px;">Flutter for all UI (menus, dialogue, debrief). Flame for the 2D game world (sprites, paths, camera, collisions).</p>
+        </div>
+        <div class="card sky">
+          <div class="label">Character animation</div>
+          <h3 style="margin-bottom:4px;">Rive</h3>
+          <p style="font-size:14px;">Skeletal animation + state machines. Used by Duolingo. Prof Penny will be a Rive rig.</p>
+        </div>
+        <div class="card">
+          <div class="label">Content engine</div>
+          <h3 style="margin-bottom:4px;">Claude AI (Anthropic)</h3>
+          <p style="font-size:14px;">Generates lesson JSON from prompts. Every scene, character, choice, and consequence is AI-written.</p>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card green">
+          <div class="label">Backgrounds</div>
+          <h3 style="margin-bottom:4px;">AI-Generated (DALL-E 3)</h3>
+          <p style="font-size:14px;">Bing Image Creator — free. Cartoon storybook style. Ken Burns animation applied in Flutter.</p>
+        </div>
+        <div class="card">
+          <div class="label">Character sprites</div>
+          <h3 style="margin-bottom:4px;">Kenney.nl (CC0)</h3>
+          <p style="font-size:14px;">Free, professional sprite sheets with walk cycles. No attribution needed. Drop-in to Flame.</p>
+        </div>
+        <div class="card sky">
+          <div class="label">State / Nav</div>
+          <h3 style="margin-bottom:4px;">Provider + Go Router</h3>
+          <p style="font-size:14px;">Lesson state machine already built. Zone-based: intro → pathSelect → pathScenes → ending.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SLIDE 7: What's Built ──────────────────── -->
+  <div class="slide slide-dark" id="s7">
+    <h2>Current State</h2>
+    <div class="cols" style="max-width:860px; align-items:flex-start;">
+      <div class="col">
+        <ul class="check-list">
+          <li class="done"><span class="icon"></span><span>Full lesson flow (intro → paths → debrief)</span></li>
+          <li class="done"><span class="icon"></span><span>AI-generated lesson JSON schema + validator</span></li>
+          <li class="done"><span class="icon"></span><span>Cinematic intro — AI image + Ken Burns zoom</span></li>
+          <li class="done"><span class="icon"></span><span>Typewriter speech bubble (healer dialogue)</span></li>
+          <li class="done"><span class="icon"></span><span>Path selection screen with dead-end tracking</span></li>
+          <li class="done"><span class="icon"></span><span>Prof Penny PNG with bobbing animation</span></li>
+          <li class="done"><span class="icon"></span><span>Dialogue screen with fade transitions</span></li>
+          <li class="done"><span class="icon"></span><span>Debrief + trophy screen</span></li>
+          <li class="done"><span class="icon"></span><span>Windows Desktop + Web builds working</span></li>
+        </ul>
+      </div>
+      <div class="col">
+        <ul class="check-list">
+          <li class="yours"><span class="icon"></span><span><strong style="color:var(--gold)">Flame game world</strong> — not started</span></li>
+          <li class="yours"><span class="icon"></span><span><strong style="color:var(--gold)">Walking character sprites</strong> on market path</span></li>
+          <li class="yours"><span class="icon"></span><span><strong style="color:var(--gold)">NPC interaction zones</strong> + proximity triggers</span></li>
+          <li class="yours"><span class="icon"></span><span><strong style="color:var(--gold)">Level builder pipeline</strong> (AI → layout JSON → Flame)</span></li>
+          <li class="todo"><span class="icon"></span><span>Prof Penny Rive rig</span></li>
+          <li class="todo"><span class="icon"></span><span>Android build + TTS audio</span></li>
+          <li class="todo"><span class="icon"></span><span>Lesson 2+</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SLIDE 8: The Level Builder ────────────── -->
+  <div class="slide slide-dark" id="s8">
+    <h2>Your Mission — The Level Builder</h2>
+    <p style="text-align:center; margin-bottom:32px;">Given a text description → produce a fully playable animated 2D Flame level.</p>
+    <div class="flow">
+      <div class="flow-step" style="border-color:rgba(212,160,23,0.5); min-width:150px;">
+        <span class="icon">📝</span>
+        <span class="name">Text description</span>
+      </div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-step" style="border-color:rgba(144,202,249,0.4); min-width:150px;">
+        <span class="icon">🤖</span>
+        <span class="name">AI Layout Generator<br><small style="color:rgba(255,255,255,0.4); font-size:11px;">Claude API → JSON</small></span>
+      </div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-step" style="min-width:150px;">
+        <span class="icon">🖼️</span>
+        <span class="name">Asset Resolver<br><small style="color:rgba(255,255,255,0.4); font-size:11px;">sprites + backgrounds</small></span>
+      </div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-step" style="border-color:rgba(45,106,79,0.6); min-width:150px;">
+        <span class="icon">🎮</span>
+        <span class="name">Flame Scene Builder<br><small style="color:rgba(255,255,255,0.4); font-size:11px;">playable level</small></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SLIDE 9: Layout JSON ───────────────────── -->
+  <div class="slide slide-dark" id="s9">
+    <h2>What the AI Outputs</h2>
+    <pre><span class="c">// INPUT: "Medieval market. Eli walks left to right.
+// Stalls: fisherman, baker, orange seller (far right)."
+
+// OUTPUT — Scene Layout JSON:</span>
+{
+  <span class="s">"background"</span>: <span class="s">"medieval_market_day"</span>,
+  <span class="s">"path"</span>: [[0.0, 0.6], [0.3, 0.58], [0.7, 0.62], [1.0, 0.6]],
+  <span class="s">"npcs"</span>: [
+    { <span class="s">"id"</span>: <span class="s">"fisherman"</span>,    <span class="s">"x"</span>: 0.25, <span class="s">"sprite"</span>: <span class="s">"vendor_male_1"</span>   },
+    { <span class="s">"id"</span>: <span class="s">"baker"</span>,        <span class="s">"x"</span>: 0.55, <span class="s">"sprite"</span>: <span class="s">"vendor_female_1"</span> },
+    { <span class="s">"id"</span>: <span class="s">"orange_seller"</span>, <span class="s">"x"</span>: 0.85, <span class="s">"sprite"</span>: <span class="s">"vendor_male_2"</span>   }
+  ],
+  <span class="s">"player_start"</span>: [0.0, 0.6],
+  <span class="s">"interaction_radius"</span>: 0.08
+}</pre>
+  </div>
+
+  <!-- ── SLIDE 10: First Task ───────────────────── -->
+  <div class="slide slide-dark" id="s10">
+    <h2>Your First Task — POC</h2>
+    <p style="text-align:center; margin-bottom:28px; color:rgba(255,255,255,0.6)">Prove the Flame layer works before building the full pipeline.</p>
+    <div class="cols" style="max-width:860px;">
+      <div class="col">
+        <div class="card gold" style="margin-bottom:12px;">
+          <div style="display:flex; align-items:center; gap:12px;">
+            <span style="font-size:28px;">1️⃣</span>
+            <div>
+              <div class="label">Background</div>
+              <p style="font-size:15px;">Load AI market image as Flame parallax background</p>
+            </div>
+          </div>
+        </div>
+        <div class="card sky" style="margin-bottom:12px;">
+          <div style="display:flex; align-items:center; gap:12px;">
+            <span style="font-size:28px;">2️⃣</span>
+            <div>
+              <div class="label">NPCs</div>
+              <p style="font-size:15px;">Place 3 Kenney sprites at fixed positions, idle animation loop</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card green" style="margin-bottom:12px;">
+          <div style="display:flex; align-items:center; gap:12px;">
+            <span style="font-size:28px;">3️⃣</span>
+            <div>
+              <div class="label">Player walk</div>
+              <p style="font-size:15px;">Auto-walk left → right along path, walk cycle animation</p>
+            </div>
+          </div>
+        </div>
+        <div class="card" style="margin-bottom:12px;">
+          <div style="display:flex; align-items:center; gap:12px;">
+            <span style="font-size:28px;">4️⃣</span>
+            <div>
+              <div class="label">Trigger</div>
+              <p style="font-size:15px;">On NPC proximity → stop, fire Flutter dialogue overlay</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SLIDE 11: Scene variations ───────────────── -->
+  <div class="slide slide-scene" id="s11">
+    <div class="label" style="margin-bottom:16px;">Scene art — 4 generated variations for Lesson 1</div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; max-width:860px;">
+      <img src="../Images/lesson1-screen1-option1.jpg" style="width:100%; border-radius:10px; object-fit:cover; height:200px; border:1px solid rgba(212,160,23,0.2);" onerror="this.parentElement.removeChild(this)">
+      <img src="../Images/lesson1-screen1-option2.jpg" style="width:100%; border-radius:10px; object-fit:cover; height:200px; border:1px solid rgba(212,160,23,0.2);" onerror="this.parentElement.removeChild(this)">
+      <img src="../Images/lesson1-screen1-option3.jpg" style="width:100%; border-radius:10px; object-fit:cover; height:200px; border:1px solid rgba(212,160,23,0.2);" onerror="this.parentElement.removeChild(this)">
+      <img src="../Images/lesson1-screen1-option4.jpg" style="width:100%; border-radius:10px; object-fit:cover; height:200px; border:1px solid rgba(212,160,23,0.2);" onerror="this.parentElement.removeChild(this)">
+    </div>
+    <p style="margin-top:16px; font-size:14px; color:rgba(255,255,255,0.4);">Generated with DALL-E 3 via Bing Image Creator — free. One randomly selected per session.</p>
+  </div>
+
+  <!-- ── SLIDE 12: Resources ─────────────────────── -->
+  <div class="slide slide-dark" id="s12">
+    <h2>Resources & Links</h2>
+    <div class="cols" style="max-width:860px;">
+      <div class="col">
+        <div class="card sky">
+          <div class="label">Get sprites</div>
+          <h3>kenney.nl/assets</h3>
+          <p style="font-size:14px;">Search: <strong>Tiny RPG</strong> or <strong>RPG Urban Pack</strong><br>CC0 — no attribution needed</p>
+        </div>
+        <div class="card">
+          <div class="label">Character animation</div>
+          <h3>rive.app/community</h3>
+          <p style="font-size:14px;">Search "owl" for free rigs.<br>Rive editor is free, browser-based.</p>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card gold">
+          <div class="label">Codebase</div>
+          <h3>github.com/orengavish/Coin-Grow</h3>
+          <p style="font-size:14px;">Flutter app in <code>mobile/</code><br>Run: <code>flutter run -d windows</code></p>
+        </div>
+        <div class="card green">
+          <div class="label">Flame docs</div>
+          <h3>docs.flame-engine.org</h3>
+          <p style="font-size:14px;">Start: Flame → Components → SpriteAnimationComponent</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SLIDE 13: Summary ──────────────────────── -->
+  <div class="slide slide-title" id="s13">
+    <div style="text-align:center; max-width:700px;">
+      <div style="font-size:56px; margin-bottom:20px;">🎯</div>
+      <h2 style="font-size:40px; margin-bottom:20px;">One Goal</h2>
+      <p style="font-size:22px; line-height:1.7; color:var(--text);">
+        Build a machine that takes a <strong style="color:var(--gold)">text description</strong> of a game scene and outputs a <strong style="color:var(--gold)">fully playable animated 2D level</strong>.
+      </p>
+      <div style="margin-top:36px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+        <span class="pill pill-sky">Flame + Flutter</span>
+        <span class="pill pill-gold">Claude AI layout</span>
+        <span class="pill pill-green">Kenney sprites</span>
+        <span class="pill pill-orange">AI backgrounds</span>
+      </div>
+      <p style="margin-top:32px; font-size:15px; color:rgba(255,255,255,0.35);">Start with the POC — 4 steps, one scene, prove it works.</p>
+    </div>
+  </div>
+
+</div><!-- /deck -->
+
+<!-- ── Navigation ─────────────────────────── -->
+<div class="nav">
+  <button id="prevBtn" onclick="go(-1)" disabled>← Prev</button>
+  <span class="slide-counter" id="counter">1 / 13</span>
+  <button id="nextBtn" onclick="go(1)">Next →</button>
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const total = slides.length;
+  let cur = 0;
+
+  function go(dir) {
+    slides[cur].classList.remove('active');
+    cur = Math.max(0, Math.min(total - 1, cur + dir));
+    slides[cur].classList.add('active');
+    document.getElementById('counter').textContent = `${cur + 1} / ${total}`;
+    document.getElementById('prevBtn').disabled = cur === 0;
+    document.getElementById('nextBtn').disabled = cur === total - 1;
+    document.getElementById('progressFill').style.width = `${((cur + 1) / total) * 100}%`;
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') go(1);
+    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')                    go(-1);
+  });
+
+  // Init progress
+  document.getElementById('progressFill').style.width = `${(1/total)*100}%`;
+</script>
+</body>
+</html>

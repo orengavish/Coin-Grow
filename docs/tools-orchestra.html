@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Coin Grow — The Orchestra</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --gold:#D4A017; --navy:#08101E; --deep:#0D1F3A; --text:#CCE4FF;
+  --green:#2D6A4F; --sky:#7EC8F0; --orange:#FF8C00; --purple:#7D3C98;
+}
+body { font-family:'Segoe UI',Georgia,sans-serif; background:var(--navy); color:var(--text); overflow:hidden; height:100vh; }
+.slide { position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; align-items:center; padding:44px 60px; opacity:0; pointer-events:none; transition:opacity 0.5s; }
+.slide.active { opacity:1; pointer-events:all; }
+.progress { position:fixed; top:0; left:0; right:0; height:4px; background:rgba(255,255,255,0.08); z-index:99; }
+.pbar { height:100%; background:var(--gold); transition:width 0.4s; }
+.nav { position:fixed; bottom:28px; left:50%; transform:translateX(-50%); display:flex; gap:12px; align-items:center; z-index:99; }
+.nav button { background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.15); color:white; padding:9px 22px; border-radius:24px; cursor:pointer; font-size:13px; transition:all 0.2s; }
+.nav button:hover { background:rgba(255,255,255,0.14); }
+.nav button:disabled { opacity:0.25; cursor:default; }
+.ctr { color:rgba(255,255,255,0.3); font-size:12px; min-width:52px; text-align:center; }
+h1 { font-size:50px; color:var(--gold); line-height:1.15; text-align:center; }
+h2 { font-size:34px; color:var(--gold); margin-bottom:20px; }
+h3 { font-size:20px; color:var(--sky); margin-bottom:8px; }
+p  { font-size:16px; line-height:1.7; }
+.label { font-size:10px; letter-spacing:2px; color:rgba(255,255,255,0.35); text-transform:uppercase; margin-bottom:6px; }
+.cols { display:flex; gap:24px; width:100%; }
+.col  { flex:1; }
+.card { background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.09); border-radius:14px; padding:20px; margin-bottom:14px; }
+.card.g { border-color:rgba(212,160,23,0.45); }
+.card.s { border-color:rgba(126,200,240,0.35); }
+.card.n { border-color:rgba(45,106,79,0.5); }
+.card.o { border-color:rgba(255,140,0,0.4); }
+.card.p { border-color:rgba(125,60,152,0.5); }
+.pill { display:inline-block; padding:3px 12px; border-radius:20px; font-size:11px; font-weight:700; letter-spacing:0.8px; margin:3px; }
+.pg { background:rgba(212,160,23,0.15); color:var(--gold); border:1px solid rgba(212,160,23,0.5); }
+.ps { background:rgba(126,200,240,0.12); color:var(--sky); border:1px solid rgba(126,200,240,0.4); }
+.pn { background:rgba(45,106,79,0.18); color:#5CC99A; border:1px solid rgba(45,106,79,0.6); }
+.po { background:rgba(255,140,0,0.12); color:var(--orange); border:1px solid rgba(255,140,0,0.5); }
+.pp { background:rgba(125,60,152,0.15); color:#BB8FCE; border:1px solid rgba(125,60,152,0.5); }
+.mono { font-family:'Courier New',monospace; font-size:12px; background:rgba(0,0,0,0.5); border:1px solid rgba(255,255,255,0.09); border-radius:10px; padding:16px 20px; line-height:1.85; color:#A8D8A8; text-align:left; overflow-x:auto; }
+.mono .c  { color:rgba(255,255,255,0.28); }
+.mono .h  { color:var(--gold); font-weight:700; }
+.mono .k  { color:var(--sky); }
+.mono .s  { color:#F0C070; }
+.mono .r  { color:#E74C3C; }
+.mono .g  { color:#5CC99A; }
+.mono .p  { color:#BB8FCE; }
+.mono .w  { color:rgba(255,255,255,0.5); }
+.instr { background:rgba(255,255,255,0.05); border:1.5px solid rgba(255,255,255,0.12); border-radius:14px; padding:18px 20px; text-align:center; }
+.instr .ic { font-size:40px; margin-bottom:8px; display:block; }
+.instr .role { font-size:10px; letter-spacing:2px; color:rgba(255,255,255,0.35); margin-bottom:4px; }
+.instr .name { font-size:15px; font-weight:700; margin-bottom:4px; }
+.instr .desc { font-size:12px; color:rgba(255,255,255,0.5); line-height:1.4; }
+.scene-img { width:100%; max-height:380px; object-fit:cover; border-radius:14px; border:2px solid rgba(212,160,23,0.25); box-shadow:0 16px 48px rgba(0,0,0,0.6); }
+.owl-img { height:180px; object-fit:contain; filter:drop-shadow(0 8px 20px rgba(0,0,0,0.5)); }
+</style>
+</head>
+<body>
+<div class="progress"><div class="pbar" id="pb"></div></div>
+
+<!-- ═══════════════════════════════════════════════════════ SLIDE 1 -->
+<div class="slide active" style="background:radial-gradient(ellipse at 50% 40%,#1A3060 0%,var(--navy) 70%)">
+  <div style="text-align:center">
+    <div style="font-size:72px;margin-bottom:16px">🎼</div>
+    <h1>The Orchestra</h1>
+    <p style="font-size:20px;color:rgba(255,255,255,0.45);margin-top:14px;font-style:italic">Six tools. One game. How they play together.</p>
+    <div style="margin-top:36px">
+      <span class="pill pg">Coin Grow</span>
+      <span class="pill ps">Tools Architecture</span>
+      <span class="pill pn">Junior Developer Guide</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ SLIDE 2 -->
+<div class="slide">
+  <h2 style="text-align:center">Meet the Orchestra</h2>
+  <p style="text-align:center;margin-bottom:28px;color:rgba(255,255,255,0.45)">Each tool has one job. Together they make a game.</p>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:860px;width:100%">
+    <div class="instr" style="border-color:rgba(212,160,23,0.5)">
+      <span class="ic">🎛️</span>
+      <div class="role">THE CONDUCTOR</div>
+      <div class="name" style="color:var(--gold)">Streamlit Studio</div>
+      <div class="desc">Runs the whole pipeline. Calls every other tool in order.</div>
+    </div>
+    <div class="instr" style="border-color:rgba(126,200,240,0.4)">
+      <span class="ic">🤖</span>
+      <div class="role">THE COMPOSER</div>
+      <div class="name" style="color:var(--sky)">Claude AI</div>
+      <div class="desc">Writes the lesson: story, characters, choices, dialogue.</div>
+    </div>
+    <div class="instr" style="border-color:rgba(255,140,0,0.4)">
+      <span class="ic">🎨</span>
+      <div class="role">THE PAINTER</div>
+      <div class="name" style="color:var(--orange)">DALL-E / Bing</div>
+      <div class="desc">Generates background art from a text description.</div>
+    </div>
+    <div class="instr" style="border-color:rgba(125,60,152,0.5)">
+      <span class="ic">💃</span>
+      <div class="role">THE DANCER</div>
+      <div class="name" style="color:#BB8FCE">Rive</div>
+      <div class="desc">Animates Prof Penny — wave, think, celebrate.</div>
+    </div>
+    <div class="instr" style="border-color:rgba(45,106,79,0.6)">
+      <span class="ic">🎮</span>
+      <div class="role">THE STAGE</div>
+      <div class="name" style="color:#5CC99A">Flutter + Flame</div>
+      <div class="desc">The app. Flame renders the world. Flutter renders the UI.</div>
+    </div>
+    <div class="instr">
+      <span class="ic">🧩</span>
+      <div class="role">THE PROPS</div>
+      <div class="name">Kenney.nl</div>
+      <div class="desc">Free cartoon sprites — walk cycles, NPCs, items. CC0 license.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ SLIDE 3 -->
+<div class="slide">
+  <h2 style="text-align:center">🎛️ The Conductor — Streamlit Studio</h2>
+  <div class="cols" style="max-width:860px;align-items:flex-start">
+    <div class="col">
+      <p style="margin-bottom:20px">Streamlit is the dashboard you open in a browser. It's the control room — you type a description and press <strong style="color:var(--gold)">Generate</strong>. It calls everyone else in order.</p>
+      <div class="card g">
+        <div class="label">What you see</div>
+        <p style="font-size:14px;line-height:1.6">Text box → generate button → lesson preview → save button. That's it. All the complexity is hidden behind those controls.</p>
+      </div>
+      <div class="card s">
+        <div class="label">What it does internally</div>
+        <ol style="font-size:14px;line-height:2;padding-left:18px">
+          <li>Calls Claude API → gets lesson JSON</li>
+          <li>Calls DALL-E → gets background image</li>
+          <li>Validates the output</li>
+          <li>Saves to <code>lessons/</code> folder</li>
+        </ol>
+      </div>
+    </div>
+    <div class="col">
+      <div style="background:rgba(0,0,0,0.4);border:1px solid rgba(255,255,255,0.1);border-radius:14px;padding:24px;font-family:monospace;font-size:13px">
+        <div style="color:rgba(255,255,255,0.3);margin-bottom:16px;font-size:11px">● ● ●  Coin Grow Studio — localhost:8501</div>
+        <div style="background:rgba(212,160,23,0.1);border:1px solid rgba(212,160,23,0.3);border-radius:8px;padding:12px;margin-bottom:12px">
+          <div style="font-size:10px;color:rgba(255,255,255,0.4);margin-bottom:4px">LESSON DESCRIPTION</div>
+          <div style="color:white;font-size:13px">"Medieval market, Eli needs an orange..."</div>
+        </div>
+        <div style="display:flex;gap:8px;margin-bottom:16px">
+          <div style="flex:1;background:rgba(126,200,240,0.1);border:1px solid rgba(126,200,240,0.3);border-radius:6px;padding:8px;font-size:11px;text-align:center">Age: 8–11</div>
+          <div style="flex:1;background:rgba(126,200,240,0.1);border:1px solid rgba(126,200,240,0.3);border-radius:6px;padding:8px;font-size:11px;text-align:center">Concept: Barter</div>
+        </div>
+        <div style="background:var(--gold);color:#08101E;border-radius:8px;padding:10px;text-align:center;font-weight:700;font-size:14px;cursor:pointer">▶ Generate Lesson</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ SLIDE 4 -->
+<div class="slide">
+  <h2 style="text-align:center">🤖 The Composer — Claude AI</h2>
+  <div class="cols" style="max-width:900px;align-items:flex-start">
+    <div class="col">
+      <p style="margin-bottom:16px">Claude is the writer. It reads our <strong style="color:var(--gold)">AI Prompt</strong> (the IP) and writes a complete lesson in JSON. Every scene, every character, every choice.</p>
+      <div class="card g">
+        <div class="label">Input</div>
+        <p style="font-size:14px">Our system prompt + lesson description + age + concept</p>
+      </div>
+      <div class="card s">
+        <div class="label">Output — Lesson JSON</div>
+        <ul style="font-size:13px;line-height:2;padding-left:18px">
+          <li>Intro scenes (story, characters)</li>
+          <li>3–5 paths (2 dead ends + live paths)</li>
+          <li>NPC dialogue (bilingual EN + IT)</li>
+          <li>Debrief + trophy + scoring</li>
+          <li>Scene layout for Flame</li>
+        </ul>
+      </div>
+      <div class="card" style="padding:12px">
+        <p style="font-size:12px;color:rgba(255,255,255,0.5)">Model: <code>claude-sonnet-4-6</code> · ~2s per lesson · ~$0.03 per call</p>
+      </div>
+    </div>
+    <div class="col">
+      <div class="mono" style="font-size:11px">
+<span class="c">// Claude outputs this — automatically:</span>
+
+{
+  <span class="h">"lesson"</span>: {
+    <span class="k">"title"</span>: <span class="s">"The Orange Quest"</span>,
+    <span class="k">"concept"</span>: <span class="s">"barter"</span>,
+    <span class="k">"emotional_hook"</span>: <span class="s">"Your brother will die"</span>
+  },
+  <span class="h">"paths"</span>: [
+    {
+      <span class="k">"id"</span>: <span class="s">"trade_fish"</span>,
+      <span class="k">"is_dead_end"</span>: <span class="g">false</span>,
+      <span class="k">"scenes"</span>: [...]
+    },
+    {
+      <span class="k">"id"</span>: <span class="s">"beg_seller"</span>,
+      <span class="k">"is_dead_end"</span>: <span class="r">true</span>,
+      <span class="k">"dead_end"</span>: {
+        <span class="k">"micro_lesson"</span>: <span class="s">"Begging isn't trade..."</span>
+      }
+    }
+  ]
+}
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ SLIDE 5 -->
+<div class="slide">
+  <h2 style="text-align:center">🎨 The Painter — DALL-E / Bing</h2>
+  <div class="cols" style="max-width:900px;align-items:center">
+    <div class="col">
+      <p style="margin-bottom:20px">The background art is AI-generated. We write a prompt describing the scene, and DALL-E paints it. We save 4 variations — the app picks one randomly each session.</p>
+      <div class="card o">
+        <div class="label">Prompt we write</div>
+        <p style="font-size:13px;font-style:italic;color:white">"Cartoon storybook, thick outlines, warm candlelight. Medieval room at night. Sick boy in wooden bed, blue blanket, red fever cheeks. Tearful mother, father, anxious child. Tall healer in dark purple robe..."</p>
+      </div>
+      <div class="card" style="padding:12px">
+        <div style="display:flex;gap:12px;align-items:center">
+          <span style="font-size:24px">💰</span>
+          <p style="font-size:13px"><strong>Free:</strong> Bing Image Creator (DALL-E 3). 15 images/day. No API key needed.</p>
+        </div>
+      </div>
+      <div class="card s" style="padding:12px">
+        <div style="display:flex;gap:12px;align-items:center">
+          <span style="font-size:24px">💾</span>
+          <p style="font-size:13px">Images saved to <code>assets/images/</code>. Generated once. Reused forever.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <img src="../Images/lesson1-screen1-option1.jpg" class="scene-img" onerror="this.style.background='#1A2A3A';this.style.height='280px'">
+      <p style="text-align:center;font-size:12px;color:rgba(255,255,255,0.3);margin-top:10px">Actual generated image — used in Lesson 1 cinematic</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ SLIDE 6 -->
+<div class="slide">
+  <h2 style="text-align:center">💃 The Dancer — Rive</h2>
+  <div class="cols" style="max-width:860px;align-items:center">
+    <div class="col" style="text-align:center">
+      <img src="../Images/penny-wave.png" class="owl-img" onerror="this.style.display='none'">
+      <div style="display:flex;justify-content:center;gap:12px;margin-top:16px">
+        <img src="../Images/penny-thoughtful.png" style="height:80px;object-fit:contain;filter:drop-shadow(0 4px 12px rgba(0,0,0,0.5));" onerror="this.style.display='none'">
+        <img src="../Images/penny-celebrate.png" style="height:80px;object-fit:contain;filter:drop-shadow(0 4px 12px rgba(0,0,0,0.5));" onerror="this.style.display='none'">
+      </div>
+      <div style="display:flex;gap:8px;justify-content:center;margin-top:10px">
+        <span class="pill pg">wave</span><span class="pill ps">thoughtful</span><span class="pill pn">celebrate</span>
+      </div>
+    </div>
+    <div class="col">
+      <p style="margin-bottom:16px">Rive is a browser animation tool. You design Prof Penny's skeleton, add state machines, and export a <code>.riv</code> file. Flutter plays it with one line of code.</p>
+      <div class="card p">
+        <div class="label">State Machine</div>
+        <div style="font-size:13px;line-height:2">
+          <div>idle → <strong style="color:#BB8FCE">wave</strong> (on enter scene)</div>
+          <div>idle → <strong style="color:var(--sky)">thoughtful</strong> (on hint shown)</div>
+          <div>idle → <strong style="color:#5CC99A">celebrate</strong> (on correct answer)</div>
+        </div>
+      </div>
+      <div class="card" style="padding:12px">
+        <p style="font-size:13px;color:rgba(255,255,255,0.6)">⚠️ Rive requires a human to design the rig — it's a GUI tool, not code. Today we use PNG + bobbing animation. Rive is the upgrade.</p>
+      </div>
+      <div class="card n" style="padding:12px">
+        <p style="font-size:13px">Free tier at <strong>rive.app</strong>. Community rigs at <strong>rive.app/community</strong>. Search "owl" for free starting points.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ SLIDE 7 -->
+<div class="slide">
+  <h2 style="text-align:center">🎮 The Stage — Flutter + Flame</h2>
+  <div style="max-width:860px;width:100%">
+    <svg viewBox="0 0 820 200" style="width:100%;margin-bottom:20px">
+      <defs>
+        <marker id="af" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L10,5 L0,10z" fill="#D4A017"/></marker>
+      </defs>
+      <!-- Flutter outer box -->
+      <rect x="10" y="10" width="800" height="180" rx="14" fill="rgba(126,200,240,0.05)" stroke="rgba(126,200,240,0.4)" stroke-width="2"/>
+      <text x="30" y="32" fill="rgba(126,200,240,0.7)" font-size="11" letter-spacing="2" font-weight="700">FLUTTER  —  THE APP SHELL</text>
+
+      <!-- Flutter UI zone -->
+      <rect x="30" y="45" width="220" height="130" rx="10" fill="rgba(126,200,240,0.06)" stroke="rgba(126,200,240,0.25)" stroke-width="1.5"/>
+      <text x="140" y="90" text-anchor="middle" fill="#7EC8F0" font-size="24">💬</text>
+      <text x="140" y="115" text-anchor="middle" fill="var(--text)" font-size="12" font-weight="700">Flutter UI Layer</text>
+      <text x="140" y="132" text-anchor="middle" fill="rgba(204,228,255,0.5)" font-size="10">Dialogue · HUD</text>
+      <text x="140" y="148" text-anchor="middle" fill="rgba(204,228,255,0.5)" font-size="10">Menus · Debrief</text>
+      <text x="140" y="165" text-anchor="middle" fill="rgba(204,228,255,0.5)" font-size="10">Prof Penny overlay</text>
+
+      <!-- Flame zone -->
+      <rect x="290" y="45" width="360" height="130" rx="10" fill="rgba(45,106,79,0.08)" stroke="rgba(45,106,79,0.4)" stroke-width="1.5"/>
+      <text x="470" y="90" text-anchor="middle" fill="#5CC99A" font-size="24">🎮</text>
+      <text x="470" y="115" text-anchor="middle" fill="var(--text)" font-size="12" font-weight="700">Flame Game World</text>
+      <text x="470" y="132" text-anchor="middle" fill="rgba(204,228,255,0.5)" font-size="10">Sprites · Paths · Camera</text>
+      <text x="470" y="148" text-anchor="middle" fill="rgba(204,228,255,0.5)" font-size="10">Parallax · Collision</text>
+      <text x="470" y="165" text-anchor="middle" fill="rgba(204,228,255,0.5)" font-size="10">Walk cycles · NPC zones</text>
+
+      <!-- Bridge -->
+      <rect x="692" y="45" width="100" height="130" rx="10" fill="rgba(212,160,23,0.06)" stroke="rgba(212,160,23,0.3)" stroke-width="1.5"/>
+      <text x="742" y="90" text-anchor="middle" fill="var(--gold)" font-size="20">🌉</text>
+      <text x="742" y="112" text-anchor="middle" fill="var(--text)" font-size="11" font-weight="700">Bridge</text>
+      <text x="742" y="130" text-anchor="middle" fill="rgba(204,228,255,0.5)" font-size="10">Events /</text>
+      <text x="742" y="146" text-anchor="middle" fill="rgba(204,228,255,0.5)" font-size="10">Notifiers</text>
+      <text x="742" y="162" text-anchor="middle" fill="rgba(204,228,255,0.5)" font-size="10">Provider</text>
+
+      <!-- Arrows -->
+      <line x1="252" y1="110" x2="288" y2="110" stroke="var(--gold)" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#af)"/>
+      <line x1="652" y1="110" x2="688" y2="110" stroke="var(--gold)" stroke-width="1.5" marker-end="url(#af)"/>
+    </svg>
+    <div class="cols" style="gap:14px">
+      <div class="card s" style="flex:1;padding:14px">
+        <strong style="color:var(--sky)">Flutter</strong> handles all UI — text, buttons, menus. Works anywhere: iOS, Android, Web, Windows.
+      </div>
+      <div class="card n" style="flex:1;padding:14px">
+        <strong style="color:#5CC99A">Flame</strong> handles the game world — sprites, movement, physics, camera. Sits inside Flutter as a widget.
+      </div>
+      <div class="card g" style="flex:1;padding:14px">
+        <strong style="color:var(--gold)">Bridge</strong> — when Flame detects "player entered NPC zone", it fires an event. Flutter catches it and shows the dialogue overlay.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ SLIDE 8 -->
+<div class="slide">
+  <h2 style="text-align:center">The Full Orchestra Playing</h2>
+  <div style="max-width:900px;width:100%">
+    <svg viewBox="0 0 820 280" style="width:100%">
+      <defs>
+        <marker id="ao2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L10,5 L0,10z" fill="#D4A017"/></marker>
+        <marker id="ag2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L10,5 L0,10z" fill="#5CC99A"/></marker>
+        <marker id="as2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L10,5 L0,10z" fill="#7EC8F0"/></marker>
+      </defs>
+
+      <!-- USER -->
+      <rect x="330" y="5" width="160" height="46" rx="10" fill="#1A3060" stroke="#D4A017" stroke-width="2.5"/>
+      <text x="410" y="25" text-anchor="middle" fill="#D4A017" font-size="13" font-weight="700">👤  You</text>
+      <text x="410" y="43" text-anchor="middle" fill="rgba(204,228,255,0.6)" font-size="10">type description + press Generate</text>
+
+      <!-- STREAMLIT -->
+      <rect x="300" y="80" width="220" height="50" rx="10" fill="#0D1F3A" stroke="#D4A017" stroke-width="2"/>
+      <text x="410" y="101" text-anchor="middle" fill="#D4A017" font-size="13" font-weight="700">🎛️  Streamlit Studio</text>
+      <text x="410" y="119" text-anchor="middle" fill="rgba(204,228,255,0.5)" font-size="10">orchestrates the pipeline</text>
+
+      <!-- Arrow: You → Streamlit -->
+      <line x1="410" y1="51" x2="410" y2="78" stroke="#D4A017" stroke-width="2" marker-end="url(#ao2)"/>
+
+      <!-- CLAUDE -->
+      <rect x="40" y="170" width="160" height="50" rx="10" fill="#0D1F3A" stroke="#7EC8F0" stroke-width="1.5"/>
+      <text x="120" y="191" text-anchor="middle" fill="#7EC8F0" font-size="12" font-weight="700">🤖  Claude AI</text>
+      <text x="120" y="209" text-anchor="middle" fill="rgba(204,228,255,0.5)" font-size="10">lesson JSON</text>
+
+      <!-- DALL-E -->
+      <rect x="230" y="170" width="160" height="50" rx="10" fill="#0D1F3A" stroke="#FF8C00" stroke-width="1.5"/>
+      <text x="310" y="191" text-anchor="middle" fill="#FF8C00" font-size="12" font-weight="700">🎨  DALL-E</text>
+      <text x="310" y="209" text-anchor="middle" fill="rgba(204,228,255,0.5)" font-size="10">background images</text>
+
+      <!-- KENNEY -->
+      <rect x="420" y="170" width="160" height="50" rx="10" fill="#0D1F3A" stroke="#9B59B6" stroke-width="1.5"/>
+      <text x="500" y="191" text-anchor="middle" fill="#BB8FCE" font-size="12" font-weight="700">🧩  Kenney Sprites</text>
+      <text x="500" y="209" text-anchor="middle" fill="rgba(204,228,255,0.5)" font-size="10">characters + items</text>
+
+      <!-- RIVE -->
+      <rect x="610" y="170" width="160" height="50" rx="10" fill="#0D1F3A" stroke="#7D3C98" stroke-width="1.5"/>
+      <text x="690" y="191" text-anchor="middle" fill="#BB8FCE" font-size="12" font-weight="700">💃  Rive</text>
+      <text x="690" y="209" text-anchor="middle" fill="rgba(204,228,255,0.5)" font-size="10">Prof Penny animation</text>
+
+      <!-- Streamlit → each tool -->
+      <line x1="360" y1="130" x2="190" y2="168" stroke="#D4A017" stroke-width="1.5" marker-end="url(#ao2)"/>
+      <line x1="385" y1="130" x2="325" y2="168" stroke="#D4A017" stroke-width="1.5" marker-end="url(#ao2)"/>
+      <line x1="430" y1="130" x2="490" y2="168" stroke="#D4A017" stroke-width="1.5" marker-end="url(#ao2)"/>
+      <line x1="460" y1="130" x2="660" y2="168" stroke="#D4A017" stroke-width="1.5" marker-end="url(#ao2)"/>
+
+      <!-- FLAME OUTPUT -->
+      <rect x="280" y="248" width="260" height="28" rx="9" fill="#0D2010" stroke="#5CC99A" stroke-width="2"/>
+      <text x="410" y="266" text-anchor="middle" fill="#5CC99A" font-size="12" font-weight="700">🎮  Flame — Playable Level</text>
+
+      <!-- All tools → Flame -->
+      <line x1="120" y1="220" x2="310" y2="246" stroke="#5CC99A" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#ag2)"/>
+      <line x1="310" y1="220" x2="355" y2="246" stroke="#5CC99A" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#ag2)"/>
+      <line x1="500" y1="220" x2="460" y2="246" stroke="#5CC99A" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#ag2)"/>
+      <line x1="690" y1="220" x2="530" y2="246" stroke="#5CC99A" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#ag2)"/>
+    </svg>
+    <p style="text-align:center;font-size:14px;color:rgba(255,255,255,0.35);margin-top:8px">Everything flows through Streamlit. Flame assembles the final result.</p>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ SLIDE 9 -->
+<div class="slide">
+  <h2 style="text-align:center">⭐ The Score — The AI Prompt</h2>
+  <p style="text-align:center;margin-bottom:20px;color:rgba(255,255,255,0.5);max-width:640px">This is the heart of the product. The prompt is what makes every lesson emotionally powerful and pedagogically correct. <strong style="color:var(--gold)">This is the IP.</strong></p>
+  <div style="max-width:820px;width:100%;max-height:65vh;overflow-y:auto">
+    <div class="mono">
+<span class="h">SYSTEM — COIN GROW LESSON ENGINE v0.2</span>
+<span class="c">══════════════════════════════════════════════════════════</span>
+
+<span class="h">WHO YOU ARE</span>
+You write financial literacy lessons for children and adults.
+Your output is a <span class="k">complete playable lesson in JSON format</span>.
+You are not a teacher. You are a <span class="s">storyteller</span>.
+
+<span class="h">THE THREE UNBREAKABLE RULES</span>
+
+<span class="g">1. FEEL BEFORE UNDERSTAND</span>
+   The player must feel the problem <span class="k">before</span> they understand the concept.
+   Eli doesn't learn about barter theory.
+   He needs an orange <span class="r">NOW OR HIS BROTHER DIES</span>.
+   Emotion first. Concept second. Always.
+
+<span class="g">2. CONSEQUENCE IS THE TEACHER</span>
+   Wrong choices do not punish. They <span class="k">teach</span>.
+   Every dead end has a micro-lesson:
+   <span class="s">"Here's why that didn't work. Now you know."</span>
+   The game respects the player's intelligence.
+
+<span class="g">3. EMOTION ANCHORS MEMORY</span>
+   Abstract concepts bounce off children's brains.
+   Emotional stories stick for life.
+   Money is not explained — it is <span class="k">felt</span> as the solution
+   to an impossible problem.
+
+<span class="h">THE LESSON FORMAT</span>
+<span class="c">──────────────────────────────────────────────────────────</span>
+{
+  <span class="k">"lesson"</span>:  { title, concept, emotional_hook, age_group },
+  <span class="k">"world"</span>:   { setting, time_period, atmosphere },
+  <span class="k">"characters"</span>: {
+    <span class="s">"player"</span>:  { name, age, personality, gives, needs },
+    <span class="s">"owl"</span>:     { name: <span class="r">"Prof Penny"</span>, role: "mentor" },
+    <span class="s">"npcs"</span>:    [ { id, name, needs, gives, dialogue_style } ]
+  },
+  <span class="k">"intro_scenes"</span>:  [ scene, scene, ... ],
+  <span class="k">"paths"</span>: [
+    {
+      <span class="s">"id"</span>: "trade_fish",
+      <span class="s">"is_dead_end"</span>: false,
+      <span class="s">"card"</span>: { label, effort, time_estimate, visible_reward },
+      <span class="s">"scenes"</span>: [ ... ],
+      <span class="s">"outcome"</span>: { en: "...", it: "..." }
+    },
+    {
+      <span class="s">"id"</span>: "beg_seller",
+      <span class="s">"is_dead_end"</span>: true,
+      <span class="s">"dead_end"</span>: {
+        <span class="s">"micro_lesson"</span>: { en: "Begging isn't trade...", it: "..." },
+        <span class="s">"owl_response"</span>: { en: "Prof Penny says...", it: "..." }
+      }
+    }
+  ],
+  <span class="k">"ending_scenes"</span>: [ ... ],
+  <span class="k">"debrief"</span>: { concept_name, summary, real_world_connection },
+  <span class="k">"scoring"</span>: { path_points, max_points }
+}
+
+<span class="h">SELF-VERIFY BEFORE OUTPUTTING</span>
+<span class="c">──────────────────────────────────────────────────────────</span>
+[ ] Does the opening make the player <span class="k">feel</span> something in 10 seconds?
+[ ] Is every dead end a <span class="k">real lesson</span>, not just a failure?
+[ ] Is the concept <span class="k">never explained</span> — only experienced?
+[ ] Do all <span class="s">leads_to_scene</span> IDs point to real scene IDs?
+[ ] Does max_points equal the highest scoring path?
+[ ] Is all dialogue written in <span class="k">both EN and IT</span>?
+[ ] Would a child feel <span class="r">something</span> reading this?
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ SLIDE 10 -->
+<div class="slide">
+  <h2 style="text-align:center">Why the Prompt Is the IP</h2>
+  <div class="cols" style="max-width:860px;align-items:flex-start">
+    <div class="col">
+      <div class="card g">
+        <div style="font-size:28px;margin-bottom:10px">🔐</div>
+        <h3>Anyone can build a game app</h3>
+        <p style="font-size:14px;line-height:1.6">Flutter, Flame, Rive — these are open source tools. Any developer can set them up in a day.</p>
+      </div>
+      <div class="card g">
+        <div style="font-size:28px;margin-bottom:10px">⭐</div>
+        <h3>Only we have this prompt</h3>
+        <p style="font-size:14px;line-height:1.6">The pedagogical principles — Feel Before Understand, Consequence Is The Teacher, Emotion Anchors Memory — took research, iteration, and testing to develop. That's the moat.</p>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card s">
+        <div style="font-size:28px;margin-bottom:10px">⚡</div>
+        <h3>It scales infinitely</h3>
+        <p style="font-size:14px;line-height:1.6">One prompt → unlimited lessons. Barter, money, saving, investing, tax, insurance — all generated from the same engine.</p>
+      </div>
+      <div class="card" style="padding:16px">
+        <div class="label">Prompt versioning rule</div>
+        <p style="font-size:14px;line-height:1.6;margin-top:6px">
+          Prompts live in <code>prompts/lesson-generator-v0.2.md</code>.<br>
+          <strong style="color:var(--gold)">Never edit in place. Always copy to the next version number.</strong><br>
+          v0.1 → v0.2 → v0.3...
+        </p>
+      </div>
+      <div class="card o" style="padding:14px">
+        <p style="font-size:13px">💡 The prompt is versioned like code. Every improvement is tracked. Bad changes can always be rolled back.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ SLIDE 11 -->
+<div class="slide">
+  <h2 style="text-align:center">From Prompt to Playing — End to End</h2>
+  <div style="max-width:820px;width:100%">
+    <div style="display:grid;grid-template-columns:1fr 48px 1fr 48px 1fr;align-items:center;gap:0;margin-bottom:20px">
+
+      <div class="card g" style="margin:0;padding:20px;text-align:center">
+        <div style="font-size:36px;margin-bottom:8px">📝</div>
+        <div style="font-size:13px;font-weight:700;color:var(--gold);margin-bottom:6px">Input</div>
+        <p style="font-size:12px;line-height:1.5;color:rgba(255,255,255,0.6)">"Lesson about barter for 8-year-olds, Mediterranean market"</p>
+      </div>
+      <div style="text-align:center;font-size:24px;color:var(--gold)">→</div>
+      <div class="card s" style="margin:0;padding:20px;text-align:center">
+        <div style="font-size:36px;margin-bottom:8px">🤖🎨🧩</div>
+        <div style="font-size:13px;font-weight:700;color:var(--sky);margin-bottom:6px">Pipeline</div>
+        <p style="font-size:12px;line-height:1.5;color:rgba(255,255,255,0.6)">Claude writes story.<br>DALL-E paints scene.<br>Kenney provides sprites.</p>
+      </div>
+      <div style="text-align:center;font-size:24px;color:var(--gold)">→</div>
+      <div class="card n" style="margin:0;padding:20px;text-align:center">
+        <div style="font-size:36px;margin-bottom:8px">🎮</div>
+        <div style="font-size:13px;font-weight:700;color:#5CC99A;margin-bottom:6px">Output</div>
+        <p style="font-size:12px;line-height:1.5;color:rgba(255,255,255,0.6)">Eli walks the market. Meets NPCs. Makes choices. Learns barter.</p>
+      </div>
+    </div>
+    <div class="cols" style="gap:12px">
+      <div class="card" style="flex:1;padding:14px;text-align:center">
+        <div style="font-size:22px">⏱️</div>
+        <p style="font-size:13px;margin-top:6px">~30 seconds from input to playable lesson</p>
+      </div>
+      <div class="card" style="flex:1;padding:14px;text-align:center">
+        <div style="font-size:22px">💰</div>
+        <p style="font-size:13px;margin-top:6px">~$0.03 per lesson (Claude API cost)</p>
+      </div>
+      <div class="card g" style="flex:1;padding:14px;text-align:center">
+        <div style="font-size:22px">♾️</div>
+        <p style="font-size:13px;margin-top:6px">Infinite lessons from one prompt</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ SLIDE 12 -->
+<div class="slide" style="background:radial-gradient(ellipse at 50% 45%,#1B3060 0%,var(--navy) 70%)">
+  <div style="text-align:center;max-width:700px">
+    <div style="font-size:72px;margin-bottom:16px">🎼</div>
+    <h2 style="font-size:42px;margin-bottom:20px">The Orchestra, Together</h2>
+    <div style="display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:28px">
+      <div style="text-align:center;padding:14px">
+        <div style="font-size:32px">🎛️</div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.4);margin-top:4px">Conductor</div>
+      </div>
+      <div style="font-size:24px;color:var(--gold);line-height:60px">+</div>
+      <div style="text-align:center;padding:14px">
+        <div style="font-size:32px">🤖</div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.4);margin-top:4px">Composer</div>
+      </div>
+      <div style="font-size:24px;color:var(--gold);line-height:60px">+</div>
+      <div style="text-align:center;padding:14px">
+        <div style="font-size:32px">🎨</div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.4);margin-top:4px">Painter</div>
+      </div>
+      <div style="font-size:24px;color:var(--gold);line-height:60px">+</div>
+      <div style="text-align:center;padding:14px">
+        <div style="font-size:32px">💃</div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.4);margin-top:4px">Dancer</div>
+      </div>
+      <div style="font-size:24px;color:var(--gold);line-height:60px">+</div>
+      <div style="text-align:center;padding:14px">
+        <div style="font-size:32px">🎮</div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.4);margin-top:4px">Stage</div>
+      </div>
+      <div style="font-size:24px;color:var(--gold);line-height:60px">+</div>
+      <div style="text-align:center;padding:14px">
+        <div style="font-size:32px">🧩</div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.4);margin-top:4px">Props</div>
+      </div>
+    </div>
+    <div style="font-size:36px;color:var(--gold);margin-bottom:12px">=</div>
+    <p style="font-size:24px;line-height:1.6;color:white">A financial literacy game that <strong style="color:var(--gold)">teaches itself</strong> — one description at a time.</p>
+    <div style="margin-top:28px">
+      <span class="pill pg">The prompt is the IP</span>
+      <span class="pill pn">The tools are free</span>
+      <span class="pill ps">The scale is infinite</span>
+    </div>
+  </div>
+</div>
+
+<div class="nav">
+  <button id="pb2" onclick="go(-1)" disabled>← Prev</button>
+  <span class="ctr" id="ctr2">1 / 12</span>
+  <button id="nb2" onclick="go(1)">Next →</button>
+</div>
+<script>
+const slides=document.querySelectorAll('.slide'),total=slides.length;let cur=0;
+function go(d){slides[cur].classList.remove('active');cur=Math.max(0,Math.min(total-1,cur+d));slides[cur].classList.add('active');document.getElementById('ctr2').textContent=`${cur+1} / ${total}`;document.getElementById('pb2').disabled=cur===0;document.getElementById('nb2').disabled=cur===total-1;document.getElementById('pb').style.width=`${((cur+1)/total)*100}%`;}
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key===' ')go(1);if(e.key==='ArrowLeft')go(-1);});
+document.getElementById('pb').style.width=`${(1/total)*100}%`;
+</script>
+</body>
+</html>

@@ -25,6 +25,9 @@ class CinematicIntroScreen extends StatefulWidget {
 class _CinematicIntroState extends State<CinematicIntroScreen>
     with TickerProviderStateMixin {
   late final String _image;
+  // TTS placeholder — flutter_tts added back when building for Android/iOS
+  // ignore: unused_field
+  dynamic _tts;
 
   // Ken Burns: slow zoom over the full scene duration
   late final AnimationController _kbCtrl;
@@ -50,21 +53,23 @@ class _CinematicIntroState extends State<CinematicIntroScreen>
 
     _image = _sceneImages[Random().nextInt(_sceneImages.length)];
 
-    // Ken Burns — 20 second slow zoom, starts immediately
+    // TTS initialised here when flutter_tts is re-added for Android/iOS build
+
+    // Ken Burns — starts focused on right side (wizard), slowly pulls to center
     _kbCtrl = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 20),
+      duration: const Duration(seconds: 22),
     )..forward();
 
-    _kbScale = Tween<double>(begin: 1.0, end: 1.12).animate(
-      CurvedAnimation(parent: _kbCtrl, curve: Curves.linear),
+    _kbScale = Tween<double>(begin: 1.07, end: 1.0).animate(
+      CurvedAnimation(parent: _kbCtrl, curve: Curves.easeOut),
     );
 
-    // Slight pan: drift up-left to up-right
+    // Start right (wizard face), drift to center
     _kbOffset = Tween<Offset>(
-      begin: const Offset(-0.03, -0.02),
-      end: const Offset(0.03, -0.05),
-    ).animate(CurvedAnimation(parent: _kbCtrl, curve: Curves.linear));
+      begin: const Offset(0.07, -0.02),
+      end: const Offset(0.0, 0.0),
+    ).animate(CurvedAnimation(parent: _kbCtrl, curve: Curves.easeOut));
 
     // Fade in scene over 1.2s, then trigger speaking
     _fadeCtrl = AnimationController(
@@ -98,8 +103,10 @@ class _CinematicIntroState extends State<CinematicIntroScreen>
   }
 
   void _beginTyping() {
-    final len = _wizardLines[_lineIndex].length;
-    _typeCtrl.duration = Duration(milliseconds: (len * 44).clamp(800, 3000));
+    final line = _wizardLines[_lineIndex];
+    _tts?.speak(line);
+    _typeCtrl.duration =
+        Duration(milliseconds: (line.length * 44).clamp(800, 3000));
     _typeCtrl.reset();
     setState(() => _charCount = 0);
     _typeCtrl.forward();
@@ -112,11 +119,13 @@ class _CinematicIntroState extends State<CinematicIntroScreen>
       return;
     }
     if (_typeCtrl.value < 1.0) {
+      _tts?.stop();
       _typeCtrl.stop();
       setState(() => _charCount = _wizardLines[_lineIndex].length);
       return;
     }
     if (_lineIndex < _wizardLines.length - 1) {
+      _tts?.stop();
       setState(() => _lineIndex++);
       _beginTyping();
     } else {
@@ -126,6 +135,7 @@ class _CinematicIntroState extends State<CinematicIntroScreen>
 
   @override
   void dispose() {
+    _tts?.stop();
     _kbCtrl.dispose();
     _fadeCtrl.dispose();
     _bubbleCtrl.dispose();
