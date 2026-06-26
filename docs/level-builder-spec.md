@@ -377,3 +377,194 @@ Steps 2 and 3 of the pipeline are unchanged. Asset Resolver handles `result_card
 | 3 | Event tags + timed activation | Low | Before first classroom pilot |
 | 4 | Teacher dashboard (read-only) | Medium | Before school partnership |
 | 5 | Teacher inject / live override | High | Post-funding milestone |
+
+---
+
+## 13. The Matrix System
+
+### Concept
+
+Before the AI generates anything, the junior developer defines the **possibility space** of a level as a matrix of dimensions. The AI then fills each active intersection with real content: dialogue, art, NPC placement, quest hooks.
+
+This replaces the old model of hand-crafting every NPC location. The matrix is the input. The AI generates from it.
+
+### Dimensions
+
+A level matrix has 2–4 dimensions. Each dimension is a list of options. Their intersections are "cells" — some cells are **active** (playable content exists), others are empty.
+
+**Barter lesson matrix:**
+```
+Dimension 1 — Locations:   [market_square, river_bank, apple_farm]
+Dimension 2 — Items:       [oranges, fish, apples, cloth]
+Dimension 3 — Characters:  [orange_seller, fisherman, farmer]
+```
+
+**Active combinations (junior picks these):**
+```
+market_square  × oranges × orange_seller   → MANDATORY (must visit)
+river_bank     × fish    × fisherman       → OPTIONAL quest
+apple_farm     × apples  × farmer          → OPTIONAL quest
+```
+
+The active combinations tell the AI exactly which NPCs exist, where on the path they stand, and what they offer. The AI writes their dialogue and motivations from the lesson concept.
+
+### The Matrix Input JSON
+
+```json
+"matrix": {
+  "dimensions": {
+    "locations": [
+      { "id": "market_square", "label": "Market Square", "path_x": 0.55 },
+      { "id": "river_bank",    "label": "River Bank",    "path_x": 0.2  },
+      { "id": "apple_farm",    "label": "Apple Farm",    "path_x": 0.85 }
+    ],
+    "items": ["oranges", "fish", "apples", "cloth"],
+    "characters": [
+      { "id": "orange_seller", "location": "market_square", "gives": "oranges", "wants": "cloth" },
+      { "id": "fisherman",     "location": "river_bank",    "gives": "fish",    "wants": "apples" },
+      { "id": "farmer",        "location": "apple_farm",    "gives": "apples",  "wants": "fish" }
+    ]
+  },
+  "active_combinations": [
+    { "location": "market_square", "character": "orange_seller", "role": "mandatory" },
+    { "location": "river_bank",    "character": "fisherman",     "role": "optional", "quest_id": "explore_river" },
+    { "location": "apple_farm",    "character": "farmer",        "role": "optional", "quest_id": "visit_farm" }
+  ]
+}
+```
+
+### How Flame Uses the Matrix
+
+Each active combination becomes a **zone** on the path:
+- `path_x` places the NPC at the right position on the Flame world coordinate system
+- Mandatory combinations are on the direct path — player must visit them
+- Optional combinations are placed as accessible detours — player chooses to explore
+
+The matrix replaces the hand-coded NPC position list from Section 6. The junior no longer places NPCs manually — they define the matrix, and the AI generates the positions.
+
+### Matrix Varies Per Level
+
+- Lesson 1 (Barter): location × item × character (3D)
+- Lesson 2 (Money): time_period × item × community_trust (3D) — shows how barter → coins
+- Lesson 3 (Saving): season × spending_choice × consequence (3D)
+- Lesson 5 (Investment): asset_type × risk × time_horizon (3D)
+
+The junior chooses which dimensions make sense for the concept. The builder generates from whatever matrix is provided.
+
+---
+
+## 14. Quest System
+
+### Mandatory vs Optional
+
+Every level has two quest tiers:
+
+**Mandatory quests** (1–3 per level):
+- Required for lesson completion
+- Drive the main story
+- Always reward points
+- Unlocked by default at level start
+
+**Optional quests** (0–5 per level):
+- Never required — player can skip
+- Reward bonus points (counted in leaderboard)
+- Award badges on completion
+- May unlock hidden dialogue or a bonus scene
+
+### Quest JSON Schema
+
+```json
+"quests": {
+  "mandatory": [
+    {
+      "id": "get_orange",
+      "description": "Trade for an orange from the market seller",
+      "target_npc": "orange_seller",
+      "completion_trigger": "item_received",
+      "points": 100
+    }
+  ],
+  "optional": [
+    {
+      "id": "explore_river",
+      "description": "Discover the fisherman at the river",
+      "target_npc": "fisherman",
+      "completion_trigger": "dialogue_complete",
+      "points": 25,
+      "badge_id": "river_explorer",
+      "unlocks_scene": "fisherman_backstory"
+    },
+    {
+      "id": "barter_chain",
+      "description": "Complete a 3-step barter chain",
+      "completion_trigger": "chain_complete",
+      "points": 50,
+      "badge_id": "chain_trader"
+    }
+  ]
+}
+```
+
+### Quest UX in Flame
+
+- Mandatory quests: shown in HUD as active objectives
+- Optional quests: discovered when player approaches the NPC zone (not pre-announced — exploration reward)
+- Quest completion triggers badge notification + score update
+- On lesson end: quest summary screen shows all attempted quests, badges earned, points breakdown
+
+---
+
+## 15. Badges + Trophies
+
+### Two Levels of Achievement
+
+**Badges** — granular, per-action achievements. Accumulate on the player's profile across all lessons.
+
+**Trophies** — per-level completion tier. Awarded once per lesson based on total performance.
+
+### Badge Types
+
+| Badge | Icon | Condition |
+|---|---|---|
+| Explorer | 🗺️ | Visited all NPCs in the level |
+| Speed Runner | ⚡ | Completed mandatory quest in under 2 minutes |
+| Perfect | ✨ | Zero wrong-path choices in the lesson |
+| Chain Trader | 🔗 | Completed a 3-step barter chain |
+| Completionist | 🏅 | Finished every optional quest |
+| Social | 📱 | Shared a result card |
+| Streak | 🔥 | Played 3 days in a row |
+
+### Trophy Tiers (per level)
+
+| Trophy | Condition |
+|---|---|
+| 🥉 Bronze | Completed all mandatory quests |
+| 🥈 Silver | Bronze + at least 1 optional quest |
+| 🥇 Gold | Silver + no wrong-path choices |
+| 💎 Diamond | Gold + speed run (under time threshold) |
+
+### Badge + Trophy JSON
+
+```json
+"achievements": {
+  "trophies": [
+    { "id": "bronze", "tier": "bronze", "condition": "mandatory_complete",     "icon": "🥉" },
+    { "id": "silver", "tier": "silver", "condition": "bronze + 1_optional",    "icon": "🥈" },
+    { "id": "gold",   "tier": "gold",   "condition": "silver + no_wrong_path", "icon": "🥇" },
+    { "id": "diamond","tier": "diamond","condition": "gold + speed_run",        "icon": "💎" }
+  ],
+  "badges": [
+    { "id": "river_explorer", "name": "River Explorer", "icon": "🗺️", "condition": "optional:explore_river" },
+    { "id": "chain_trader",   "name": "Chain Trader",   "icon": "🔗", "condition": "optional:barter_chain" },
+    { "id": "speed_runner",   "name": "Speed Runner",   "icon": "⚡", "condition": "time_under:120s" },
+    { "id": "perfect",        "name": "Perfect",         "icon": "✨", "condition": "no_wrong_path" }
+  ]
+}
+```
+
+### Where Badges + Trophies Appear
+
+- **Result card** (shareable image) — top trophy + earned badges shown
+- **Player profile** — all badges collected across all lessons
+- **Leaderboard** — trophy tier shown alongside score
+- **Home screen** — lesson card shows player's best trophy for that lesson

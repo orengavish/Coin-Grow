@@ -650,9 +650,45 @@ You are not a teacher. You are a <span class="s">storyteller</span>.
   </div>
 </div>
 
+<!-- ═══════════════════════════════════════════════════════ SLIDE 14 -->
+<div class="slide">
+  <h2 style="text-align:center">Matrix · Quests · Badges</h2>
+  <p style="text-align:center;margin-bottom:20px;color:rgba(255,255,255,0.5)">Three systems built on top of the existing pipeline — no new tools required</p>
+  <div style="max-width:920px;width:100%">
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:16px">
+      <div class="card g" style="padding:20px">
+        <div style="font-size:36px;margin-bottom:10px">🧮</div>
+        <h3 style="color:var(--gold);font-size:16px;margin-bottom:8px">The Matrix</h3>
+        <p style="font-size:13px;line-height:1.5;color:rgba(255,255,255,0.6)">Junior defines axes (locations × items × characters) before generation. Each active cell becomes an NPC zone in Flame. Different lessons = different axes. Claude fills the content.</p>
+        <div style="margin-top:10px"><span class="pill pg">Locations</span> <span class="pill pg">Items</span> <span class="pill pg">Characters</span></div>
+      </div>
+      <div class="card" style="border-color:rgba(45,106,79,0.5);padding:20px">
+        <div style="font-size:36px;margin-bottom:10px">🗺️</div>
+        <h3 style="color:#5CC99A;font-size:16px;margin-bottom:8px">Quest System</h3>
+        <p style="font-size:13px;line-height:1.5;color:rgba(255,255,255,0.6)">Mandatory quests (story, required) + optional quests (exploration, bonus points). Optional quests are discovered by entering NPC zones — not pre-announced. Exploration is its own reward.</p>
+        <div style="margin-top:10px"><span class="pill pn">✅ Mandatory</span> <span class="pill pn">⭐ Optional</span></div>
+      </div>
+      <div class="card" style="border-color:rgba(126,200,240,0.4);padding:20px">
+        <div style="font-size:36px;margin-bottom:10px">🏆</div>
+        <h3 style="color:var(--sky);font-size:16px;margin-bottom:8px">Badges + Trophies</h3>
+        <p style="font-size:13px;line-height:1.5;color:rgba(255,255,255,0.6)">Badges for specific actions (🗺️ Explorer, ⚡ Speed, ✨ Perfect, 🔗 Chain). Trophy tiers per level: 🥉→🥈→🥇→💎. Shown on result card, profile, and leaderboard.</p>
+        <div style="margin-top:10px"><span class="pill ps">Profile</span> <span class="pill ps">Result Card</span></div>
+      </div>
+    </div>
+    <div class="mono" style="font-size:11px">
+<span class="c">// Claude generates matrix + quests + badges in one call — no extra tools needed:</span>
+{
+  <span class="k">"matrix"</span>:       { <span class="w">active_combinations, dimensions</span> },  <span class="c">← Flame reads for NPC placement</span>
+  <span class="k">"quests"</span>:       { <span class="w">mandatory: [...], optional: [...]</span> }, <span class="c">← HUD + discovery triggers</span>
+  <span class="k">"achievements"</span>: { <span class="w">trophies: [...], badges: [...]</span> },   <span class="c">← Firebase + result card</span>
+}
+    </div>
+  </div>
+</div>
+
 <div class="nav">
   <button id="pb2" onclick="go(-1)" disabled>← Prev</button>
-  <span class="ctr" id="ctr2">1 / 13</span>
+  <span class="ctr" id="ctr2">1 / 14</span>
   <button id="nb2" onclick="go(1)">Next →</button>
 </div>
 <script>
