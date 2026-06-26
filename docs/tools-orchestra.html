@@ -114,6 +114,12 @@ p  { font-size:16px; line-height:1.7; }
       <div class="name">Kenney.nl</div>
       <div class="desc">Free cartoon sprites — walk cycles, NPCs, items. CC0 license.</div>
     </div>
+    <div class="instr" style="border-color:rgba(255,107,107,0.5);grid-column:2">
+      <span class="ic">🔥</span>
+      <div class="role">THE MEMORY</div>
+      <div class="name" style="color:#FF6B6B">Firebase</div>
+      <div class="desc">Real-time database. Leaderboards, teacher monitor, live class state, social scores.</div>
+    </div>
   </div>
 </div>
 
@@ -385,6 +391,12 @@ p  { font-size:16px; line-height:1.7; }
       <line x1="310" y1="220" x2="355" y2="246" stroke="#5CC99A" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#ag2)"/>
       <line x1="500" y1="220" x2="460" y2="246" stroke="#5CC99A" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#ag2)"/>
       <line x1="690" y1="220" x2="530" y2="246" stroke="#5CC99A" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#ag2)"/>
+
+      <!-- Firebase (score sink + monitor) -->
+      <rect x="575" y="244" width="140" height="30" rx="8" fill="#1A0808" stroke="rgba(255,107,107,0.6)" stroke-width="1.5"/>
+      <text x="645" y="263" text-anchor="middle" fill="#FF6B6B" font-size="11" font-weight="700">🔥  Firebase</text>
+      <!-- Flame → Firebase -->
+      <line x1="540" y1="260" x2="573" y2="260" stroke="#FF6B6B" stroke-width="1" stroke-dasharray="3,3"/>
     </svg>
     <p style="text-align:center;font-size:14px;color:rgba(255,255,255,0.35);margin-top:8px">Everything flows through Streamlit. Flame assembles the final result.</p>
   </div>
@@ -549,6 +561,44 @@ You are not a teacher. You are a <span class="s">storyteller</span>.
 </div>
 
 <!-- ═══════════════════════════════════════════════════════ SLIDE 12 -->
+<div class="slide">
+  <h2 style="text-align:center">🔥 The Memory — Firebase</h2>
+  <p style="text-align:center;margin-bottom:20px;color:rgba(255,255,255,0.5)">The 7th instrument — where scores live, where teachers watch, where the social game plays out</p>
+  <div style="max-width:900px;width:100%">
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:16px">
+      <div class="card" style="border-color:rgba(126,200,240,0.4);padding:20px">
+        <div style="font-size:36px;margin-bottom:10px">👁️</div>
+        <h3 style="color:var(--sky);font-size:16px;margin-bottom:8px">Teacher Monitor</h3>
+        <p style="font-size:13px;line-height:1.5;color:rgba(255,255,255,0.6)">Real-time class map — each student as a dot. Teacher can pause the game, inject hints, redirect to a specific scene. Read-only ships first; live control is the upgrade.</p>
+        <div style="margin-top:10px"><span class="pill ps">Read-only first</span></div>
+      </div>
+      <div class="card" style="border-color:rgba(212,160,23,0.5);padding:20px">
+        <div style="font-size:36px;margin-bottom:10px">🏆</div>
+        <h3 style="color:var(--gold);font-size:16px;margin-bottom:8px">Leaderboards</h3>
+        <p style="font-size:13px;line-height:1.5;color:rgba(255,255,255,0.6)">Classroom → School → Country. Ranked by score + speed. One Firebase write on lesson complete. Timed events auto-reset the board.</p>
+        <div style="margin-top:10px"><span class="pill pg">Classroom</span> <span class="pill pg">Country</span></div>
+      </div>
+      <div class="card" style="border-color:rgba(255,140,0,0.4);padding:20px">
+        <div style="font-size:36px;margin-bottom:10px">📱</div>
+        <h3 style="color:var(--orange);font-size:16px;margin-bottom:8px">Social + Events</h3>
+        <p style="font-size:13px;line-height:1.5;color:rgba(255,255,255,0.6)">Result card shared to Instagram / WhatsApp / TikTok. Seasonal events (🎃 Harvest Week) with bonus points and limited-time leaderboards.</p>
+        <div style="margin-top:10px"><span class="pill po">Share Card</span> <span class="pill po">Events</span></div>
+      </div>
+    </div>
+    <div class="mono" style="font-size:11px">
+<span class="c">// Builder outputs 5 keys — Flame reads game_world, Firebase reads the rest:</span>
+{
+  <span class="k">"game_world"</span>:   { <span class="w">background, path, npcs</span> },         <span class="c">← Flame</span>
+  <span class="k">"monitor"</span>:      { <span class="w">checkpoints, teacher_controls</span> },    <span class="c">← Firebase + teacher app</span>
+  <span class="k">"competition"</span>:  { <span class="w">leaderboard_key, tiers, metric</span> },  <span class="c">← Firebase leaderboard</span>
+  <span class="k">"social"</span>:       { <span class="w">result_card_bg, share_text</span> },       <span class="c">← share_plus plugin</span>
+  <span class="k">"event"</span>:        <span class="g">null</span>                                  <span class="c">← or seasonal event data</span>
+}
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ SLIDE 13 -->
 <div class="slide" style="background:radial-gradient(ellipse at 50% 45%,#1B3060 0%,var(--navy) 70%)">
   <div style="text-align:center;max-width:700px">
     <div style="font-size:72px;margin-bottom:16px">🎼</div>
@@ -583,6 +633,11 @@ You are not a teacher. You are a <span class="s">storyteller</span>.
         <div style="font-size:32px">🧩</div>
         <div style="font-size:11px;color:rgba(255,255,255,0.4);margin-top:4px">Props</div>
       </div>
+      <div style="font-size:24px;color:var(--gold);line-height:60px">+</div>
+      <div style="text-align:center;padding:14px">
+        <div style="font-size:32px">🔥</div>
+        <div style="font-size:11px;color:#FF6B6B;margin-top:4px">Memory</div>
+      </div>
     </div>
     <div style="font-size:36px;color:var(--gold);margin-bottom:12px">=</div>
     <p style="font-size:24px;line-height:1.6;color:white">A financial literacy game that <strong style="color:var(--gold)">teaches itself</strong> — one description at a time.</p>
@@ -590,13 +645,14 @@ You are not a teacher. You are a <span class="s">storyteller</span>.
       <span class="pill pg">The prompt is the IP</span>
       <span class="pill pn">The tools are free</span>
       <span class="pill ps">The scale is infinite</span>
+      <span class="pill po">The classroom is connected</span>
     </div>
   </div>
 </div>
 
 <div class="nav">
   <button id="pb2" onclick="go(-1)" disabled>← Prev</button>
-  <span class="ctr" id="ctr2">1 / 12</span>
+  <span class="ctr" id="ctr2">1 / 13</span>
   <button id="nb2" onclick="go(1)">Next →</button>
 </div>
 <script>

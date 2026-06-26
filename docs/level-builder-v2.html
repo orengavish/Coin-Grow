@@ -582,7 +582,149 @@ C:\flutter\bin\flutter.bat analyze  <span class="c">← must say "No issues foun
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════════════════════ SLIDE 13 -->
+<!-- ═══════════════════════════════════════════════════════ SLIDE 14 -->
+<div class="slide">
+  <h2 style="text-align:center">Beyond the Game World</h2>
+  <p style="text-align:center;margin-bottom:24px;color:rgba(255,255,255,0.5)">Three new layers — none change the Flame pipeline. Generated automatically alongside the level.</p>
+  <div class="cols" style="max-width:900px;gap:18px">
+    <div class="card" style="flex:1;text-align:center;padding:26px;border-color:rgba(126,200,240,0.45)">
+      <div style="font-size:52px;margin-bottom:12px">👁️</div>
+      <h3 style="color:var(--sky);font-size:18px;margin-bottom:10px">Monitor</h3>
+      <p style="font-size:13px;line-height:1.6;color:rgba(255,255,255,0.7)">Teacher or parent watches a student play in real-time. Can pause, inject a question, redirect paths.</p>
+      <div style="margin-top:14px"><span class="pill ps">Firebase</span> <span class="pill ps">Teacher App</span></div>
+    </div>
+    <div class="card" style="flex:1;text-align:center;padding:26px;border-color:rgba(212,160,23,0.5)">
+      <div style="font-size:52px;margin-bottom:12px">🏆</div>
+      <h3 style="color:var(--gold);font-size:18px;margin-bottom:10px">Competition</h3>
+      <p style="font-size:13px;line-height:1.6;color:rgba(255,255,255,0.7)">Class vs class. School vs school. Country vs country. Ranked by score + time. Timed seasonal events.</p>
+      <div style="margin-top:14px"><span class="pill pg">Classroom</span> <span class="pill pg">School</span> <span class="pill pg">Country</span></div>
+    </div>
+    <div class="card" style="flex:1;text-align:center;padding:26px;border-color:rgba(255,140,0,0.45)">
+      <div style="font-size:52px;margin-bottom:12px">📣</div>
+      <h3 style="color:var(--orange);font-size:18px;margin-bottom:10px">Events + Social</h3>
+      <p style="font-size:13px;line-height:1.6;color:rgba(255,255,255,0.7)">Seasonal events with bonus points. Share result cards to Instagram, WhatsApp, TikTok.</p>
+      <div style="margin-top:14px"><span class="pill po">Events</span> <span class="pill po">Share Card</span></div>
+    </div>
+  </div>
+  <div class="card g" style="margin-top:18px;max-width:900px;width:100%;padding:14px;text-align:center">
+    <p style="font-size:14px">The level builder generates all three layers automatically. The Flame game world is unchanged.</p>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ SLIDE 15 -->
+<div class="slide">
+  <h2 style="text-align:center">Monitor + Competition</h2>
+  <div class="cols" style="max-width:920px;align-items:flex-start">
+    <div class="col">
+      <h3 style="color:var(--sky);margin-bottom:14px">👁️ Teacher Monitor</h3>
+      <div class="card s" style="margin-bottom:12px">
+        <div class="label">What the teacher sees (real-time)</div>
+        <p style="font-size:13px;line-height:1.6;margin-top:6px">Class map — each student as a dot. Color = progress. Teacher sees who's stuck, who raced ahead, which path each chose.</p>
+      </div>
+      <div class="card" style="margin-bottom:12px;padding:14px">
+        <div class="label">Teacher controls (build order)</div>
+        <div style="font-size:13px;line-height:2.1">
+          <div>📺 <strong>Read-only</strong> — ship first</div>
+          <div>⏸️ <strong>Pause</strong> — stop the student's game</div>
+          <div>💬 <strong>Inject hint</strong> — push a message in-game</div>
+          <div>🔀 <strong>Override path</strong> — redirect next scene</div>
+        </div>
+      </div>
+      <div class="mono" style="font-size:11px">
+<span class="c">// Builder generates checkpoints:</span>
+{
+  <span class="k">"monitor"</span>: {
+    <span class="k">"checkpoints"</span>: [{
+      <span class="k">"after_npc"</span>: <span class="s">"baker"</span>,
+      <span class="k">"suggested_question"</span>:
+        <span class="s">"Why didn't Eli take the offer?"</span>
+    }]
+  }
+}
+      </div>
+    </div>
+    <div class="col">
+      <h3 style="color:var(--gold);margin-bottom:14px">🏆 Competition</h3>
+      <div class="card g" style="margin-bottom:12px">
+        <div class="label">Leaderboard tiers</div>
+        <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
+          <span class="pill pg">Classroom</span>
+          <span class="pill pg">School</span>
+          <span class="pill pg">City</span>
+          <span class="pill pg">Country</span>
+        </div>
+      </div>
+      <div class="card" style="margin-bottom:12px;padding:14px">
+        <div class="label">Metric</div>
+        <p style="font-size:13px;margin-top:4px"><code>score + time</code> — fastest perfect run wins. <code>score_only</code> option for younger ages.</p>
+      </div>
+      <div class="card" style="margin-bottom:12px;padding:14px">
+        <div class="label">Timed events</div>
+        <p style="font-size:13px;margin-top:4px">"Barter Week" Oct 1–7, 1.5× points. Builder sets <code>event_window</code>. Game reads dates. Leaderboard auto-resets.</p>
+      </div>
+      <div class="card s" style="padding:14px">
+        <div class="label">Backend</div>
+        <p style="font-size:13px;margin-top:4px">Firebase Realtime DB. One write on lesson complete. One query for leaderboard. No custom server needed.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ SLIDE 16 -->
+<div class="slide">
+  <h2 style="text-align:center">Events + Social Sharing</h2>
+  <div class="cols" style="max-width:920px;align-items:flex-start">
+    <div class="col">
+      <h3 style="color:var(--orange);margin-bottom:14px">📅 Events</h3>
+      <div class="card o" style="margin-bottom:12px">
+        <div class="label">What is an event?</div>
+        <p style="font-size:13px;line-height:1.6;margin-top:6px">A time-gated version of a lesson — same game, seasonal banner, bonus points. "Harvest Week 🎃" gives 1.5× points Oct 1–7. No extra backend — the app reads dates on load.</p>
+      </div>
+      <div class="mono" style="font-size:11px;margin-bottom:12px">
+<span class="c">// Builder generates event metadata:</span>
+{
+  <span class="k">"event"</span>: {
+    <span class="k">"id"</span>: <span class="s">"harvest_week_2026"</span>,
+    <span class="k">"active_from"</span>: <span class="s">"2026-10-01"</span>,
+    <span class="k">"active_until"</span>: <span class="s">"2026-10-07"</span>,
+    <span class="k">"bonus_multiplier"</span>: <span class="v">1.5</span>,
+    <span class="k">"banner"</span>: <span class="s">"🎃 Harvest Week!"</span>
+  }
+}
+      </div>
+    </div>
+    <div class="col">
+      <h3 style="color:var(--sky);margin-bottom:14px">📱 Social Sharing</h3>
+      <div class="card s" style="margin-bottom:12px">
+        <div class="label">Result Card</div>
+        <p style="font-size:13px;line-height:1.6;margin-top:6px">On lesson complete: Flutter renders a shareable card. One tap shares to Instagram Stories, WhatsApp, TikTok. <code>RepaintBoundary</code> → <code>toImage()</code> → <code>share_plus</code>.</p>
+      </div>
+      <div style="background:linear-gradient(135deg,#1A2F18,#0D2010);border:2px solid rgba(212,160,23,0.5);border-radius:16px;padding:20px;text-align:center;max-width:260px;margin:0 auto 14px">
+        <div style="font-size:10px;letter-spacing:2px;color:rgba(255,255,255,0.35);margin-bottom:6px">COIN GROW</div>
+        <div style="font-size:38px;margin-bottom:6px">🍊</div>
+        <div style="font-size:15px;font-weight:700;color:var(--gold);margin-bottom:4px">The Orange Quest</div>
+        <div style="font-size:26px;color:white;font-weight:700;margin-bottom:4px">94 / 100</div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.5);margin-bottom:8px">Eli found the orange!</div>
+        <span class="pill pn">🏆 Barter Master</span>
+      </div>
+      <div class="mono" style="font-size:11px">
+<span class="c">// Builder generates share template:</span>
+{
+  <span class="k">"social"</span>: {
+    <span class="k">"share_text"</span>:
+      <span class="s">"Scored {score}/100 🍊 #CoinGrow"</span>,
+    <span class="k">"result_card_bg"</span>: <span class="s">"market_sunset"</span>,
+    <span class="k">"platforms"</span>: [
+      <span class="s">"instagram_story"</span>, <span class="s">"whatsapp"</span>
+    ]
+  }
+}
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ SLIDE 17 -->
 <div class="slide" style="background:radial-gradient(ellipse at 50% 50%,#1B3060 0%,var(--navy) 70%)">
   <div style="text-align:center;max-width:700px">
     <div style="font-size:72px;margin-bottom:16px">🎯</div>
@@ -603,7 +745,7 @@ C:\flutter\bin\flutter.bat analyze  <span class="c">← must say "No issues foun
 
 <div class="nav">
   <button id="pb2" onclick="go(-1)" disabled>← Prev</button>
-  <span class="ctr" id="ctr2">1 / 13</span>
+  <span class="ctr" id="ctr2">1 / 17</span>
   <button id="nb2" onclick="go(1)">Next →</button>
 </div>
 <script>

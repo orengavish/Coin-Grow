@@ -259,3 +259,121 @@ Android setup: Android Studio at `C:\Program Files\Android\Android Studio`. SDK 
 - Bing Image Creator: `bing.com/images/create` (background generation)
 - Lesson JSON schema: see `mobile/lib/models/lesson.dart`
 - App theme / colors: see `mobile/lib/theme/app_theme.dart`
+
+---
+
+## 12. The Meta-Game Layer
+
+Three new aspects sit **above** the Flame game world. None change the level builder core pipeline — they are additional keys Claude generates alongside `game_world`.
+
+### 12.1 Monitor (Teacher / Parent Dashboard)
+
+Teachers and parents observe a student's session in real-time, inject questions at key moments, and override which path plays next.
+
+**Builder output (added to lesson JSON):**
+```json
+"monitor": {
+  "checkpoints": [
+    {
+      "after_npc": "baker",
+      "teacher_can_pause": true,
+      "suggested_question": "Why didn't Eli accept the first offer?"
+    }
+  ],
+  "teacher_controls": ["pause", "override_next_path", "inject_hint"]
+}
+```
+
+**Backend:** Firebase Realtime Database. Game emits checkpoint events on NPC interaction. Teacher web app (or Flutter admin screen) subscribes and renders a class map — who's at which NPC, who's stuck.
+
+**Build order:**
+1. Read-only dashboard (ship first) — teacher sees real-time progress
+2. Pause / resume control
+3. Override path (redirect student to a specific scene)
+4. Inject hint (push a message into the student's running game)
+
+### 12.2 Competition (Leaderboard)
+
+Classrooms compete against each other. Schools against schools. Age groups against age groups.
+
+**Builder output:**
+```json
+"competition": {
+  "leaderboard_key": "lesson_01_barter_v1",
+  "tiers": ["classroom", "school", "country"],
+  "metric": "score_plus_time",
+  "event_window": null
+}
+```
+
+**Backend:** Firebase Realtime Database. One collection per `leaderboard_key`. Score submitted on lesson completion — a single write. Leaderboard queries sort by `metric`.
+
+`event_window` is `null` for always-on lessons. For timed competitions set an ISO date range (e.g. `"2026-10-01/2026-10-07"`).
+
+### 12.3 Events + Social Sharing
+
+**Events** are time-gated lessons with a seasonal banner and bonus multiplier:
+```json
+"event": {
+  "id": "harvest_week_2026",
+  "active_from": "2026-10-01",
+  "active_until": "2026-10-07",
+  "bonus_multiplier": 1.5,
+  "banner": "🎃 Harvest Week — double points!"
+}
+```
+No extra backend. The app reads dates on lesson load. `event` is `null` when no event is active.
+
+**Social sharing** — builder generates the template, Flutter renders to image, OS share sheet distributes:
+```json
+"social": {
+  "result_card_bg": "market_sunset",
+  "share_text": "I bartered my way to {score}/100 in The Orange Quest! 🍊 #CoinGrow",
+  "platforms": ["instagram_story", "whatsapp", "tiktok"]
+}
+```
+Implementation: `RepaintBoundary` → `toImage()` → `share_plus` package. One widget, reused for every lesson.
+
+### 12.4 Extended Builder Output Shape
+
+The AI Layout Generator (Step 1) now produces all five keys:
+
+```json
+{
+  "game_world": {
+    "background": "medieval_market_day",
+    "path": [[0.0, 0.6], [0.3, 0.58], [0.7, 0.62], [1.0, 0.6]],
+    "npcs": [ ... ],
+    "player_start": [0.0, 0.6],
+    "interaction_radius": 0.08
+  },
+  "monitor": {
+    "checkpoints": [ ... ],
+    "teacher_controls": ["pause", "override_next_path", "inject_hint"]
+  },
+  "competition": {
+    "leaderboard_key": "lesson_01_barter_v1",
+    "tiers": ["classroom", "school", "country"],
+    "metric": "score_plus_time",
+    "event_window": null
+  },
+  "social": {
+    "result_card_bg": "market_sunset",
+    "share_text": "Scored {score}/100 🍊 #CoinGrow",
+    "platforms": ["instagram_story", "whatsapp", "tiktok"]
+  },
+  "event": null
+}
+```
+
+Steps 2 and 3 of the pipeline are unchanged. Asset Resolver handles `result_card_bg`. Flame Builder only reads `game_world`. The other four keys feed Firebase and the share plugin.
+
+### 12.5 Build Priority
+
+| Priority | Feature | Complexity | When |
+|---|---|---|---|
+| 1 | Score submission + classroom leaderboard | Low | Same sprint as first lesson |
+| 2 | Result card + OS share sheet | Low | Same sprint as first lesson |
+| 3 | Event tags + timed activation | Low | Before first classroom pilot |
+| 4 | Teacher dashboard (read-only) | Medium | Before school partnership |
+| 5 | Teacher inject / live override | High | Post-funding milestone |
